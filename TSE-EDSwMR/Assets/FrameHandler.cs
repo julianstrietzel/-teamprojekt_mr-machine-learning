@@ -42,6 +42,7 @@ public class FrameHandler : MonoBehaviour
         {
             Instantiate(NoPrefab).transform.parent = grid.transform;
         }
+        grid.AddComponent<GridLayoutGroup>();
         
 
     //Instantiate

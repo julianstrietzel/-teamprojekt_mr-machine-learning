@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TSE-EDSwMR.unity
+    path: Assets/Scenes/nodes on virtual table.unity
     guid: 80e680b86e4194b4babc6aa18aeeaba2
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 07b71980238f30c4e904d1f0aee2455a, type: 2}
