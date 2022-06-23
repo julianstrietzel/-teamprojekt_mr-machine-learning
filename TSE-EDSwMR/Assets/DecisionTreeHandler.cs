@@ -11,7 +11,8 @@ public class DecisionTreeHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject root = Instantiate(frame_prefab);
+        root.transform.parent = transform;
     }
 
     // Update is called once per frame

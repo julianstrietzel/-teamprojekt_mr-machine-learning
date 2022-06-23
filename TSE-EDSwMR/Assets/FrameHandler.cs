@@ -11,6 +11,9 @@ public class FrameHandler : MonoBehaviour
     public GameObject YesPrefab;
     public GameObject NoPrefab;
     public GameObject EmptyPrefab;
+    public GameObject button2;
+    public GameObject button3;
+    public GameObject button4;  
 
 
     // Start is called before the first frame update
