@@ -1,14 +1,15 @@
+    using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class dataHandler : MonoBehaviour 
+
+public class DataHandler : MonoBehaviour 
 {
     public static List<dataPoint> data = new List<dataPoint>();
     private void Start()
     {
         data.Clear();
-
 
         data.Add(new dataPoint("Sunny",     "Hot",  "High", "Weak",     false,  1));
         data.Add(new dataPoint("Sunny",     "Hot",  "High", "Strong",   false,  2));

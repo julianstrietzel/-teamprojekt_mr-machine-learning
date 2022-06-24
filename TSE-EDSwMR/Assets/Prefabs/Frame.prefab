@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7739895247285617998}
-  - component: {fileID: 7568729703614209563}
-  - component: {fileID: 4326363045101770971}
   m_Layer: 0
   m_Name: grid
   m_TagString: Untagged
@@ -37,60 +35,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7568729703614209563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 811157811142189615}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 1, y: 1}
-  m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
---- !u!114 &4326363045101770971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 811157811142189615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf12ee76e7e00a44a9a84256760020e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeList: []
-  ignoreInactiveTransforms: 1
-  sortType: 0
-  surfaceType: 1
-  orientType: 0
-  layout: 1
-  anchor: 4
-  anchorAlongAxis: 0
-  columnAlignment: 0
-  rowAlignment: 0
-  radius: 2
-  radialRange: 180
-  distance: 0
-  rows: 3
-  columns: 3
-  cellWidth: 0.5
-  cellHeight: 0.5
-  assetVersion: 1
 --- !u!1 &2782996914973628218
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,9 +374,9 @@ MonoBehaviour:
   YesPrefab: {fileID: 7795670210892563242, guid: 7c05d21ee520fc64eb839924b14b990a, type: 3}
   NoPrefab: {fileID: 191725123763652313, guid: 82535e144ff6e8c4ca13b077c060f754, type: 3}
   EmptyPrefab: {fileID: 191725123763652313, guid: ddc1e6aa6adee464bbde54fb33cd42e3, type: 3}
-  button2: {fileID: 0}
-  button3: {fileID: 4215703320649419437, guid: 2adb9bf13fbb7694bbf77b35226ff4af, type: 3}
-  button4: {fileID: 5909813013237261275, guid: 9db3c1f5a57fb2b40ae4b085f123abfe, type: 3}
+  choose_button_prefab: {fileID: 1917323831215790522, guid: bb34994362e071e44804d437ae75fbe5, type: 3}
+  frame_prefab: {fileID: 2782996915518340344}
+  child_nodes: []
 --- !u!1 &2782996916342316544
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,13 +4,41 @@ using UnityEngine;
 
 public class dataPoint
 {
-    public enum categories {
+
+
+    public enum categories
+    {
         Outlook,
         Temperature,
         Humidity,
         Wind
     }
 
+    
+
+   // public static Dictionary<categories, object> choices_categories = new Dictionary<categories, object>();
+    
+
+    public enum choices_outlook
+    {
+        Sunny, 
+        Overcast, 
+        Rain
+    }
+
+    public enum choices_temperature
+    {
+        High, Mild, Cool
+    }
+    public enum choices_humidity
+    {
+        High, Normal
+    }
+
+    public enum choices_wind
+    {
+        Strong, Weak
+    }
     public Dictionary<categories, string> values;
 
     public bool result;
