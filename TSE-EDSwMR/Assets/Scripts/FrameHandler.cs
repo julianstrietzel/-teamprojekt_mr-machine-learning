@@ -18,6 +18,9 @@ public class FrameHandler : MonoBehaviour
     private List<dataPoint.categories> categories_filtered_for;
     private GameObject choose_button;
     public List<GameObject> child_nodes;
+    private int layer;
+    private int rightbound;
+    private int leftbound;
 
 
     // Start is called before the first frame update
@@ -33,8 +36,15 @@ public class FrameHandler : MonoBehaviour
        
     }
 
-    public void InitFrame(List<dataPoint.categories> filtered_for, List<dataPoint> relevant_datapoints)
+    public void InitFrame(List<dataPoint.categories> filtered_for, List<dataPoint> relevant_datapoints, int layer, int rightBound, int leftBound)
     {
+        this.layer = layer;
+        this.rightbound = rightBound;
+        this.leftbound = leftBound;
+
+        gameObject.transform.localPosition = new Vector3((rightBound + leftBound) / 2, 0, layer);
+
+
         dataPoints = relevant_datapoints;
         categories_filtered_for = filtered_for;
         foreach(Transform plate in grid.transform)
@@ -51,9 +61,11 @@ public class FrameHandler : MonoBehaviour
             {
                 no++;
             }
-        } 
-        int length = (int) Math.Ceiling(Math.Sqrt(relevant_datapoints.Count));
-        int none = (int) Math.Pow(length, 2) - yes - no;
+        }
+        int height = 4;
+        int width = (int)Math.Ceiling(relevant_datapoints.Count / (float) height);
+        int none = (int) width * height - yes - no;
+        //gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * width / height, 1, 1); //Scales frames to necessary width
         for(int i = 0; i < yes; i++)
         {
             Instantiate(YesPrefab, grid.transform);
@@ -69,8 +81,8 @@ public class FrameHandler : MonoBehaviour
         grid.AddComponent<GridLayoutGroup>();
 
 
-        choose_button = Instantiate(choose_button_prefab);
-        choose_button.transform.parent = gameObject.transform;
+        choose_button = Instantiate(choose_button_prefab, gameObject.transform);
+        choose_button.transform.localPosition = new Vector3(.5f, .7f, 0);
         Transform button_collection = choose_button.transform.GetChild(1);
         Transform temp_button = button_collection.transform.GetChild(1);        
         Transform outlook_button = button_collection.transform.GetChild(0);
@@ -139,11 +151,11 @@ public class FrameHandler : MonoBehaviour
             GameObject third_child = Instantiate(frame_prefab, gameObject.transform.parent);
 
             first_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dataPoints.FindAll(
-                e => e.values[dataPoint.categories.Outlook] == dataPoint.choices_outlook.Sunny.ToString()));
+                e => e.values[dataPoint.categories.Outlook] == dataPoint.choices_outlook.Sunny.ToString()), layer -1, leftbound, leftbound + (rightbound -leftbound) / 3);
             second_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dataPoints.FindAll(
-                e => e.values[dataPoint.categories.Outlook] == dataPoint.choices_outlook.Overcast.ToString()));
+                e => e.values[dataPoint.categories.Outlook] == dataPoint.choices_outlook.Overcast.ToString()), layer-1, leftbound + (rightbound - leftbound) / 3, leftbound + 2 * (rightbound - leftbound) / 3);
             third_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dataPoints.FindAll(
-                e => e.values[dataPoint.categories.Outlook] == dataPoint.choices_outlook.Rain.ToString()));
+                e => e.values[dataPoint.categories.Outlook] == dataPoint.choices_outlook.Rain.ToString()), layer-1, leftbound + 2 * (rightbound - leftbound) / 3, rightbound);
 
             child_nodes.Add(first_child);
             child_nodes.Add(second_child);
@@ -160,11 +172,11 @@ public class FrameHandler : MonoBehaviour
             second_child.transform.parent = gameObject.transform.parent;
 
             first_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dataPoints.FindAll(
-                e => e.values[dataPoint.categories.Temperature] == dataPoint.choices_temperature.Cool.ToString()));
+                e => e.values[dataPoint.categories.Temperature] == dataPoint.choices_temperature.Cool.ToString()), layer - 1, leftbound, leftbound + (rightbound - leftbound) / 3);
             second_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dataPoints.FindAll(
-                e => e.values[dataPoint.categories.Temperature] == dataPoint.choices_temperature.Mild.ToString()));
+                e => e.values[dataPoint.categories.Temperature] == dataPoint.choices_temperature.Mild.ToString()), layer - 1, leftbound + (rightbound - leftbound) / 3, leftbound + 2 * (rightbound - leftbound) / 3);
             third_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dataPoints.FindAll(
-                e => e.values[dataPoint.categories.Temperature] == dataPoint.choices_temperature.High.ToString()));
+                e => e.values[dataPoint.categories.Temperature] == dataPoint.choices_temperature.High.ToString()), layer - 1, leftbound + 2 * (rightbound - leftbound) / 3, rightbound);
 
             child_nodes.Add(first_child);
             child_nodes.Add(second_child);
@@ -178,10 +190,10 @@ public class FrameHandler : MonoBehaviour
             second_child.transform.parent = gameObject.transform.parent;
 
             first_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dataPoints.FindAll(
-                e => e.values[dataPoint.categories.Humidity] == dataPoint.choices_humidity.Normal.ToString()));
+                e => e.values[dataPoint.categories.Humidity] == dataPoint.choices_humidity.Normal.ToString()), layer - 1, leftbound, (leftbound + rightbound) / 2);
             second_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dataPoints.FindAll(
-                e => e.values[dataPoint.categories.Humidity] == dataPoint.choices_humidity.High.ToString()));
-            
+                e => e.values[dataPoint.categories.Humidity] == dataPoint.choices_humidity.High.ToString()), layer - 1, (leftbound + rightbound) / 2, rightbound);
+
 
             child_nodes.Add(first_child);
             child_nodes.Add(second_child);
@@ -194,9 +206,9 @@ public class FrameHandler : MonoBehaviour
             second_child.transform.parent = gameObject.transform.parent;
 
             first_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dataPoints.FindAll(
-                e => e.values[dataPoint.categories.Wind] == dataPoint.choices_wind.Weak.ToString()));
+                e => e.values[dataPoint.categories.Wind] == dataPoint.choices_wind.Weak.ToString()), layer - 1, leftbound, (leftbound + rightbound) / 2);
             second_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dataPoints.FindAll(
-                e => e.values[dataPoint.categories.Wind] == dataPoint.choices_wind.Strong.ToString()));
+                e => e.values[dataPoint.categories.Wind] == dataPoint.choices_wind.Strong.ToString()), layer - 1, (leftbound + rightbound) / 2, rightbound);
 
             child_nodes.Add(first_child);
             child_nodes.Add(second_child);

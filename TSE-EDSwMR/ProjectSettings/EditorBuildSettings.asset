@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/nodes on virtual table.unity
-    guid: 80e680b86e4194b4babc6aa18aeeaba2
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 07b71980238f30c4e904d1f0aee2455a, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: e477a2dedd853af4c8b3f60c8a6ca7a9, type: 2}

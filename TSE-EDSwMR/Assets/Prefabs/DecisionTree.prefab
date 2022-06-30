@@ -43,5 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f0a60afea5fed47bc4737adb834594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 5363501095054871213, guid: 31855f04ebb97914eb1a546f9458819e, type: 3}
+  button_prefab: {fileID: 2161814823950967579, guid: 6fe8c2e2d3e431a499e443b27190bfc3, type: 3}
   frame_prefab: {fileID: 2782996915518340344, guid: 1845797212c4596428823d8df671fe55, type: 3}
