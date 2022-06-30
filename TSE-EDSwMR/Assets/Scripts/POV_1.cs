@@ -42,14 +42,22 @@ public class POV_1 : MonoBehaviour
 
     // current day in the story.
     private int day;
-    private int iconNr;
+    private int icon_nr;
     // Start is called before the first frame update
     void Start()
     {
         day = 1;
 
-        iconNr = 1;
+        icon_nr = 1;
 
+        for (int i = 0; i < icons_day1_prefab.Length; i++)
+        {
+            currentIcons[i] = GameObject.Instantiate(IconsOfDay_prefabs()[i], gameObject.transform);
+
+        }
+
+
+        LoopIconsAnswer();
 
         // wait for user input
         // then increase iconNr and displaynext icon again until we have 3 icons.
@@ -64,11 +72,12 @@ public class POV_1 : MonoBehaviour
 
     private void LoopIconsAnswer()
     {
-        while (iconNr <= 3)
+        // changing global variable really?
+        while (icon_nr <= 3)
         {
-            DisplayNextIcon(iconNr);
+            DisplayNextIcon();
 
-            iconNr++;
+            icon_nr++;
         }
     }
 
@@ -85,25 +94,25 @@ public class POV_1 : MonoBehaviour
     /// Intatiates the next icon in the correct position
     /// </summary>
     /// <param name="icon_nr"> number between 1 and 3 </param>
-    private void DisplayNextIcon(int icon_nr)
+    private void DisplayNextIcon()
     {
-        icon_nr--; // because of array
-        currentIcons[icon_nr] = GameObject.Instantiate(IconsOfDay_prefabs()[icon_nr],gameObject.transform);
+        int icon_nr_array = icon_nr - 1;
+        currentIcons[icon_nr_array] = GameObject.Instantiate(IconsOfDay_prefabs()[icon_nr_array],gameObject.transform);
 
 
         if (icon_nr == 1)
         {
-            currentIcons[icon_nr].transform.localPosition = position_icon1;
+            currentIcons[0].transform.localPosition = position_icon1;
 
         }
         else if (icon_nr == 2)
         {
-            currentIcons[icon_nr].transform.localPosition = position_icon2;
+            currentIcons[1].transform.localPosition = position_icon2;
 
         }
         else if (icon_nr == 3)
         {
-            currentIcons[icon_nr].transform.localPosition = position_icon3;
+            currentIcons[2].transform.localPosition = position_icon3;
 
         }
 
