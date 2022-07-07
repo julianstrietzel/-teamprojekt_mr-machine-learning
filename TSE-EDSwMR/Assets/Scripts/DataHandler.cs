@@ -7,7 +7,9 @@ using UnityEngine;
 public class DataHandler : MonoBehaviour 
 {
     public static List<dataPoint> data = new List<dataPoint>();
-    private void Start()
+    public GameObject decisionTree;
+
+    void Start()
     {
         data.Clear();
 
@@ -25,6 +27,8 @@ public class DataHandler : MonoBehaviour
         data.Add(new dataPoint("Overcast",  "Mild", "High", "Strong",   true,   12));
         data.Add(new dataPoint("Overcast",  "Hot",  "Normal", "Weak",   true,   13));
         data.Add(new dataPoint("Rain",      "Mild", "High", "Weak",     false,  14));
+
+        decisionTree.GetComponent<DecisionTreeHandler>().OnDataHandlerInit(); 
     }
 
 }
