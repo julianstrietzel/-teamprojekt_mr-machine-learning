@@ -15,9 +15,13 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.0156
       objectReference: {fileID: 0}
+    - target: {fileID: 896726644281827226, guid: 4f44c0d070528944c9bff425c6932763, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.007
+      objectReference: {fileID: 0}
     - target: {fileID: 3126786008848669196, guid: 4f44c0d070528944c9bff425c6932763, type: 3}
       propertyPath: m_Name
-      value: PressableButtonHoloLens2_32x96
+      value: Yes_PressableButtonHoloLens2_32x96 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3126786009469193090, guid: 4f44c0d070528944c9bff425c6932763, type: 3}
       propertyPath: m_Mesh

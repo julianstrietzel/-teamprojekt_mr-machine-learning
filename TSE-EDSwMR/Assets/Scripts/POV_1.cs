@@ -23,6 +23,9 @@ public class POV_1 : MonoBehaviour
     public GameObject[] icons_day3_prefab = new GameObject[3];
     public GameObject[] icons_day4_prefab = new GameObject[3];
 
+   
+
+
 
     private GameObject[] icons_day1 = new GameObject[3];
     private GameObject[] icons_day2 = new GameObject[3];
@@ -30,6 +33,9 @@ public class POV_1 : MonoBehaviour
     private GameObject[] icons_day4 = new GameObject[3];
 
     private GameObject[] currentIcons;
+
+
+   
 
     private static Vector3 position_icon1 = new Vector3(-0.04f, 0.04f, -0.01f);
     private static Vector3 position_icon2 = new Vector3(-0.04f, 0.0f, -0.025f);
