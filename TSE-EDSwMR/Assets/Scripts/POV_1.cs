@@ -56,14 +56,14 @@ public class POV_1 : MonoBehaviour
 
         icon_nr = 1;
 
-        for (int i = 0; i < icons_day1_prefab.Length; i++)
-        {
-            currentIcons[i] = GameObject.Instantiate(IconsOfDay_prefabs()[i], gameObject.transform);
+        //for (int i = 0; i < icons_day1_prefab.Length; i++)
+        //{
+        //    currentIcons[i] = GameObject.Instantiate(IconsOfDay_prefabs()[i], gameObject.transform);
 
-        }
+        //}
 
 
-        LoopIconsAnswer();
+        // LoopIconsAnswer();
 
         // wait for user input
         // then increase iconNr and displaynext icon again until we have 3 icons.
@@ -100,7 +100,7 @@ public class POV_1 : MonoBehaviour
     /// Intatiates the next icon in the correct position
     /// </summary>
     /// <param name="icon_nr"> number between 1 and 3 </param>
-    private void DisplayNextIcon()
+    public void DisplayNextIcon()
     {
         int icon_nr_array = icon_nr - 1;
         currentIcons[icon_nr_array] = GameObject.Instantiate(IconsOfDay_prefabs()[icon_nr_array],gameObject.transform);
