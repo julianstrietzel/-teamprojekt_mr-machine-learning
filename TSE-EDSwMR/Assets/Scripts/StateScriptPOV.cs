@@ -24,7 +24,7 @@ public class StateScriptPOV : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("in State Script");
+        Debug.Log("in State Script");        
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class StateScriptPOV : MonoBehaviour
 
     void UpdateCurrentState()
     {
-        if (icon_nr > PanelIconsPOV.AMOUNT_ICONS)
+        if (icon_nr >= PanelIconsPOV.AMOUNT_ICONS)
         {
             icon_nr = 0;
             day++;
@@ -44,6 +44,8 @@ public class StateScriptPOV : MonoBehaviour
         if (day > PanelIconsPOV.AMOUNT_DAYS)
         {
             finishedGame = true;
+            Debug.Log(" set finishedGame ==: " + finishedGame);
+
         }
 
         else
@@ -64,15 +66,20 @@ public class StateScriptPOV : MonoBehaviour
 
         Debug.Log("after update- Day: " + day + " icon_nr: " + icon_nr);
 
-        if (finishedGame)
+        Debug.Log("finished?: " + finishedGame);
+
+        if (finishedGame && panelIcons != null)
         {
-            // TODO do something
+            // TODO Destroy Panel and Buttons
+            // TODO Kai talks and introduces DT                         
+            panelIcons.DestroyPanelAfterGameFinish();
+        }
+        else
+        {
+            panelIcons.DisplayNextIcon(day, icon_nr);
+
         }
 
-
-        //panelIcons.DisplayIcons();
-        panelIcons.DisplayNextIcon(day, icon_nr);
-     
     }
 
     public void Yes_Clicked()
@@ -88,6 +95,11 @@ public class StateScriptPOV : MonoBehaviour
         dataHandler.AddDecision(false);
 
         Clicked();
+    }
+
+    public bool GetFinishedGame()
+    {
+        return finishedGame;
     }
 
 

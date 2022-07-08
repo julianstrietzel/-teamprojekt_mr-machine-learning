@@ -9,28 +9,16 @@ public class ButtonsYesNoPOV : MonoBehaviour
     public StateScriptPOV stateScript;
 
 
-    // TODO: are these yes no prefabs needed?
-    //public GameObject yes_prefab;
-    //public GameObject no_prefab;
-
-    //private GameObject yes_button;
-    //private GameObject no_button;
-
-
     // Start is called before the first frame update
     void Start()
     {
 
-        // TODO: click button does not work, function does
-       /* Debug.Log("ButtonsYesNo");
-        Yes_Clicked();
-        No_Clicked();*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        DestroyButtonsAfterGameFinished();
     }
     // TODO: Differnt class for click
     /*
@@ -57,7 +45,14 @@ public class ButtonsYesNoPOV : MonoBehaviour
 
     }
 
+    private void DestroyButtonsAfterGameFinished()
+    {
+        if (stateScript.GetFinishedGame())
+        {
+            Destroy(gameObject);
 
+        }
+    }
 
 
 
