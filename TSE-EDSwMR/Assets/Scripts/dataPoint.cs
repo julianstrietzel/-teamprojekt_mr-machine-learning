@@ -14,10 +14,16 @@ public class dataPoint
         Wind
     }
 
+
+    public class Categories
+    {
+        
+    }
+
     
 
    // public static Dictionary<categories, object> choices_categories = new Dictionary<categories, object>();
-    
+    //TODO working as JSON structure
 
     public enum choices_outlook
     {
@@ -28,17 +34,23 @@ public class dataPoint
 
     public enum choices_temperature
     {
-        High, Mild, Cool
+        Hot, 
+        Mild, 
+        Cool
     }
+    
     public enum choices_humidity
     {
-        High, Normal
+        High,
+        Normal
     }
 
     public enum choices_wind
     {
-        Strong, Weak
+        Strong,
+        Weak
     }
+
     public Dictionary<categories, string> values;
 
     public bool result;

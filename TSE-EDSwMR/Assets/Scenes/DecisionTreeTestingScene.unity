@@ -559,7 +559,7 @@ PrefabInstance:
     - target: {fileID: 2032773260573700922, guid: ad6311bfcd60c5b458710707eae1b686, type: 3}
       propertyPath: data
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1285746966}
     - target: {fileID: 2032773260573700922, guid: ad6311bfcd60c5b458710707eae1b686, type: 3}
       propertyPath: button_prefab
       value: 
@@ -866,3 +866,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1285746966 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1791579933534501311, guid: 31855f04ebb97914eb1a546f9458819e, type: 3}
+  m_PrefabInstance: {fileID: 726122227}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9e258138e87fe4caf0ef2902ad180a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

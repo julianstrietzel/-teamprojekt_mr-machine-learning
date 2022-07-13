@@ -336,7 +336,9 @@ MonoBehaviour:
   EmptyPrefab: {fileID: 191725123763652313, guid: ddc1e6aa6adee464bbde54fb33cd42e3, type: 3}
   choose_button_prefab: {fileID: 1917323831215790522, guid: bb34994362e071e44804d437ae75fbe5, type: 3}
   frame_prefab: {fileID: 2782996915518340344}
+  categories_filtered_for: 
   child_nodes: []
+  numberForSorting: 0
 --- !u!1 &2782996916342316544
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +487,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2118117504701756210
 RectTransform:
   m_ObjectHideFlags: 0

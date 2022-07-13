@@ -25,7 +25,8 @@ public class Layer
         countFinallyFiltered += frameHandler.Singular() ? frameHandler.NumberDatapoints() : 0 ;
 
         int newNumberForSort = frameHandler.numberForSorting;
-        int i = 0; 
+        int i = 0;
+//TODO for each instead of while 
         while (i < nodes.Count)
         {
             if(((GameObject)nodes[i]).GetComponent<FrameHandler>().numberForSorting > newNumberForSort)
