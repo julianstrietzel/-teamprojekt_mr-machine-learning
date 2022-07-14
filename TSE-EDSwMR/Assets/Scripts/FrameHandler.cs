@@ -18,10 +18,11 @@ public class FrameHandler : MonoBehaviour
     public List<dataPoint.categories> categories_filtered_for;
     private GameObject choose_button;
     public List<GameObject> child_nodes;
-
     public Layer layer;
     public int numberForSorting; //indices for nodes beginns at 1 making root node 1 and its childnodes 11, 12 and evtl. 13
 
+    private bool singular_known = false;
+    private bool singular;
 
 
 
@@ -32,9 +33,12 @@ public class FrameHandler : MonoBehaviour
 
     public bool Singular()
     {
+        if (singular_known) return singular;   
         if (dataPoints.Count == 0)
         {
             Debug.Log("datapoints of Node " + gameObject.name + "is empty in Singular()");
+            singular_known = true;
+            singular = true;
             return true;
         }
         print(dataPoints);
@@ -43,10 +47,14 @@ public class FrameHandler : MonoBehaviour
         {
             if (refDp.result != dp.result)
             {
+                singular = false;
+                singular_known = true;
                 return false;
             }
 
         }
+        singular_known = true;
+        singular = true;
         return true;
     }
 
@@ -69,20 +77,30 @@ public class FrameHandler : MonoBehaviour
 
     public void InitFrame(List<dataPoint.categories> filtered_for, List<dataPoint> relevant_datapoints, Layer layer, int numberSort, int number_datapoints_to_left)
     {
-        //For naming only
-        gameObject.name = "Node" + numberSort;
+
+
+        gameObject.name = "Node" + numberSort; //For naming only
         dataPoints = relevant_datapoints;
         categories_filtered_for = filtered_for;
         this.layer = layer;
         this.numberForSorting = numberSort;
 
-        //TODO place according to number of dps to the left
+
+        //if node is empty
+        if (dataPoints.Count == 0 )
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+
+        //place according to number of dps to the left
         transform.localPosition = new Vector3((DecisionTreeHandler.s_max_width / layer.countDps) * number_datapoints_to_left, 0, layer.layerLevel);
 
 
 
         //Placing plate for tennisballs in the frames
-        //TODO grid layout does not work with the 3d models we are using so far maybe we just have to place them ourselves
+        //TODO grid layout does not work with the 3d models we are using so far maybe we just have to place them ourselves #4
         
 
         layer.AddNode(this.gameObject);
@@ -105,7 +123,7 @@ public class FrameHandler : MonoBehaviour
         int width = (int)Math.Ceiling(relevant_datapoints.Count / (float) height);
         int none = (int) width * height - yes - no;
 
-        //TODO Scale the frames to appropriete size to the number of tennisballs inside
+        //TODO Scale the frames to appropriete size to the number of tennisballs inside #11
         //gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * width / height, 1, 1); //Scales frames to necessary width
         for(int i = 0; i < yes; i++)
         {
@@ -124,7 +142,7 @@ public class FrameHandler : MonoBehaviour
 
         if (!this.Singular())
         {
-            //TODO only activate Buttons if layer is ready means when layer above is finished
+            //TODO only activate Buttons if layer is ready means when layer above is finished #13
             choose_button = Instantiate(choose_button_prefab, gameObject.transform);
             choose_button.transform.localPosition = new Vector3(.5f, .7f, 0);
             Transform button_collection = choose_button.transform.GetChild(1);
@@ -159,7 +177,7 @@ public class FrameHandler : MonoBehaviour
             }
 
 
-            //TODO place button in appropriete location relative to frame
+            //TODO place button in appropriete location relative to frame #14
         }
     }
 
