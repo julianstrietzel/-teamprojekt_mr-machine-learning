@@ -50,6 +50,7 @@ public class Layer
         return newLayer;
     }
 
+
     //Returns the number of dps to the left of the given frame to place ´his childs accordingly
     //returns -1 if node is not in layer
     //Wird aufgerufen von einem Knoten in dieser Layer, welcher einen neuen Knoten darunter platzieren will
@@ -79,7 +80,39 @@ public class Layer
     }
 
     
+    public bool IsReady()
+    {
+        foreach (GameObject node in nodes)
+        {
+            if (!node.GetComponent<FrameHandler>().IsReady()) return false;
+        }
+        return true;
+    }
 
+    public bool IsEmpty()
+    {
+        return nodes.Count == 0;
+    }
+
+
+    public void ListenerNodeGeneratesChildren()
+    {
+        if (!IsReady()) return;
+        if(NextLayer().IsEmpty()) 
+        { 
+            //TODO do something if everything is empty or ready
+        }
+        NextLayer().Activate();
+
+    }
+
+    public void Activate()
+    {
+        foreach (GameObject nodeGameObject in nodes)
+        {
+            nodeGameObject.GetComponent<FrameHandler>().Activate();
+        }
+    }
 
 
 

@@ -23,6 +23,9 @@ public class FrameHandler : MonoBehaviour
 
     private bool singular_known = false;
     private bool singular;
+    private bool button_pressed = false;
+    private bool activated = false;
+     
 
 
 
@@ -30,6 +33,15 @@ public class FrameHandler : MonoBehaviour
     {
         return dataPoints.Count;
     }
+
+    public bool IsReady()
+    {
+        
+        if(!activated) return false;
+        if (Singular()) return true;
+        return button_pressed;
+    }
+
 
     public bool Singular()
     {
@@ -95,7 +107,7 @@ public class FrameHandler : MonoBehaviour
 
 
         //place according to number of dps to the left
-        transform.localPosition = new Vector3((DecisionTreeHandler.s_max_width / layer.countDps) * number_datapoints_to_left, 0, layer.layerLevel);
+        transform.localPosition = new Vector3((DecisionTreeHandler.s_max_width / layer.countDps) * number_datapoints_to_left, 0, layer.layerLevel * (-1));
 
 
 
@@ -140,10 +152,18 @@ public class FrameHandler : MonoBehaviour
         grid.AddComponent<GridLayoutGroup>();
 
 
+        
+    }
+
+
+    public void Activate()
+    {
+        activated = true;
         if (!this.Singular())
         {
             //TODO only activate Buttons if layer is ready means when layer above is finished #13
             choose_button = Instantiate(choose_button_prefab, gameObject.transform);
+            button_pressed = false;
             choose_button.transform.localPosition = new Vector3(.5f, .7f, 0);
             Transform button_collection = choose_button.transform.GetChild(1);
             Transform temp_button = button_collection.transform.GetChild(1);
@@ -159,19 +179,19 @@ public class FrameHandler : MonoBehaviour
             //hum_button.GetComponent<Button>().onClick.AddListener(ButtonClick_Humidity);
             //wind_button.GetComponent<Button>().onClick.AddListener(ButtonClick_Wind);
 
-            if (filtered_for.Contains(dataPoint.categories.Outlook))
+            if (categories_filtered_for.Contains(dataPoint.categories.Outlook))
             {
                 outlook_button.gameObject.SetActive(false);
             }
-            if (filtered_for.Contains(dataPoint.categories.Temperature))
+            if (categories_filtered_for.Contains(dataPoint.categories.Temperature))
             {
                 temp_button.gameObject.SetActive(false);
             }
-            if (filtered_for.Contains(dataPoint.categories.Humidity))
+            if (categories_filtered_for.Contains(dataPoint.categories.Humidity))
             {
                 hum_button.gameObject.SetActive(false);
             }
-            if (filtered_for.Contains(dataPoint.categories.Wind))
+            if (categories_filtered_for.Contains(dataPoint.categories.Wind))
             {
                 wind_button.gameObject.SetActive(false);
             }
@@ -212,6 +232,8 @@ public class FrameHandler : MonoBehaviour
 
     void create_child_nodes(dataPoint.categories filtered)
     {
+        button_pressed = true;
+        layer.ListenerNodeGeneratesChildren();
 
         Layer next_layer = layer.NextLayer();
 
