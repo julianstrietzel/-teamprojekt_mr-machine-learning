@@ -122,61 +122,71 @@ public class FrameHandler : MonoBehaviour
         grid.AddComponent<GridLayoutGroup>();
 
 
-
-        //TODO only activate Buttons if layer is ready means when layer above is finished
-        choose_button = Instantiate(choose_button_prefab, gameObject.transform);
-        choose_button.transform.localPosition = new Vector3(.5f, .7f, 0);
-        Transform button_collection = choose_button.transform.GetChild(1);
-        Transform temp_button = button_collection.transform.GetChild(1);        
-        Transform outlook_button = button_collection.transform.GetChild(0);
-        Transform hum_button = button_collection.transform.GetChild(2);
-        Transform wind_button = button_collection.transform.GetChild(3);
-        temp_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Temp);
-        outlook_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Outlook);
-        hum_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Humidity);
-        wind_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Wind);
-
-        // outlook_button.GetComponent<Button>().onClick.AddListener(ButtonClick_Outlook); 
-        //hum_button.GetComponent<Button>().onClick.AddListener(ButtonClick_Humidity);
-        //wind_button.GetComponent<Button>().onClick.AddListener(ButtonClick_Wind);
-
-        if (filtered_for.Contains(dataPoint.categories.Outlook))
+        if (!this.Singular())
         {
-            outlook_button.gameObject.SetActive(false);
-        }
-        if (filtered_for.Contains(dataPoint.categories.Temperature))
-        {
-            temp_button.gameObject.SetActive(false);
-        }
-        if (filtered_for.Contains(dataPoint.categories.Humidity))
-        {
-            hum_button.gameObject.SetActive(false);
-        }
-        if (filtered_for.Contains(dataPoint.categories.Wind))
-        {
-            wind_button.gameObject.SetActive(false);
-        }
+            //TODO only activate Buttons if layer is ready means when layer above is finished
+            choose_button = Instantiate(choose_button_prefab, gameObject.transform);
+            choose_button.transform.localPosition = new Vector3(.5f, .7f, 0);
+            Transform button_collection = choose_button.transform.GetChild(1);
+            Transform temp_button = button_collection.transform.GetChild(1);
+            Transform outlook_button = button_collection.transform.GetChild(0);
+            Transform hum_button = button_collection.transform.GetChild(2);
+            Transform wind_button = button_collection.transform.GetChild(3);
+            temp_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Temp);
+            outlook_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Outlook);
+            hum_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Humidity);
+            wind_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Wind);
 
-        //TODO place button in appropriete location relative to frame
+            // outlook_button.GetComponent<Button>().onClick.AddListener(ButtonClick_Outlook); 
+            //hum_button.GetComponent<Button>().onClick.AddListener(ButtonClick_Humidity);
+            //wind_button.GetComponent<Button>().onClick.AddListener(ButtonClick_Wind);
+
+            if (filtered_for.Contains(dataPoint.categories.Outlook))
+            {
+                outlook_button.gameObject.SetActive(false);
+            }
+            if (filtered_for.Contains(dataPoint.categories.Temperature))
+            {
+                temp_button.gameObject.SetActive(false);
+            }
+            if (filtered_for.Contains(dataPoint.categories.Humidity))
+            {
+                hum_button.gameObject.SetActive(false);
+            }
+            if (filtered_for.Contains(dataPoint.categories.Wind))
+            {
+                wind_button.gameObject.SetActive(false);
+            }
+
+
+            //TODO place button in appropriete location relative to frame
+        }
     }
 
     public void ButtonClick_Temp() {
+        if (this.choose_button is null) return;
         choose_button.gameObject.SetActive(false);
         create_child_nodes(dataPoint.categories.Temperature);
     }
 
     public void ButtonClick_Outlook()
     {
+        if (this.choose_button is null) return;
+
         choose_button.gameObject.SetActive(false);
         create_child_nodes(dataPoint.categories.Outlook);
     }
     public void ButtonClick_Humidity()
     {
+        if (this.choose_button is null) return;
+
         choose_button.gameObject.SetActive(false);
         create_child_nodes(dataPoint.categories.Humidity);
     }
     public void ButtonClick_Wind()
     {
+        if (this.choose_button is null) return;
+
         choose_button.gameObject.SetActive(false);
         create_child_nodes(dataPoint.categories.Wind);
     }
