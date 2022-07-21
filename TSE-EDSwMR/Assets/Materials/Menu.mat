@@ -9,9 +9,9 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Menu
   m_Shader: {fileID: 4800000, guid: 5bdea20278144b11916d77503ba1467a, type: 3}
-  m_ShaderKeywords: _BORDER_LIGHT _BORDER_LIGHT_REPLACES_ALBEDO _DIRECTIONAL_LIGHT
-    _HOVER_LIGHT _INDEPENDENT_CORNERS _NEAR_LIGHT_FADE _REFLECTIONS _ROUND_CORNERS
-    _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A _SPECULAR_HIGHLIGHTS
+  m_ShaderKeywords: _BORDER_LIGHT_REPLACES_ALBEDO _DIRECTIONAL_LIGHT _HOVER_LIGHT
+    _INDEPENDENT_CORNERS _NEAR_LIGHT_FADE _REFLECTIONS _ROUND_CORNERS _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+    _SPECULAR_HIGHLIGHTS
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -75,7 +75,7 @@ Material:
     - _AlbedoAssignedAtRuntime: 0
     - _BlendOp: 0
     - _BlendedClippingWidth: 1
-    - _BorderLight: 1
+    - _BorderLight: 0
     - _BorderLightOpaque: 0
     - _BorderLightOpaqueAlpha: 1
     - _BorderLightReplacesAlbedo: 1
@@ -86,13 +86,13 @@ Material:
     - _ClippingBorder: 0
     - _ClippingBorderWidth: 0.025
     - _ColorWriteMask: 15
-    - _CullMode: 2
+    - _CullMode: 0
     - _CustomMode: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DirectionalLight: 1
     - _DstBlend: 0
-    - _EdgeSmoothingValue: 0
+    - _EdgeSmoothingValue: 0.0099
     - _EnableChannelMap: 0
     - _EnableEmission: 0
     - _EnableHoverColorOverride: 0
