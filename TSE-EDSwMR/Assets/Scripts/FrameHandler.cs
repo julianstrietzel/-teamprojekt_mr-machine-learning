@@ -7,7 +7,7 @@ using System;
 
 public class FrameHandler : MonoBehaviour
 {
-    public GameObject grid;
+    //public GameObject grid;
     public GameObject YesPrefab;
     public GameObject NoPrefab;
     public GameObject EmptyPrefab;
@@ -25,6 +25,7 @@ public class FrameHandler : MonoBehaviour
     private bool singular;
     private bool button_pressed = false;
     private bool activated = false;
+    public float space_for_buttons_normed = 4;
      
 
 
@@ -72,23 +73,9 @@ public class FrameHandler : MonoBehaviour
 
 
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        //InitFrame(2,3, null, null);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-
     public void InitFrame(List<dataPoint.categories> filtered_for, List<dataPoint> relevant_datapoints, Layer layer, int numberSort, int number_datapoints_to_left)
     {
+        
 
 
         gameObject.name = "Node" + numberSort; //For naming only
@@ -107,19 +94,24 @@ public class FrameHandler : MonoBehaviour
 
 
         //place according to number of dps to the left
-        transform.localPosition = new Vector3((DecisionTreeHandler.s_max_width / layer.countDps) * number_datapoints_to_left, 0, layer.layerLevel * (-1));
+        transform.localPosition = new Vector3((DecisionTreeHandler.s_max_width / layer.countDps) * number_datapoints_to_left, 0, layer.layerLevel * (-1.1f));
+        if(layer.layerLevel == 0) { transform.localPosition = new Vector3(DecisionTreeHandler.s_max_width / 4, 0, 0); }
 
-
+        //Scale X Axis according to number of tennisballs
+        float new_x_scale = ((float) Math.Ceiling(((float) relevant_datapoints.Count) /  space_for_buttons_normed) / space_for_buttons_normed);
+        Debug.Log(new_x_scale + " " + numberForSorting  + " " + transform.childCount);
+        Vector3 localScale = transform.GetChild(0).localScale;
+        transform.GetChild(0).localScale = new Vector3(new_x_scale, localScale.y, localScale.z);
 
         //Placing plate for tennisballs in the frames
         //TODO grid layout does not work with the 3d models we are using so far maybe we just have to place them ourselves #4
         
 
         layer.AddNode(gameObject);
-        foreach(Transform plate in grid.transform)
-        {
-            GameObject.Destroy(plate.gameObject);
-        }
+        //foreach(Transform plate in grid.transform)
+        //{
+        //    GameObject.Destroy(plate.gameObject);
+        //}
         int yes = 0;
         int no = 0;
         foreach(dataPoint dp in relevant_datapoints){
@@ -133,26 +125,26 @@ public class FrameHandler : MonoBehaviour
         }
         int height = 4;
         int width = (int)Math.Ceiling(relevant_datapoints.Count / (float) height);
-        int none = (int) width * height - yes - no;
+        int none = (int)width * height - yes - no;
 
         //TODO Scale the frames to appropriete size to the number of tennisballs inside #11
         //gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * width / height, 1, 1); //Scales frames to necessary width
-        for(int i = 0; i < yes; i++)
-        {
-            Instantiate(YesPrefab, grid.transform);
-        }
-        for (int i = 0; i < none; i++)
-        {
-            Instantiate(EmptyPrefab, grid.transform);
-        }
-        for (int i = 0; i < no; i++)
-        {
-            Instantiate(NoPrefab, grid.transform);
-        }
-        grid.AddComponent<GridLayoutGroup>();
+        //for(int i = 0; i < yes; i++)
+        //{
+        //    Instantiate(YesPrefab, grid.transform);
+        //}
+        //for (int i = 0; i < none; i++)
+        //{
+        //    Instantiate(EmptyPrefab, grid.transform);
+        //}
+        //for (int i = 0; i < no; i++)
+        //{
+        //    Instantiate(NoPrefab, grid.transform);
+        //}
+        //grid.AddComponent<GridLayoutGroup>();
 
 
-        
+
     }
 
 
@@ -204,7 +196,7 @@ public class FrameHandler : MonoBehaviour
     public void ButtonClick_Temp() {
         if (this.choose_button is null) return;
         choose_button.gameObject.SetActive(false);
-        create_child_nodes(dataPoint.categories.Temperature);
+        Create_child_nodes(dataPoint.categories.Temperature);
     }
 
     public void ButtonClick_Outlook()
@@ -212,30 +204,29 @@ public class FrameHandler : MonoBehaviour
         if (this.choose_button is null) return;
 
         choose_button.gameObject.SetActive(false);
-        create_child_nodes(dataPoint.categories.Outlook);
+        Create_child_nodes(dataPoint.categories.Outlook);
     }
     public void ButtonClick_Humidity()
     {
         if (this.choose_button is null) return;
 
         choose_button.gameObject.SetActive(false);
-        create_child_nodes(dataPoint.categories.Humidity);
+        Create_child_nodes(dataPoint.categories.Humidity);
     }
     public void ButtonClick_Wind()
     {
         if (this.choose_button is null) return;
 
         choose_button.gameObject.SetActive(false);
-        create_child_nodes(dataPoint.categories.Wind);
+        Create_child_nodes(dataPoint.categories.Wind);
     }
 
 
-    void create_child_nodes(dataPoint.categories filtered)
+    void Create_child_nodes(dataPoint.categories filtered)
     {
         button_pressed = true;
 
         Layer next_layer = layer.NextLayer();
-
 
         child_nodes = new List<GameObject>();
 
@@ -316,7 +307,8 @@ public class FrameHandler : MonoBehaviour
 
     }
 
-    public bool equals(System.Object o)
+    override
+    public bool Equals(System.Object o)
     {
 #pragma warning disable CS0253 // Possible unintended reference comparison; right hand side needs cast
         if (this == o) return true;
