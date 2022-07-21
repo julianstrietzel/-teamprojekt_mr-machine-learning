@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.45142543, g: 0.5007999, b: 0.5716797, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -642,17 +642,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48966e8161118ad45a8353ae64a5e468, type: 3}
---- !u!114 &1643594428 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7340525056059961924, guid: 48966e8161118ad45a8353ae64a5e468, type: 3}
-  m_PrefabInstance: {fileID: 1643594427}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4df4163f4134d694498bab90ffb5ae40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1858343405
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,8 +672,8 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
+  m_Range: 100
+  m_SpotAngle: 52
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -739,13 +728,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1858343405}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.2512247, y: 0, z: 0, w: 0.9679288}
+  m_LocalPosition: {x: -0.11, y: 0.52, z: -0.536}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 29.1, y: 0, z: 0}
 --- !u!1001 &5933346763599999690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -753,10 +742,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3109381192887392136, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d621fa99144ed404db8e0b8f4ac3851c, type: 2}
     - target: {fileID: 3793914047043111069, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1643594428}
+      objectReference: {fileID: 0}
     - target: {fileID: 5933346763321879837, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_Name
       value: 'Quad '
