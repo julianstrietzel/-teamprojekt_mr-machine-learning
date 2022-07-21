@@ -7,7 +7,7 @@ using UnityEngine;
 public class Menu_Recommender : MonoBehaviour
 {
     //Change that Static highlight the wanted Module
-    public static int recommendedModule;
+    public static int recommendedModule = 1;
 
     public GameObject Highlight_Module1;
     public GameObject Highlight_Module2;
