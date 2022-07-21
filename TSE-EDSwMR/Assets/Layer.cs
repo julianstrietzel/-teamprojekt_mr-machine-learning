@@ -8,11 +8,13 @@ public class Layer
     public readonly int countDps; //number of datapoints in this layer to set frame size relative to this depending on the #dps in the node. Is already defined by the layer above
     int countFinallyFiltered = 0; // number of datapoints, that are perfectly seperated in this layer. In combination we now know the number of datapoints for the next layer
     public readonly int layerLevel;
-    Layer prevLayer;
+    private Layer prevLayer;
+    private DecisionTreeHandler decisionTree;
 
 
-    public Layer(int level, int expectedDPs, Layer previousLayer)
+    public Layer(int level, int expectedDPs, Layer previousLayer, DecisionTreeHandler decisionTreeHandler)
     {
+        decisionTree = decisionTreeHandler;
         layerLevel = level;
         countDps = expectedDPs;
         prevLayer = previousLayer;
@@ -44,7 +46,7 @@ public class Layer
     {
         if(DecisionTreeHandler.s_layers.Count <= layerLevel + 1)
         {
-            DecisionTreeHandler.s_layers.Add(new Layer(layerLevel + 1, countDps - countFinallyFiltered, this));
+            DecisionTreeHandler.s_layers.Add(new Layer(layerLevel + 1, countDps - countFinallyFiltered, this, decisionTree));
         }
         Layer newLayer = (Layer) DecisionTreeHandler.s_layers[layerLevel + 1];
         return newLayer;
@@ -64,7 +66,7 @@ public class Layer
             return -1;
         }
         FrameHandler it_frame = ((GameObject)nodes[i]).GetComponent<FrameHandler>();
-        while (!it_frame.equals(frame))
+        while (!it_frame.Equals(frame))
         {
             result += it_frame.Singular()? 0 : it_frame.NumberDatapoints();
 
@@ -109,6 +111,9 @@ public class Layer
 
     public void Activate()
     {
+
+        decisionTree.MoveUpForNextLayer();
+
         foreach (GameObject nodeGameObject in nodes)
         {
             nodeGameObject.GetComponent<FrameHandler>().Activate();
