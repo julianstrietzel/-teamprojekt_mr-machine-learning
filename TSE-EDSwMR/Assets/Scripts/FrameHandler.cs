@@ -115,7 +115,7 @@ public class FrameHandler : MonoBehaviour
         //TODO grid layout does not work with the 3d models we are using so far maybe we just have to place them ourselves #4
         
 
-        layer.AddNode(this.gameObject);
+        layer.AddNode(gameObject);
         foreach(Transform plate in grid.transform)
         {
             GameObject.Destroy(plate.gameObject);
@@ -233,7 +233,6 @@ public class FrameHandler : MonoBehaviour
     void create_child_nodes(dataPoint.categories filtered)
     {
         button_pressed = true;
-        layer.ListenerNodeGeneratesChildren();
 
         Layer next_layer = layer.NextLayer();
 
@@ -313,6 +312,7 @@ public class FrameHandler : MonoBehaviour
             child_nodes.Add(first_child);
             child_nodes.Add(second_child);
         }
+        layer.ListenerNodeGeneratesChildren();
 
     }
 

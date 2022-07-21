@@ -80,7 +80,7 @@ public class Layer
     }
 
     
-    public bool IsReady()
+    public bool LayerIsReady()
     {
         foreach (GameObject node in nodes)
         {
@@ -92,12 +92,13 @@ public class Layer
     public bool IsEmpty()
     {
         return nodes.Count == 0;
+        //TODO make if no node containes any 
     }
 
 
     public void ListenerNodeGeneratesChildren()
     {
-        if (!IsReady()) return;
+        if (!LayerIsReady()) return;
         if(NextLayer().IsEmpty()) 
         { 
             //TODO do something if everything is empty or ready
