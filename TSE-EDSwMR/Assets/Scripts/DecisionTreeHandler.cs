@@ -28,7 +28,7 @@ public class DecisionTreeHandler : MonoBehaviour
             moved += Vector3.Distance(Vector3.forward * Time.deltaTime * speed, Vector3.zero);
              
             transform.Translate( Vector3.forward  * Time.deltaTime * speed);
-            if (moved > 1f + buffer)
+            if (moved > .3f * (1f + buffer))
             {
                 move = false;
                 moved = 0f;
