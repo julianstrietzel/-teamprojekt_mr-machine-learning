@@ -6,7 +6,7 @@ public class Layer
 {
     ArrayList nodes = new ArrayList(); //List of nodes in the layer to be placed 
     public readonly int countDps; //number of datapoints in this layer to set frame size relative to this depending on the #dps in the node. Is already defined by the layer above
-    int countFinallyFiltered = 0; // number of datapoints, that are perfectly seperated in this layer. In combination we now know the number of datapoints for the next layer
+    int countFinallyFiltered; // number of datapoints, that are perfectly seperated in this layer. In combination we now know the number of datapoints for the next layer
     public readonly int layerLevel;
     private Layer prevLayer;
     private DecisionTreeHandler decisionTree;
@@ -31,7 +31,7 @@ public class Layer
 //TODO for each instead of while 
         while (i < nodes.Count)
         {
-            if(((GameObject)nodes[i]).GetComponent<FrameHandler>().numberForSorting > newNumberForSort)
+            if(GetFrameHandler(i).numberForSorting > newNumberForSort)
             {
                 nodes.Insert(i, frame);
                 return;
@@ -77,12 +77,19 @@ public class Layer
             {
                 return -1;
             }
-            it_frame = ((GameObject)nodes[i]).GetComponent<FrameHandler>();
+            it_frame = GetFrameHandler(i);
         }
         return result;
     }
 
-    
+
+    private FrameHandler GetFrameHandler(int i)
+    {
+        return ((GameObject)nodes[i]).GetComponent<FrameHandler>();
+    }
+
+
+
     public bool LayerIsReady()
     {
         foreach (GameObject node in nodes)

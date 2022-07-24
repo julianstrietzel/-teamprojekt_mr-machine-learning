@@ -5,7 +5,9 @@ using UnityEngine.UI;
 using System;
 
 
+#pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 public class FrameHandler : MonoBehaviour
+#pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 {
     //public GameObject grid;
     public GameObject YesPrefab;
@@ -95,7 +97,7 @@ public class FrameHandler : MonoBehaviour
 
         //place according to number of dps to the left
         transform.localPosition = new Vector3((DecisionTreeHandler.s_max_width / layer.countDps) * number_datapoints_to_left, 0, layer.layerLevel * (-1.2f));
-        if(layer.layerLevel == 0) { transform.localPosition = new Vector3(DecisionTreeHandler.s_max_width / 4, 0, 0); }
+        if(layer.layerLevel == 0) { transform.localPosition = new Vector3(DecisionTreeHandler.s_max_width / 4, 0, 0); }//special handling for root node
 
         //Scale X Axis according to number of tennisballs
         float new_x_scale = ((float) Math.Ceiling(((float) relevant_datapoints.Count) /  space_for_buttons_normed) / space_for_buttons_normed);
