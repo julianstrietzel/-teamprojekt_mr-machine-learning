@@ -68,7 +68,8 @@ public class Layer
         FrameHandler it_frame = ((GameObject)nodes[i]).GetComponent<FrameHandler>();
         while (!it_frame.Equals(frame))
         {
-            result += it_frame.Singular()? 0 : it_frame.NumberDatapoints();
+            result += it_frame.Singular() ? 0 : (int)System.Math.Ceiling(it_frame.NumberDatapoints() / 4f) * 4;
+
 
 
             i++;
