@@ -19,6 +19,8 @@ public class DecisionTreeHandler : MonoBehaviour
 
     private float buffer = .1f; //Buffer between the layers
     private static Color prev_color;
+    private static Color yellow_plate_color = new Color(255, 230, 132);
+    private static Color red_plate_color = new Color(217, 0, 69);
 
     private void Update()
     {   
@@ -66,7 +68,7 @@ public class DecisionTreeHandler : MonoBehaviour
 
     public static Color RandomColor()
     {
-        float level_similarity = .3f; //TODO calibrate level of similarity
+        float level_similarity = .2f; //TODO calibrate level of similarity
         print("prevColor is " + prev_color);
         if (prev_color == null) return prev_color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
         Color new_color;
@@ -74,7 +76,11 @@ public class DecisionTreeHandler : MonoBehaviour
         do {
             i++;
             new_color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);            
-        } while (i < 5 && (prev_color.b - new_color.b) * (prev_color.b - new_color.b) + (prev_color.r - new_color.r) * (prev_color.r - new_color.r) + (prev_color.b - new_color.b) * (prev_color.b - new_color.b) < level_similarity);
+        } while (i < 10
+        && (prev_color.b - new_color.b) * (prev_color.b - new_color.b) + (prev_color.r - new_color.r) * (prev_color.r - new_color.r) + (prev_color.b - new_color.b) * (prev_color.b - new_color.b) < level_similarity
+        && (yellow_plate_color.b - new_color.b) * (yellow_plate_color.b - new_color.b) + (yellow_plate_color.r - new_color.r) * (yellow_plate_color.r - new_color.r) + (yellow_plate_color.b - new_color.b) * (yellow_plate_color.b - new_color.b) < level_similarity
+        && (red_plate_color.b - new_color.b) * (red_plate_color.b - new_color.b) + (red_plate_color.r - new_color.r) * (red_plate_color.r - new_color.r) + (red_plate_color.b - new_color.b) * (red_plate_color.b - new_color.b) < level_similarity
+        );
         //TODO make color not to similar to red and yellow of the plates
         return prev_color = new_color;
 
