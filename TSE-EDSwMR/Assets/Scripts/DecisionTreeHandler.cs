@@ -15,11 +15,10 @@ public class DecisionTreeHandler : MonoBehaviour
 
     private bool move;
     private float moved = 0;
-    private Vector3 next_global_position;
     private float speed = 0.5f;
 
     private float buffer = .1f; //Buffer between the layers
-
+    private static Color prev_color;
 
     private void Update()
     {   
@@ -52,7 +51,8 @@ public class DecisionTreeHandler : MonoBehaviour
         Layer layerZero = new Layer(0, DataHandler.data.Count, null, this);
         s_layers.Add(layerZero);
         FrameHandler roothandler = root.GetComponent<FrameHandler>();
-        roothandler.InitFrame(new List<dataPoint.categories>(), DataHandler.data, layerZero, 1, 0);
+        prev_color = Color.blue; 
+        roothandler.InitFrame(new List<dataPoint.categories>(), DataHandler.data, layerZero, 1, 0, prev_color);
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
         UnityEngine.Events.UnityEvent button_pressed = place_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed;
         button_pressed.AddListener(Dissable_Following);
@@ -62,5 +62,17 @@ public class DecisionTreeHandler : MonoBehaviour
 
     public void MoveUpForNextLayer() {
         move = true;
+    }
+
+    public static Color RandomColor()
+    {
+        if (prev_color == null) return new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
+        Color new_color;
+        do {
+            new_color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
+        } while ((prev_color.b - new_color.b) * (prev_color.b - new_color.b) + (prev_color.r - new_color.r) * (prev_color.r - new_color.r) + (prev_color.b - new_color.b) * (prev_color.b - new_color.b) < 15);
+        //TODO make color not to similar to red and yellow of the plates
+        prev_color = new_color;
+        return new_color;
     }
 }

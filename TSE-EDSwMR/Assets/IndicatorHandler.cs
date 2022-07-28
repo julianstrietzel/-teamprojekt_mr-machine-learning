@@ -28,8 +28,9 @@ public class IndicatorHandler : MonoBehaviour
         }
 
         transform.GetChild(0).GetComponent<TextMeshPro>().text = yes + "x";
-        transform.GetChild(1).GetComponent<TextMeshPro>().text = no + "x";
-
+        transform.GetChild(1).GetComponent<TextMeshPro>().text = no + "x"; 
+        if (yes == 0) transform.GetChild(0).GetComponent<TextMeshPro>().text = "";
+        if (no == 0) transform.GetChild(1).GetComponent<TextMeshPro>().text = "";
     }
 
     private void DestroyChildrenIndicators()
