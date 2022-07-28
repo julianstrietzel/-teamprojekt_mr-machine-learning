@@ -66,13 +66,17 @@ public class DecisionTreeHandler : MonoBehaviour
 
     public static Color RandomColor()
     {
-        if (prev_color == null) return new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
+        float level_similarity = .3f; //TODO calibrate level of similarity
+        print("prevColor is " + prev_color);
+        if (prev_color == null) return prev_color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
         Color new_color;
+        int i = 0;
         do {
-            new_color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
-        } while ((prev_color.b - new_color.b) * (prev_color.b - new_color.b) + (prev_color.r - new_color.r) * (prev_color.r - new_color.r) + (prev_color.b - new_color.b) * (prev_color.b - new_color.b) < 15);
+            i++;
+            new_color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);            
+        } while (i < 5 && (prev_color.b - new_color.b) * (prev_color.b - new_color.b) + (prev_color.r - new_color.r) * (prev_color.r - new_color.r) + (prev_color.b - new_color.b) * (prev_color.b - new_color.b) < level_similarity);
         //TODO make color not to similar to red and yellow of the plates
-        prev_color = new_color;
-        return new_color;
+        return prev_color = new_color;
+
     }
 }
