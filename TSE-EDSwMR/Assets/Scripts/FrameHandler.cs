@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
+using Newtonsoft.Json.Linq;
 
 
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
@@ -12,8 +13,8 @@ public class FrameHandler : MonoBehaviour
     public GameObject choose_button_prefab;
     public GameObject frame_prefab;
 
-    public List<dataPoint> dataPoints;
-    public List<dataPoint.categories> categories_filtered_for;
+    public List<DataPointNew> dataPoints;
+    public List<string> categories_filtered_for;
     private GameObject choose_button;
     public List<GameObject> child_nodes;
     public Layer layer;
@@ -23,7 +24,7 @@ public class FrameHandler : MonoBehaviour
     private bool singular;
     private bool button_pressed = false;
     private bool activated = false;
-    public float space_for_buttons_normed = 4;
+    public float space_for_buttons_normed = 2;
     private Color color;
      
 
@@ -56,8 +57,8 @@ public class FrameHandler : MonoBehaviour
     public bool Singular()
     {
         if (singular_known) return singular;   
-        dataPoint refDp = null;
-        foreach (dataPoint dp in dataPoints)
+        DataPointNew refDp = null;
+        foreach (DataPointNew dp in dataPoints)
         {
             if (!(refDp == null) && refDp.result != dp.result)
             {
@@ -82,7 +83,7 @@ public class FrameHandler : MonoBehaviour
     /// <param name="layer">the level in which this node is home</param>
     /// <param name="numberSort">an integer where each digit gives the position in a layer. It creates a order between all nodes. Example: 123: The third child of the second child of the root.</param>
     /// <param name="number_datapoints_to_left">Gives the number of datapoints in this layer to the left of this node. All previously finally filtered or singular nodes are calculated out of this.</param>
-    public void InitFrame(List<dataPoint.categories> filtered_for, List<dataPoint> relevant_datapoints, Layer layer, int numberSort, int number_datapoints_to_left, Color prev_color)
+    public void InitFrame(List<string> filtered_for, List<DataPointNew> relevant_datapoints, Layer layer, int numberSort, int number_datapoints_to_left, Color prev_color)
     {
         gameObject.name = "Node" + numberSort; //For naming only
         dataPoints = relevant_datapoints;
@@ -113,8 +114,7 @@ public class FrameHandler : MonoBehaviour
         if(layer.layerLevel == 0) { transform.localPosition = new Vector3(DecisionTreeHandler.s_max_width / 4, 0, 0); }//special handling for root node
 
         //Scale X Axis according to number of tennisballs
-        float new_x_scale = ((float) Math.Ceiling(((float) relevant_datapoints.Count) /  space_for_buttons_normed) / space_for_buttons_normed);
-        Debug.Log(new_x_scale + " " + numberForSorting  + " " + transform.childCount);
+        float new_x_scale = (float)Math.Ceiling((float)relevant_datapoints.Count / (float)space_for_buttons_normed) / 4f;
         Vector3 localScale = transform.GetChild(0).localScale;
         transform.GetChild(0).localScale = new Vector3(new_x_scale, localScale.y, localScale.z);
 
@@ -125,6 +125,9 @@ public class FrameHandler : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Activates and shows the buttons for this frame so that the next discrimination can be chosen
+    /// </summary>
     public void Activate()
     {
         activated = true;
@@ -144,19 +147,19 @@ public class FrameHandler : MonoBehaviour
         hum_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Humidity);
         wind_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Wind);
 
-        if (categories_filtered_for.Contains(dataPoint.categories.Outlook))
+        if (categories_filtered_for.Contains(DataHandler.categories[0].Value<String>("id")))
         {
             outlook_button.gameObject.SetActive(false);
         }
-        if (categories_filtered_for.Contains(dataPoint.categories.Temperature))
+        if (categories_filtered_for.Contains(DataHandler.categories[1].Value<String>("id")))
         {
             temp_button.gameObject.SetActive(false);
         }
-        if (categories_filtered_for.Contains(dataPoint.categories.Humidity))
+        if (categories_filtered_for.Contains(DataHandler.categories[2].Value<String>("id")))
         {
             hum_button.gameObject.SetActive(false);
         }
-        if (categories_filtered_for.Contains(dataPoint.categories.Wind))
+        if (categories_filtered_for.Contains(DataHandler.categories[3].Value<String>("id")))
         {
             wind_button.gameObject.SetActive(false);
         }
@@ -165,117 +168,72 @@ public class FrameHandler : MonoBehaviour
         //TODO place button in appropriete location relative to frame #14
         
     }
-
-    public void ButtonClick_Temp() {
-        if (this.choose_button is null) return;
-        choose_button.gameObject.SetActive(false);
-        Create_child_nodes(dataPoint.categories.Temperature);
-    }
-
     public void ButtonClick_Outlook()
     {
         if (this.choose_button is null) return;
 
         choose_button.gameObject.SetActive(false);
-        Create_child_nodes(dataPoint.categories.Outlook);
+        Create_child_nodes(DataHandler.categories[0].Value<string>("id"));
     }
+
+    public void ButtonClick_Temp() {
+        if (this.choose_button is null) return;
+        choose_button.gameObject.SetActive(false);
+        Create_child_nodes(DataHandler.categories[1].Value<string>("id"));
+    }
+
     public void ButtonClick_Humidity()
     {
         if (this.choose_button is null) return;
 
         choose_button.gameObject.SetActive(false);
-        Create_child_nodes(dataPoint.categories.Humidity);
+        Create_child_nodes(DataHandler.categories[2].Value<string>("id"));
     }
     public void ButtonClick_Wind()
     {
         if (this.choose_button is null) return;
 
         choose_button.gameObject.SetActive(false);
-        Create_child_nodes(dataPoint.categories.Wind);
+        Create_child_nodes(DataHandler.categories[3].Value<string>("id"));
     }
 
 
-    void Create_child_nodes(dataPoint.categories filtered)
+
+    /// <summary>
+    /// Creates the child nodes according to the chosen categorie discriminated for
+    /// Gives the child nodes the necessary information to place and go on in the tree
+    /// </summary>
+    /// <param name="filtered">The category the datapoints have to be discriminated by</param>
+    void Create_child_nodes(string filtered)
     {
         button_pressed = true;
-
         Layer next_layer = layer.NextLayer();
-
         child_nodes = new List<GameObject>();
 
-        List<dataPoint.categories> new_filtered_for = new List<dataPoint.categories>(categories_filtered_for);
+        List<string> new_filtered_for = new List<string>(categories_filtered_for);
         new_filtered_for.Add(filtered);
 
         int number_datapoints_to_left = layer.GetCountDPsToTheLeftForNextLayer(this);
-        int new_dp_to_Left = 0;
+        int added_dp_to_Left = 0;
 
-        if (filtered == dataPoint.categories.Outlook) {
-            GameObject first_child = Instantiate(frame_prefab, transform.parent);
-            GameObject second_child = Instantiate(frame_prefab, transform.parent);
-            GameObject third_child = Instantiate(frame_prefab, transform.parent);
-
-            List<dataPoint> dps = dataPoints.FindAll(e => e.values[dataPoint.categories.Outlook] == dataPoint.choices_outlook.Sunny.ToString());
-            first_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + 1, number_datapoints_to_left + new_dp_to_Left, color);
-            new_dp_to_Left += dps.Count;
-            dps = dataPoints.FindAll(e => e.values[dataPoint.categories.Outlook] == dataPoint.choices_outlook.Overcast.ToString());
-            second_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + 2, number_datapoints_to_left + new_dp_to_Left, color);
-            new_dp_to_Left += dps.Count;
-            dps = dataPoints.FindAll(e => e.values[dataPoint.categories.Outlook] == dataPoint.choices_outlook.Rain.ToString());
-            third_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + 3, number_datapoints_to_left + new_dp_to_Left, color);
-            
-
-            child_nodes.Add(first_child);
-            child_nodes.Add(second_child);
-            child_nodes.Add(third_child);
-        }
-
-        else if (filtered == dataPoint.categories.Temperature)
+        JToken categorie_filtered = null;
+        foreach (JObject cat in DataHandler.categories)
         {
-            GameObject first_child = Instantiate(frame_prefab, transform.parent);
-            GameObject second_child = Instantiate(frame_prefab, transform.parent);
-            GameObject third_child = Instantiate(frame_prefab, transform.parent);
-
-            List<dataPoint> dps = dataPoints.FindAll(e => e.values[dataPoint.categories.Temperature] == dataPoint.choices_temperature.Hot.ToString());
-            first_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + 1, number_datapoints_to_left + new_dp_to_Left, color);
-            new_dp_to_Left += dps.Count;
-            dps = dataPoints.FindAll(e => e.values[dataPoint.categories.Temperature] == dataPoint.choices_temperature.Mild.ToString());
-            second_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + 2, number_datapoints_to_left + new_dp_to_Left, color);
-            new_dp_to_Left += dps.Count;
-            dps = dataPoints.FindAll(e => e.values[dataPoint.categories.Temperature] == dataPoint.choices_temperature.Cool.ToString());
-            third_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + 3, number_datapoints_to_left + new_dp_to_Left, color);
-
-            child_nodes.Add(first_child);
-            child_nodes.Add(second_child);
-            child_nodes.Add(third_child);
+            if (cat["id"].Value<string>() == filtered) categorie_filtered = cat;
         }
-        else if (filtered == dataPoint.categories.Humidity)
+        List<DataPointNew> dps;
+        int ind_for_sorting = 1;
+        foreach (string choice in categorie_filtered["choices"].Values<string>())
         {
-            GameObject first_child = Instantiate(frame_prefab, transform.parent);
-            GameObject second_child = Instantiate(frame_prefab, transform.parent);
-
-            List<dataPoint> dps = dataPoints.FindAll(e => e.values[dataPoint.categories.Humidity] == dataPoint.choices_humidity.Normal.ToString());
-            first_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + 1, number_datapoints_to_left + new_dp_to_Left, color);
-            new_dp_to_Left += dps.Count;
-            dps = dataPoints.FindAll(e => e.values[dataPoint.categories.Humidity] == dataPoint.choices_humidity.High.ToString());
-            second_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + 2, number_datapoints_to_left + new_dp_to_Left, color);
-
-            child_nodes.Add(first_child);
-            child_nodes.Add(second_child);
+            GameObject child = Instantiate(frame_prefab, transform.parent);
+            dps = dataPoints.FindAll(e => e.values[filtered] == choice);
+            child.GetComponent<FrameHandler>()
+                .InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + ind_for_sorting++, number_datapoints_to_left + added_dp_to_Left, color);
+            added_dp_to_Left += dps.Count;
+            //TODO faked dps to count for placing next 
+            child_nodes.Add(child);
         }
-        else if (filtered == dataPoint.categories.Wind)
-        {
-            GameObject first_child = Instantiate(frame_prefab, transform.parent);
-            GameObject second_child = Instantiate(frame_prefab, transform.parent);
 
-            List<dataPoint> dps = dataPoints.FindAll(e => e.values[dataPoint.categories.Wind] == dataPoint.choices_wind.Strong.ToString());
-            first_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + 1, number_datapoints_to_left + new_dp_to_Left, color);
-            new_dp_to_Left += dps.Count;
-            dps = dataPoints.FindAll(e => e.values[dataPoint.categories.Wind] == dataPoint.choices_wind.Weak.ToString());
-            second_child.GetComponent<FrameHandler>().InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + 2, number_datapoints_to_left + new_dp_to_Left, color);
-
-            child_nodes.Add(first_child);
-            child_nodes.Add(second_child);
-        }
         layer.ListenerNodeGeneratesChildren();
 
     }

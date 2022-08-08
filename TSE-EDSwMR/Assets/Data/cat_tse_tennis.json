@@ -1,0 +1,39 @@
+{
+  "dataset_id": "tse_tennis_easy_example",
+  "categories": [
+    {
+      "id": "outlook",
+      "choices": [
+        "sunny",
+        "overcast",
+        "rain"
+      ],
+      "name": "Outlook"
+    },
+    {
+      "id": "temperature",
+      "choices": [
+        "hot",
+        "mild",
+        "cool"
+      ],
+      "name": "Temperature"
+    },
+    {
+      "id": "humidity",
+      "choices": [
+        "high",
+        "normal"
+      ],
+      "name": "Humidity"
+    },
+    {
+      "id": "wind",
+      "choices": [
+        "weak",
+        "strong"
+      ],
+      "name": "Wind"
+    }
+  ]
+}

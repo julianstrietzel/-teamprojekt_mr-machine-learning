@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DecisionTreeHandler : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class DecisionTreeHandler : MonoBehaviour
     public GameObject frame_prefab;
     private GameObject place_button;
     public static ArrayList s_layers = new ArrayList();
-    public static float s_max_width = 2;
+    public static float s_max_width = 2.5f;
 
     private bool move;
     private float moved = 0;
@@ -22,13 +23,14 @@ public class DecisionTreeHandler : MonoBehaviour
     private static Color yellow_plate_color = new Color(255, 230, 132);
     private static Color red_plate_color = new Color(217, 0, 69);
 
+
     private void Update()
-    {   
+    {
         if (move)
         {
             moved += Vector3.Distance(Vector3.forward * Time.deltaTime * speed, Vector3.zero);
-             
-            transform.Translate( Vector3.forward  * Time.deltaTime * speed);
+
+            transform.Translate(Vector3.forward * Time.deltaTime * speed);
             if (moved > .3f * (1f + buffer))
             {
                 move = false;
@@ -39,22 +41,19 @@ public class DecisionTreeHandler : MonoBehaviour
 
     private void Dissable_Following()
     {
-        //print("Dissable working");
         gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler>().enabled = false;
         place_button.SetActive(false);
-
-
     }
 
-    public  void OnDataHandlerInit()
+    public void OnDataHandlerInit()
     {
         GameObject root = Instantiate(frame_prefab, gameObject.transform);
         s_layers = new ArrayList();
         Layer layerZero = new Layer(0, DataHandler.data.Count, null, this);
         s_layers.Add(layerZero);
         FrameHandler roothandler = root.GetComponent<FrameHandler>();
-        prev_color = Color.blue; 
-        roothandler.InitFrame(new List<dataPoint.categories>(), DataHandler.data, layerZero, 1, 0, prev_color);
+        prev_color = Color.blue;
+        roothandler.InitFrame(new List<string>(), DataHandler.data, layerZero, 1, 0, prev_color);
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
         UnityEngine.Events.UnityEvent button_pressed = place_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed;
         button_pressed.AddListener(Dissable_Following);
@@ -62,27 +61,33 @@ public class DecisionTreeHandler : MonoBehaviour
         place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
     }
 
-    public void MoveUpForNextLayer() {
+    public void MoveUpForNextLayer()
+    {
         move = true;
     }
 
     public static Color RandomColor()
     {
-        float level_similarity = .2f; //TODO calibrate level of similarity
-        print("prevColor is " + prev_color);
-        if (prev_color == null) return prev_color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);
+        float threshold_similarity = .6f; //TODO calibrate level of similarity
+        if (prev_color == null) return prev_color = new Color(UnityEngine.Random.Range(0, 255) / 255f, UnityEngine.Random.Range(0, 255) / 255f, UnityEngine.Random.Range(0, 255) / 255f);
         Color new_color;
         int i = 0;
-        do {
+        do
+        {
             i++;
-            new_color = new Color(Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f, Random.Range(0, 255) / 255f);            
+            new_color = new Color(UnityEngine.Random.Range(0, 255) / 255f, UnityEngine.Random.Range(0, 255) / 255f, UnityEngine.Random.Range(0, 255) / 255f);
         } while (i < 10
-        && (prev_color.b - new_color.b) * (prev_color.b - new_color.b) + (prev_color.r - new_color.r) * (prev_color.r - new_color.r) + (prev_color.b - new_color.b) * (prev_color.b - new_color.b) < level_similarity
-        && (yellow_plate_color.b - new_color.b) * (yellow_plate_color.b - new_color.b) + (yellow_plate_color.r - new_color.r) * (yellow_plate_color.r - new_color.r) + (yellow_plate_color.b - new_color.b) * (yellow_plate_color.b - new_color.b) < level_similarity
-        && (red_plate_color.b - new_color.b) * (red_plate_color.b - new_color.b) + (red_plate_color.r - new_color.r) * (red_plate_color.r - new_color.r) + (red_plate_color.b - new_color.b) * (red_plate_color.b - new_color.b) < level_similarity
+        && unsimilarity(prev_color, new_color) < threshold_similarity
+        && unsimilarity(new_color, yellow_plate_color) < threshold_similarity
+        && unsimilarity(new_color, red_plate_color) < threshold_similarity
         );
-        //TODO make color not to similar to red and yellow of the plates
+        if (i == 10) Debug.Log("No new random color found. Exit with similar color");
         return prev_color = new_color;
+
+        double unsimilarity(Color color_a, Color color_b)
+        {
+            return Math.Pow(color_a.b - color_b.b, 2) + Math.Pow(color_a.r - color_b.r, 2) + Math.Pow(color_a.g - color_b.g, 2);
+        }
 
     }
 }

@@ -12,7 +12,6 @@ public class IndicatorHandler : MonoBehaviour
     public void Visualize(int yes, int no)
     {
 
-        Debug.Log("The visualize has the following points: " + yes + " no "+ no);
         DestroyChildrenIndicators();
         transform.localScale = Vector3.one * .25f;
         transform.localPosition = new Vector3(0, .17f, 0);

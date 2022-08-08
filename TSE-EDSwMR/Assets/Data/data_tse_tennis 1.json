@@ -1,0 +1,103 @@
+{
+  "dataset_id": "tse_tennis_easy_example",
+  "datapoints": [
+    {
+      "outlook": "sunny",
+      "temperature": "hot",
+      "humidity": "high",
+      "wind": "weak",
+      "result": false
+    },
+    {
+      "outlook": "sunny",
+      "temperature": "hot",
+      "humidity": "high",
+      "wind": "strong",
+      "result": false
+    },
+    {
+      "outlook": "overcast",
+      "temperature": "hot",
+      "humidity": "high",
+      "wind": "weak",
+      "result": true
+    },
+    {
+      "outlook": "rain",
+      "temperature": "mild",
+      "humidity": "high",
+      "wind": "weak",
+      "result": true
+    },
+    {
+      "outlook": "rain",
+      "temperature": "cool",
+      "humidity": "normal",
+      "wind": "weak",
+      "result": true
+    },
+    {
+      "outlook": "rain",
+      "temperature": "cool",
+      "humidity": "normal",
+      "wind": "strong",
+      "result": false
+    },
+    {
+      "outlook": "overcast",
+      "temperature": "cool",
+      "humidity": "normal",
+      "wind": "strong",
+      "result": true
+    },
+    {
+      "outlook": "sunny",
+      "temperature": "mild",
+      "humidity": "high",
+      "wind": "weak",
+      "result": false
+    },
+    {
+      "outlook": "sunny",
+      "temperature": "cool",
+      "humidity": "normal",
+      "wind": "weak",
+      "result": true
+    },
+    {
+      "outlook": "rain",
+      "temperature": "mild",
+      "humidity": "normal",
+      "wind": "weak",
+      "result": true
+    },
+    {
+      "outlook": "sunny",
+      "temperature": "mild",
+      "humidity": "normal",
+      "wind": "strong",
+      "result": true
+    },
+    {
+      "outlook": "overcast",
+      "temperature": "mild",
+      "humidity": "high",
+      "wind": "strong",
+      "result": true
+    },
+    {
+      "outlook": "overcast",
+      "temperature": "hot",
+      "humidity": "normal",
+      "wind": "weak",
+      "result": true
+    },
+    {
+      "outlook": "rain",
+      "temperature": "mild",
+      "humidity": "high",
+      "wind": "strong",
+      "result": false
+    }
+  ]
+}

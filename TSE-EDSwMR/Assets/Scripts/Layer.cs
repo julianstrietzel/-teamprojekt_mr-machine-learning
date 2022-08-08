@@ -24,31 +24,31 @@ public class Layer
     {
         FrameHandler frameHandler = frame.GetComponent<FrameHandler>();
 
-        countFinallyFiltered += frameHandler.Singular() ? frameHandler.NumberDatapoints() : 0 ;
+        countFinallyFiltered += frameHandler.Singular() ? frameHandler.NumberDatapoints() : 0;
 
         int newNumberForSort = frameHandler.numberForSorting;
         int i = 0;
-//TODO for each instead of while 
+        //TODO for each instead of while 
         while (i < nodes.Count)
         {
-            if(GetFrameHandler(i).numberForSorting > newNumberForSort)
+            if (GetFrameHandler(i).numberForSorting > newNumberForSort)
             {
                 nodes.Insert(i, frame);
                 return;
             }
             i++;
-           
+
         }
         nodes.Add(frame); //fallback if last object
     }
 
     public Layer NextLayer()
     {
-        if(DecisionTreeHandler.s_layers.Count <= layerLevel + 1)
+        if (DecisionTreeHandler.s_layers.Count <= layerLevel + 1)
         {
             DecisionTreeHandler.s_layers.Add(new Layer(layerLevel + 1, countDps - countFinallyFiltered, this, decisionTree));
         }
-        Layer newLayer = (Layer) DecisionTreeHandler.s_layers[layerLevel + 1];
+        Layer newLayer = (Layer)DecisionTreeHandler.s_layers[layerLevel + 1];
         return newLayer;
     }
 
@@ -61,19 +61,16 @@ public class Layer
 
         int result = 0;
         int i = 0;
-        if(!(nodes.Count > 0))
+        if (!(nodes.Count > 0))
         {
             return -1;
         }
         FrameHandler it_frame = ((GameObject)nodes[i]).GetComponent<FrameHandler>();
         while (!it_frame.Equals(frame))
         {
-            result += it_frame.Singular() ? 0 : (int)System.Math.Ceiling(it_frame.NumberDatapoints() / 4f) * 4;
-
-
-
+            result += it_frame.Singular() ? 0 : (int)System.Math.Ceiling(it_frame.NumberDatapoints() / 2f) * 2;
             i++;
-            if(!(i < nodes.Count))
+            if (!(i < nodes.Count))
             {
                 return -1;
             }
@@ -109,8 +106,8 @@ public class Layer
     public void ListenerNodeGeneratesChildren()
     {
         if (!LayerIsReady()) return;
-        if(NextLayer().IsEmpty()) 
-        { 
+        if (NextLayer().IsEmpty())
+        {
             //TODO do something if everything is empty or ready
         }
         NextLayer().Activate();
