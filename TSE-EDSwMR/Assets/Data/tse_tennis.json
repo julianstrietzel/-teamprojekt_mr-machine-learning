@@ -1,0 +1,153 @@
+{
+  "dataset_id": "tse_tennis_easy_example",
+  "categories": [
+    {
+      "id": "outlook",
+      "choices": [
+        "sunny",
+        "overcast",
+        "rain"
+      ],
+      "name": "Outlook"
+    },
+    {
+      "id": "temperature",
+      "choices": [
+        "hot",
+        "mild",
+        "cool"
+      ],
+      "name": "Temperature"
+    },
+    {
+      "id": "humidity",
+      "choices": [
+        "high",
+        "normal"
+      ],
+      "name": "Humidity"
+    },
+    {
+      "id": "wind",
+      "choices": [
+        "weak",
+        "strong"
+      ],
+      "name": "Wind"
+    }
+  ],
+  "datapoints": [
+    {
+      "outlook": "sunny",
+      "temperature": "hot",
+      "humidity": "high",
+      "wind": "weak",
+      "result": false, 
+      "index":  1
+    },
+    {
+      "outlook": "sunny",
+      "temperature": "hot",
+      "humidity": "high",
+      "wind": "strong",
+      "result": false,
+      "index": 2
+    },
+    {
+      "outlook": "overcast",
+      "temperature": "hot",
+      "humidity": "high",
+      "wind": "weak",
+      "result": true,
+      "index": 3
+    },
+    {
+      "outlook": "rain",
+      "temperature": "mild",
+      "humidity": "high",
+      "wind": "weak",
+      "result": true,
+      "index": 4
+    },
+    {
+      "outlook": "rain",
+      "temperature": "cool",
+      "humidity": "normal",
+      "wind": "weak",
+      "result": true,
+      "index": 5
+    },
+    {
+      "outlook": "rain",
+      "temperature": "cool",
+      "humidity": "normal",
+      "wind": "strong",
+      "result": false,
+      "index": 6
+    },
+    {
+      "outlook": "overcast",
+      "temperature": "cool",
+      "humidity": "normal",
+      "wind": "strong",
+      "result": true,
+      "index": 7
+    },
+    {
+      "outlook": "sunny",
+      "temperature": "mild",
+      "humidity": "high",
+      "wind": "weak",
+      "result": false,
+      "index": 8
+    },
+    {
+      "outlook": "sunny",
+      "temperature": "cool",
+      "humidity": "normal",
+      "wind": "weak",
+      "result": true,
+      "index": 9
+    },
+    {
+      "outlook": "rain",
+      "temperature": "mild",
+      "humidity": "normal",
+      "wind": "weak",
+      "result": true,
+      "index": 10
+    },
+    {
+      "outlook": "sunny",
+      "temperature": "mild",
+      "humidity": "normal",
+      "wind": "strong",
+      "result": true,
+      "index": 11
+    },
+    {
+      "outlook": "overcast",
+      "temperature": "mild",
+      "humidity": "high",
+      "wind": "strong",
+      "result": true,
+      "index": 12
+    },
+    {
+      "outlook": "overcast",
+      "temperature": "hot",
+      "humidity": "normal",
+      "wind": "weak",
+      "result": true,
+      "index": 13
+    },
+    {
+      "outlook": "rain",
+      "temperature": "mild",
+      "humidity": "high",
+      "wind": "strong",
+      "result": false,
+      "index": 14
+    }
+  ]
+}

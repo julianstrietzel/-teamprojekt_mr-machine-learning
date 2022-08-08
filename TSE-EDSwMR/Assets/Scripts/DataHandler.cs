@@ -2,31 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 
 
 public class DataHandler : MonoBehaviour 
 {
-    public static List<dataPoint> data = new List<dataPoint>();
+    public static List<DataPointNew> data = new List<DataPointNew>();
     public GameObject decisionTree;
+    public static JArray categories;
 
     void Start()
     {
         data.Clear();
 
-        data.Add(new dataPoint("Sunny",     "Hot",  "High", "Weak",     false,  1));
-        data.Add(new dataPoint("Sunny",     "Hot",  "High", "Strong",   false,  2));
-        data.Add(new dataPoint("Overcast",  "Hot",  "High", "Weak",     true,   3));
-        data.Add(new dataPoint("Rain",      "Mild", "High", "Weak",     true,   4));
-        data.Add(new dataPoint("Rain",      "Cool", "Normal", "Weak",   true,   5));
-        data.Add(new dataPoint("Rain",      "Cool", "Normal", "Strong", false,  6));
-        data.Add(new dataPoint("Overcast",  "Cool", "Normal", "Strong", true,   7));
-        data.Add(new dataPoint("Sunny",     "Mild", "High", "Weak",     false,  8));
-        data.Add(new dataPoint("Sunny",     "Cool", "Normal", "Weak",   true,   9));
-        data.Add(new dataPoint("Rain",      "Mild", "Normal", "Weak",   true,   10));
-        data.Add(new dataPoint("Sunny",     "Mild", "Normal", "Strong", true,   11));
-        data.Add(new dataPoint("Overcast",  "Mild", "High", "Strong",   true,   12));
-        data.Add(new dataPoint("Overcast",  "Hot",  "Normal", "Weak",   true,   13));
-        data.Add(new dataPoint("Rain",      "Mild", "High", "Strong",   false,  14));
+        string json = File.ReadAllText(Application.dataPath + "/Data/tse_tennis.json");
+        JObject jobject = JObject.Parse(json);
+        categories = (JArray)jobject["categories"];
+        foreach (JObject dp in jobject["datapoints"])
+        {
+            Dictionary<string, string> values = new Dictionary<string, string>();
+            foreach(JObject cat in categories)
+            {
+                string catId = cat.Value<string>("id");
+                values.Add(catId, dp.Value<String>(catId));
+            }
+            data.Add(new DataPointNew(values, dp.Value<bool>("result"), dp.Value<int>("index")));
+        }
 
         decisionTree.GetComponent<DecisionTreeHandler>().OnDataHandlerInit(); 
     }
