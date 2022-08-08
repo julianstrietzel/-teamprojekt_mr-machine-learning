@@ -147,19 +147,19 @@ public class FrameHandler : MonoBehaviour
         hum_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Humidity);
         wind_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(ButtonClick_Wind);
 
-        if (categories_filtered_for.Contains(DataHandler.categories[0].Value<String>("id")))
+        if (categories_filtered_for.Contains(DataHandler.categories[0].Value<string>("id")))
         {
             outlook_button.gameObject.SetActive(false);
         }
-        if (categories_filtered_for.Contains(DataHandler.categories[1].Value<String>("id")))
+        if (categories_filtered_for.Contains(DataHandler.categories[1].Value<string>("id")))
         {
             temp_button.gameObject.SetActive(false);
         }
-        if (categories_filtered_for.Contains(DataHandler.categories[2].Value<String>("id")))
+        if (categories_filtered_for.Contains(DataHandler.categories[2].Value<string>("id")))
         {
             hum_button.gameObject.SetActive(false);
         }
-        if (categories_filtered_for.Contains(DataHandler.categories[3].Value<String>("id")))
+        if (categories_filtered_for.Contains(DataHandler.categories[3].Value<string>("id")))
         {
             wind_button.gameObject.SetActive(false);
         }

@@ -27,7 +27,7 @@ public class DataHandler : MonoBehaviour
             foreach(JObject cat in categories)
             {
                 string catId = cat.Value<string>("id");
-                values.Add(catId, dp.Value<String>(catId));
+                values.Add(catId, dp.Value<string>(catId));
             }
             data.Add(new DataPointNew(values, dp.Value<bool>("result"), dp.Value<int>("index")));
         }
