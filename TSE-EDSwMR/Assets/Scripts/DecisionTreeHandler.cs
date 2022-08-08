@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class DecisionTreeHandler : MonoBehaviour
 {
@@ -48,18 +49,36 @@ public class DecisionTreeHandler : MonoBehaviour
     public void OnDataHandlerInit()
     {
         GameObject root = Instantiate(frame_prefab, gameObject.transform);
-        s_layers = new ArrayList();
         Layer layerZero = new Layer(0, DataHandler.data.Count, null, this);
-        s_layers.Add(layerZero);
         FrameHandler roothandler = root.GetComponent<FrameHandler>();
+
+        s_layers = new ArrayList();
+        s_layers.Add(layerZero);
         prev_color = Color.blue;
         roothandler.InitFrame(new List<string>(), DataHandler.data, layerZero, 1, 0, prev_color);
-        place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
 
-        UnityEngine.Events.UnityEvent button_pressed = place_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed;
+        place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
+        place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
+
+        UnityEvent button_pressed = EnableFollowing();
         button_pressed.AddListener(Dissable_Following);
         button_pressed.AddListener(roothandler.Activate);
-        place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
+
+
+    }
+
+    /// <summary>
+    /// This function will in every situation (after init of the DT) make the dt refollow the users gaze.
+    /// Can be used to replace the tree if hololens fucks it up
+    /// </summary>
+    /// <returns>The UnityEvent triggered when the placement button is pressed. There you can add individual Listeners. 
+    /// (Not necessary for the function but maybe handy)</returns>
+    public UnityEvent EnableFollowing()
+    {
+        gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler>().enabled = true;
+        place_button.SetActive(true);
+
+        return place_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed;
     }
 
     public void MoveUpForNextLayer()
