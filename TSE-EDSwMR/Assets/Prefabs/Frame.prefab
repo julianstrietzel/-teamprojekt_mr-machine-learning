@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2782996914973628218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.05, y: 1, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 0.1}
+  m_LocalScale: {x: 1.5, y: 1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 581597826971353646}
   m_RootOrder: 1
@@ -122,7 +122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2782996915067645982}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5, y: 1, z: 0.45}
+  m_LocalPosition: {x: 0.75, y: 1, z: 0.45}
   m_LocalScale: {x: 1, y: 1, z: 0.10000001}
   m_Children: []
   m_Father: {fileID: 581597826971353646}
@@ -218,7 +218,7 @@ Transform:
   m_GameObject: {fileID: 2782996915097177006}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.05, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.1}
+  m_LocalScale: {x: 1.5, y: 1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 581597826971353646}
   m_RootOrder: 0
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   choose_button_prefab: {fileID: 1917323831215790522, guid: bb34994362e071e44804d437ae75fbe5, type: 3}
   frame_prefab: {fileID: 2782996915518340344}
-  categories_filtered_for: 
+  categories_filtered_for: []
   child_nodes: []
   numberForSorting: 0
   space_for_buttons_normed: 4
@@ -363,7 +363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2782996916342316544}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5, y: 1, z: 0.55}
+  m_LocalPosition: {x: -0.75, y: 1, z: 0.55}
   m_LocalScale: {x: 1, y: 1, z: 0.10000001}
   m_Children: []
   m_Father: {fileID: 581597826971353646}

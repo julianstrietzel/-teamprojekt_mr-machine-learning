@@ -12,7 +12,7 @@ public class DecisionTreeHandler : MonoBehaviour
     public GameObject frame_prefab;
     private GameObject place_button;
     public static ArrayList s_layers = new ArrayList();
-    public static float s_max_width = 2.5f;
+    public static float s_max_width = 4f;
 
     private bool move;
     private float moved = 0;
@@ -55,6 +55,7 @@ public class DecisionTreeHandler : MonoBehaviour
         prev_color = Color.blue;
         roothandler.InitFrame(new List<string>(), DataHandler.data, layerZero, 1, 0, prev_color);
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
+
         UnityEngine.Events.UnityEvent button_pressed = place_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed;
         button_pressed.AddListener(Dissable_Following);
         button_pressed.AddListener(roothandler.Activate);
@@ -68,7 +69,7 @@ public class DecisionTreeHandler : MonoBehaviour
 
     public static Color RandomColor()
     {
-        float threshold_similarity = .6f; //TODO calibrate level of similarity
+        float threshold_similarity = 1f; //TODO calibrate level of similarity
         if (prev_color == null) return prev_color = new Color(UnityEngine.Random.Range(0, 255) / 255f, UnityEngine.Random.Range(0, 255) / 255f, UnityEngine.Random.Range(0, 255) / 255f);
         Color new_color;
         int i = 0;
