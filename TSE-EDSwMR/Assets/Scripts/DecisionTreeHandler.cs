@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.Events;
+using Microsoft.MixedReality.Toolkit.UI;
 
 public class DecisionTreeHandler : MonoBehaviour
 {
 
     public DataHandler data;
     public GameObject button_prefab;
-
+    public GameObject info_box;
     public GameObject frame_prefab;
+    
     private GameObject place_button;
     public static ArrayList s_layers = new ArrayList();
     public static float s_max_width = 4f;
@@ -23,6 +25,7 @@ public class DecisionTreeHandler : MonoBehaviour
     private static Color prev_color;
     private static Color yellow_plate_color = new Color(255, 230, 132);
     private static Color red_plate_color = new Color(217, 0, 69);
+
 
 
     private void Update()
@@ -63,8 +66,14 @@ public class DecisionTreeHandler : MonoBehaviour
         UnityEvent button_pressed = EnableFollowing();
         button_pressed.AddListener(Dissable_Following);
         button_pressed.AddListener(roothandler.Activate);
+        button_pressed.AddListener(DeactivateTooltip);
 
 
+    }
+
+    private void DeactivateTooltip()
+    {
+        info_box.SetActive(false);
     }
 
     /// <summary>
