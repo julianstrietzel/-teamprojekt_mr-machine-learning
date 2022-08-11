@@ -9,7 +9,8 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
 {
 
     bool movedown = false;
-    public GameObject reset_button;
+    public GameObject rebuild_prefab;
+    private GameObject rebuild_button;
 
     public override void Update()
     {
@@ -49,6 +50,10 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         button_pressed.AddListener(roothandler.Activate);
         button_pressed.AddListener(DeactivateTooltip);
 
+        rebuild_button = Instantiate(rebuild_prefab, gameObject.transform.parent.transform);
+        rebuild_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Rebuild Layer";
+
+
 
     }
     //TODO add button to delete filter for every node and 
@@ -59,13 +64,16 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     public void MoveDowntoRebuild()
     {
         movedown = true;
+        
     }
 
-    public UnityEvent ResetButtonEvent()
+    
+
+    public void ReplaceListenerToRebuildButton(UnityAction call)
     {
-        return reset_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed;
+        rebuild_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed.RemoveAllListeners();
+        rebuild_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(call);
     }
-
 
     
 }

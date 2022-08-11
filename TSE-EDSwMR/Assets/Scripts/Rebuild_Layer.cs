@@ -31,24 +31,21 @@ public class Rebuild_Layer:Layer
         {
             nodeGameObject.GetComponent<FrameHandler>().Activate();
         }
-        SetResetButton();
+        ReplaceButtonCalltoThis();
     }
 
     public override void Activate()
     {
         base.Activate();
-        SetResetButton();
+        ReplaceButtonCalltoThis();
     }
 
-    public void ResetButtonPressed()
+    public void ReplaceButtonCalltoThis()
     {
-        
+        ((Rebuild_DecisionTree)decisionTree).ReplaceListenerToRebuildButton(Deactivate);
     }
 
-    public void SetResetButton()
-    {
-        //TODO 1 UnityEvent event = ((Rebuild_DecisionTree)decisionTree).ResetButtonEvent();
-    }
+    
 
 
 
