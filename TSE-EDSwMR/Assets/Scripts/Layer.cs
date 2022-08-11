@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Layer
 {
-    ArrayList nodes = new ArrayList(); //List of nodes in the layer to be placed 
+    protected ArrayList nodes = new ArrayList(); //List of nodes in the layer to be placed 
     public readonly int countDps; //number of datapoints in this layer to set frame size relative to this depending on the #dps in the node. Is already defined by the layer above
-    int countFinallyFiltered; // number of datapoints, that are perfectly seperated in this layer. In combination we now know the number of datapoints for the next layer
+    protected int countFinallyFiltered; // number of datapoints, that are perfectly seperated in this layer. In combination we now know the number of datapoints for the next layer
     public readonly int layerLevel;
-    private Layer prevLayer;
-    private DecisionTreeHandler decisionTree;
+    protected Layer prevLayer;
+    protected DecisionTreeHandler decisionTree;
 
 
     public Layer(int level, int expectedDPs, Layer previousLayer, DecisionTreeHandler decisionTreeHandler)
@@ -80,7 +80,7 @@ public class Layer
     }
 
 
-    private FrameHandler GetFrameHandler(int i)
+    protected FrameHandler GetFrameHandler(int i)
     {
         return ((GameObject)nodes[i]).GetComponent<FrameHandler>();
     }
@@ -114,7 +114,7 @@ public class Layer
 
     }
 
-    public void Activate()
+    public virtual void Activate()
     {
 
         decisionTree.MoveUpForNextLayer();
