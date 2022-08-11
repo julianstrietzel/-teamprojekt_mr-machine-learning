@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Rebuild_Layer:Layer
 {
 
-    public GameObject reset_prefab;
+   
 
     public Rebuild_Layer(int level, int expectedDPs, Layer previousLayer, Rebuild_DecisionTree decisionTreeHandler) : base(level, expectedDPs, previousLayer, decisionTreeHandler)   
     {
-        
     }
 
 
@@ -40,11 +40,14 @@ public class Rebuild_Layer:Layer
         SetResetButton();
     }
 
+    public void ResetButtonPressed()
+    {
+        
+    }
+
     public void SetResetButton()
     {
-        if(layerLevel <= 0)  return; 
-        //TODO Set Reset Button fron Prefab
-        
+        //TODO 1 UnityEvent event = ((Rebuild_DecisionTree)decisionTree).ResetButtonEvent();
     }
 
 

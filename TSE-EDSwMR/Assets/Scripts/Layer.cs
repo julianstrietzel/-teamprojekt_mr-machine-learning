@@ -12,7 +12,7 @@ public class Layer
     protected DecisionTreeHandler decisionTree;
 
 
-    public Layer(int level, int expectedDPs, Layer previousLayer, DecisionTreeHandler decisionTreeHandler)
+    public  Layer(int level, int expectedDPs, Layer previousLayer, DecisionTreeHandler decisionTreeHandler)
     {
         decisionTree = decisionTreeHandler;
         layerLevel = level;

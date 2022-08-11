@@ -9,6 +9,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
 {
 
     bool movedown = false;
+    public GameObject reset_button;
 
     public override void Update()
     {
@@ -32,7 +33,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     public void OnDataHandlerInit()
     {
         GameObject root = Instantiate(frame_prefab, gameObject.transform);
-        Layer layerZero = new Layer(0, DataHandler.data.Count, null, this);
+        Layer layerZero = new Rebuild_Layer(0, DataHandler.data.Count, null, this);
         Rebuild_FrameHandler roothandler = root.GetComponent<Rebuild_FrameHandler>();
 
         s_layers = new ArrayList();
@@ -58,6 +59,11 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     public void MoveDowntoRebuild()
     {
         movedown = true;
+    }
+
+    public UnityEvent ResetButtonEvent()
+    {
+        return reset_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed;
     }
 
 

@@ -576,6 +576,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 479902193}
     - target: {fileID: 2032773260573700922, guid: ad6311bfcd60c5b458710707eae1b686, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032773260573700922, guid: ad6311bfcd60c5b458710707eae1b686, type: 3}
       propertyPath: button_prefab
       value: 
       objectReference: {fileID: 2161814823950967579, guid: 6fe8c2e2d3e431a499e443b27190bfc3, type: 3}
@@ -840,6 +844,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1174065243287946474, guid: ad6311bfcd60c5b458710707eae1b686, type: 3}
   m_PrefabInstance: {fileID: 758375417}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &972502513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972502512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ea12a75303dcb240a10d686be76e961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 1285746966}
+  button_prefab: {fileID: 2161814823950967579, guid: 6fe8c2e2d3e431a499e443b27190bfc3, type: 3}
+  info_box: {fileID: 3736739776393015688, guid: ce0b1782c067579419ec197f2084eb20, type: 3}
+  frame_prefab: {fileID: 2782996915518340344, guid: b6c69d84d4f11824d8e20be8dbf5e772, type: 3}
 --- !u!1 &1033268226
 GameObject:
   m_ObjectHideFlags: 0

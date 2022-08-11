@@ -33,6 +33,7 @@ public class FrameHandler : MonoBehaviour
     public int NumberDatapoints()
     {
         return dataPoints.Count;
+
     }
 
     /// <summary>
