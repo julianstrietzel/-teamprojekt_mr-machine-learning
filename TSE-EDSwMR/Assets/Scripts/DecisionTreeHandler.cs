@@ -47,6 +47,7 @@ public class DecisionTreeHandler : MonoBehaviour
     {
         gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler>().enabled = false;
         place_button.SetActive(false);
+
     }
 
     public virtual void OnDataHandlerInit()
@@ -94,6 +95,8 @@ public class DecisionTreeHandler : MonoBehaviour
     {
         move = true;
     }
+
+    
 
     public static Color RandomColor()
     {

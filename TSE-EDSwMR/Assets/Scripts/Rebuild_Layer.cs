@@ -42,7 +42,9 @@ public class Rebuild_Layer:Layer
 
     public void ReplaceButtonCalltoThis()
     {
-        ((Rebuild_DecisionTree)decisionTree).ReplaceListenerToRebuildButton(Deactivate);
+        UnityAction deact = Deactivate;
+        if (layerLevel == 0) deact = null;
+        ((Rebuild_DecisionTree)decisionTree).ReplaceListenerToRebuildButton(deact);
     }
 
     

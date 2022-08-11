@@ -14,7 +14,6 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
 
     public override void Update()
     {
-        Debug.Log("Update in Rebuild!");
         base.Update();
         if (movedown)
         {
@@ -31,7 +30,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     }
 
 
-    public void OnDataHandlerInit()
+    public override void OnDataHandlerInit()
     {
         GameObject root = Instantiate(frame_prefab, gameObject.transform);
         Layer layerZero = new Rebuild_Layer(0, DataHandler.data.Count, null, this);
@@ -45,32 +44,42 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
         place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
 
+        rebuild_button = Instantiate(rebuild_prefab, gameObject.transform.parent.transform);
+        rebuild_button.SetActive(false);
+
         UnityEvent button_pressed = EnableFollowing();
         button_pressed.AddListener(Dissable_Following);
         button_pressed.AddListener(roothandler.Activate);
         button_pressed.AddListener(DeactivateTooltip);
-
-        rebuild_button = Instantiate(rebuild_prefab, gameObject.transform.parent.transform);
-        rebuild_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Rebuild Layer";
+        button_pressed.AddListener(InitRebuildButton);
+        
 
 
 
     }
     //TODO add button to delete filter for every node and 
 
-
+    private void InitRebuildButton()
+    {
+        rebuild_button.SetActive(true);
+        rebuild_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Rebuild Layer";
+    }
 
 
     public void MoveDowntoRebuild()
     {
         movedown = true;
-        
     }
 
     
 
     public void ReplaceListenerToRebuildButton(UnityAction call)
     {
+        if (call == null) {
+            rebuild_button.SetActive(false);
+            return;
+        }
+        rebuild_button.SetActive(true);
         rebuild_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed.RemoveAllListeners();
         rebuild_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(call);
     }
