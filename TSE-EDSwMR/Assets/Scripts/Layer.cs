@@ -20,26 +20,26 @@ public class Layer
         prevLayer = previousLayer;
     }
 
-    public void AddNode(GameObject frame)
+    public void AddNode(GameObject newframe)
     {
-        FrameHandler frameHandler = frame.GetComponent<FrameHandler>();
+        FrameHandler newFrameHandler = newframe.GetComponent<FrameHandler>();
 
-        countFinallyFiltered += frameHandler.Singular() ? frameHandler.NumberDatapoints() : 0;
+        countFinallyFiltered += newFrameHandler.Singular() ? newFrameHandler.NumberDatapoints() : 0;
 
-        int newNumberForSort = frameHandler.numberForSorting;
+        int newNumberForSort = newFrameHandler.numberForSorting;
         int i = 0;
-        //TODO for each instead of while 
+
         while (i < nodes.Count)
         {
             if (GetFrameHandler(i).numberForSorting > newNumberForSort)
             {
-                nodes.Insert(i, frame);
+                nodes.Insert(i, newframe);
                 return;
             }
             i++;
 
         }
-        nodes.Add(frame); //fallback if last object
+        nodes.Add(newframe); //fallback if last object
     }
 
     public virtual Layer NextLayer()

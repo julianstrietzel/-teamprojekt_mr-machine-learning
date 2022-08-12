@@ -10,7 +10,7 @@ public class Rebuild_Layer:Layer
 
     public Rebuild_Layer(int level, int expectedDPs, Layer previousLayer, Rebuild_DecisionTree decisionTreeHandler) : base(level, expectedDPs, previousLayer, decisionTreeHandler)   
     {
-        Debug.Log("layer " + level + " is rebuild");
+        
     }
 
 
@@ -19,11 +19,18 @@ public class Rebuild_Layer:Layer
         ((Rebuild_DecisionTree)decisionTree).MoveDowntoRebuild();
         foreach(GameObject nodeGameObject in nodes)
         {
-            nodeGameObject.SetActive(false);
+            nodeGameObject.GetComponent<Rebuild_FrameHandler>().DestroyThisPart();
         }
         nodes.Clear();
         ((Rebuild_Layer)prevLayer).Reactivate();
+
         DecisionTreeHandler.s_layers.Remove(NextLayer());
+        foreach(Rebuild_Layer layer in DecisionTreeHandler.s_layers)
+        {
+            int i = DecisionTreeHandler.s_layers.Count;
+            if (layer.layerLevel > this.layerLevel) DecisionTreeHandler.s_layers.Remove(layer);
+            Debug.Assert((i == DecisionTreeHandler.s_layers.Count + 1 && layer.layerLevel > this.layerLevel) || !(layer.layerLevel > this.layerLevel) , "Next layer has not been removed from List" );
+        }
     }
 
     public void Reactivate()
