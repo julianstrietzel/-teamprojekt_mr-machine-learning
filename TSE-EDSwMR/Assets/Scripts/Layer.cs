@@ -98,7 +98,7 @@ public class Layer
     public bool IsEmpty()
     {
         return nodes.Count == 0;
-        //TODO make if no node containes any 
+        //TODO do something if no node containes any 
     }
 
 
