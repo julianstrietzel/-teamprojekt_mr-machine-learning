@@ -115,9 +115,10 @@ public class FrameHandler : MonoBehaviour
         if(layer.layerLevel == 0) { transform.localPosition = new Vector3(DecisionTreeHandler.s_max_width / 4, 0, 0); }//special handling for root node
 
         //Scale X Axis according to number of tennisballs
-        float new_x_scale = (float)Math.Ceiling((float)relevant_datapoints.Count / (float)space_for_buttons_normed) / 4f;
+        float new_x_scale = (float)Math.Ceiling((float)relevant_datapoints.Count / (float)4f) / 4f;
         Vector3 localScale = transform.GetChild(0).localScale;
         transform.GetChild(0).localScale = new Vector3(new_x_scale, localScale.y, localScale.z);
+
 
         layer.AddNode(gameObject);
 
