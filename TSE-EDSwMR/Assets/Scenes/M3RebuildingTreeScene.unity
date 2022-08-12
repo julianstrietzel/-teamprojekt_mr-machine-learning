@@ -631,7 +631,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2032773260573700922, guid: ad6311bfcd60c5b458710707eae1b686, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ad6311bfcd60c5b458710707eae1b686, type: 3}
 --- !u!1 &836673361
 GameObject:
@@ -860,7 +861,8 @@ MonoBehaviour:
   button_prefab: {fileID: 2161814823950967579, guid: 6fe8c2e2d3e431a499e443b27190bfc3, type: 3}
   info_box: {fileID: 3736739776393015688, guid: ce0b1782c067579419ec197f2084eb20, type: 3}
   frame_prefab: {fileID: 2782996915518340344, guid: b6c69d84d4f11824d8e20be8dbf5e772, type: 3}
-  reset_button: {fileID: 0}
+  move: 0
+  rebuild_prefab: {fileID: 2161814823950967579, guid: da123e9a88e1d794da6ab45f69b00199, type: 3}
 --- !u!1 &1033268226
 GameObject:
   m_ObjectHideFlags: 0

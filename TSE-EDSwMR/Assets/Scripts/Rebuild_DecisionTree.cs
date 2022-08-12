@@ -33,8 +33,8 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     public override void OnDataHandlerInit()
     {
         GameObject root = Instantiate(frame_prefab, gameObject.transform);
-        Layer layerZero = new Rebuild_Layer(0, DataHandler.data.Count, null, this);
-        Rebuild_FrameHandler roothandler = root.GetComponent<Rebuild_FrameHandler>();
+        Rebuild_Layer layerZero = new Rebuild_Layer(0, DataHandler.data.Count, null, this);
+        FrameHandler roothandler = root.GetComponent<FrameHandler>();
 
         s_layers = new ArrayList();
         s_layers.Add(layerZero);

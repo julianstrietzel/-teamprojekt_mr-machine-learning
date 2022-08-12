@@ -17,7 +17,7 @@ public class DecisionTreeHandler : MonoBehaviour
     public static ArrayList s_layers = new ArrayList();
     public static float s_max_width = 4f;
 
-    protected bool move;
+    public bool move;
     protected float moved = 0;
     protected float speed = 0.5f;
 

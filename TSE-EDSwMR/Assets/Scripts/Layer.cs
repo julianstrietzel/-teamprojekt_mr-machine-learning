@@ -42,14 +42,13 @@ public class Layer
         nodes.Add(frame); //fallback if last object
     }
 
-    public Layer NextLayer()
+    public virtual Layer NextLayer()
     {
         if (DecisionTreeHandler.s_layers.Count <= layerLevel + 1)
         {
             DecisionTreeHandler.s_layers.Add(new Layer(layerLevel + 1, countDps - countFinallyFiltered, this, decisionTree));
         }
-        Layer newLayer = (Layer)DecisionTreeHandler.s_layers[layerLevel + 1];
-        return newLayer;
+        return (Layer)DecisionTreeHandler.s_layers[layerLevel + 1];
     }
 
 
