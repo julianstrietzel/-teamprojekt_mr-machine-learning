@@ -233,7 +233,6 @@ public class FrameHandler : MonoBehaviour
             child.GetComponent<FrameHandler>()
                 .InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + ind_for_sorting++, number_datapoints_to_left + added_dp_to_Left, color);
             added_dp_to_Left += dps.Count;
-            //TODO faked dps to count for placing next 
             child_nodes.Add(child);
         }
 

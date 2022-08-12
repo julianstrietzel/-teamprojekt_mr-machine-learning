@@ -44,6 +44,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
 
         rebuild_button = Instantiate(rebuild_prefab, gameObject.transform.parent.transform);
+        rebuild_button.transform.localScale *=  1f / transform.parent.localScale.x;
         rebuild_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Rebuild Layer";
         rebuild_button.SetActive(false);
 

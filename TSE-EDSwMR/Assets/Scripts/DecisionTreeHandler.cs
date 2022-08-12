@@ -100,7 +100,7 @@ public class DecisionTreeHandler : MonoBehaviour
 
     public static Color RandomColor()
     {
-        float threshold_similarity = 1f; //TODO calibrate level of similarity
+        float threshold_similarity = 1f; 
         if (prev_color == null) return prev_color = new Color(UnityEngine.Random.Range(0, 255) / 255f, UnityEngine.Random.Range(0, 255) / 255f, UnityEngine.Random.Range(0, 255) / 255f);
         Color new_color;
         int i = 0;
