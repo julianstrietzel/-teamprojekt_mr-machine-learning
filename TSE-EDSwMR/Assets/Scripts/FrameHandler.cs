@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
 using Newtonsoft.Json.Linq;
+using Microsoft.MixedReality.Toolkit.UI;
 
 
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
@@ -12,6 +13,7 @@ public class FrameHandler : MonoBehaviour
 {
     public GameObject choose_button_prefab;
     public GameObject frame_prefab;
+    //public GameObject tooltip_prefab;
 
     public List<DataPointNew> dataPoints;
     public List<string> categories_filtered_for;
@@ -115,7 +117,6 @@ public class FrameHandler : MonoBehaviour
             eHandler.Initalise();
         }
 
-
         //place according to number of dps to the left
         transform.localPosition = new Vector3((DecisionTreeHandler.s_max_width / layer.countDps) * number_datapoints_to_left, 0, layer.layerLevel * (-1.2f));
         if(layer.layerLevel == 0) { transform.localPosition = new Vector3(DecisionTreeHandler.s_max_width / 4, 0, 0); }//special handling for root node
@@ -130,6 +131,33 @@ public class FrameHandler : MonoBehaviour
 
         //Placing plate for tennisballs in the frame
         transform.GetChild(1).GetComponent<IndicatorHandler>().Visualize(relevant_datapoints.FindAll(e => e.result).Count, relevant_datapoints.FindAll(e => !e.result).Count);
+
+
+        //Changing Image in Frame
+        GameObject canvas = gameObject.transform.GetChild(2).gameObject;
+        GameObject imageObject = canvas.transform.GetChild(0).gameObject;
+        Image image = imageObject.GetComponent<Image>();
+
+        if (layer.layerLevel != 0)
+        {
+            string source_path = "";
+            string category = filtered_for[filtered_for.Count - 1];
+            source_path += category;
+            source_path += "_";
+            string choice = dataPoints[0].values[category];
+            source_path += choice;
+            Debug.Log(source_path);
+            Sprite pic = Resources.Load<Sprite>("2DIcons/" + source_path) as Sprite;
+            Debug.Log(pic);
+            Debug.Log(image);
+            image.sprite = pic;
+            
+        } else
+        {
+            image.sprite = null;
+        }
+        
+
     }
 
 
