@@ -93,6 +93,13 @@ public class FrameHandler : MonoBehaviour
         this.numberForSorting = numberSort;
 
 
+        //if node is empty deactivate it. It will also not be added to any Layer so nothing is referencing on this
+        if (dataPoints.Count == 0 )
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         //colorcoding:
         Transform frame = transform.GetChild(0);
         frame.GetChild(1).GetComponent<Renderer>().material.color = prev_color;
@@ -101,12 +108,11 @@ public class FrameHandler : MonoBehaviour
         frame.GetChild(2).GetComponent<Renderer>().material.color = color;
         frame.GetChild(3).GetComponent<Renderer>().material.color = color;
 
-
-        //if node is empty deactivate it. It will also not be added to any Layer so nothing is referencing on this
-        if (dataPoints.Count == 0 )
+        //Init Entropyhandler
+        EntropyHandler eHandler = gameObject.GetComponent<EntropyHandler>();
+        if (eHandler != null)
         {
-            gameObject.SetActive(false);
-            return;
+            eHandler.Initalise();
         }
 
 
@@ -128,7 +134,7 @@ public class FrameHandler : MonoBehaviour
 
 
     /// <summary>
-    /// Activates and shows the buttons for this frame so that the next discrimination can be chosen
+    /// Activates and shows the buttons for this frame so that the next discrimination can be chosen by the user
     /// </summary>
     public void Activate()
     { 
