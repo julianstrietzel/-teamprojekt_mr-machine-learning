@@ -33,6 +33,7 @@ public class FrameHandler : MonoBehaviour
     public int NumberDatapoints()
     {
         return dataPoints.Count;
+
     }
 
     /// <summary>
@@ -114,9 +115,10 @@ public class FrameHandler : MonoBehaviour
         if(layer.layerLevel == 0) { transform.localPosition = new Vector3(DecisionTreeHandler.s_max_width / 4, 0, 0); }//special handling for root node
 
         //Scale X Axis according to number of tennisballs
-        float new_x_scale = (float)Math.Ceiling((float)relevant_datapoints.Count / (float)space_for_buttons_normed) / 4f;
+        float new_x_scale = (float)Math.Ceiling((float)relevant_datapoints.Count / (float)4f) / 4f;
         Vector3 localScale = transform.GetChild(0).localScale;
         transform.GetChild(0).localScale = new Vector3(new_x_scale, localScale.y, localScale.z);
+
 
         layer.AddNode(gameObject);
 
@@ -129,7 +131,8 @@ public class FrameHandler : MonoBehaviour
     /// Activates and shows the buttons for this frame so that the next discrimination can be chosen
     /// </summary>
     public void Activate()
-    {
+    { 
+        child_nodes = new List<GameObject>(); 
         activated = true;
         if (Singular()) return;
 
@@ -208,7 +211,7 @@ public class FrameHandler : MonoBehaviour
     {
         button_pressed = true;
         Layer next_layer = layer.NextLayer();
-        child_nodes = new List<GameObject>();
+        child_nodes.Clear();
 
         List<string> new_filtered_for = new List<string>(categories_filtered_for);
         new_filtered_for.Add(filtered);
@@ -230,7 +233,6 @@ public class FrameHandler : MonoBehaviour
             child.GetComponent<FrameHandler>()
                 .InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + ind_for_sorting++, number_datapoints_to_left + added_dp_to_Left, color);
             added_dp_to_Left += dps.Count;
-            //TODO faked dps to count for placing next 
             child_nodes.Add(child);
         }
 

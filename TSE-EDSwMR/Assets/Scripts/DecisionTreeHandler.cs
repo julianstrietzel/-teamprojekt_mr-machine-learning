@@ -13,22 +13,22 @@ public class DecisionTreeHandler : MonoBehaviour
     public GameObject info_box;
     public GameObject frame_prefab;
     
-    private GameObject place_button;
+    protected GameObject place_button;
     public static ArrayList s_layers = new ArrayList();
     public static float s_max_width = 4f;
 
-    private bool move;
-    private float moved = 0;
-    private float speed = 0.5f;
+    public bool move;
+    protected float moved = 0;
+    protected float speed = 0.5f;
 
-    private float buffer = .1f; //Buffer between the layers
-    private static Color prev_color;
-    private static Color yellow_plate_color = new Color(255, 230, 132);
-    private static Color red_plate_color = new Color(217, 0, 69);
+    protected float buffer = .1f; //Buffer between the layers
+    protected static Color prev_color;
+    protected static Color yellow_plate_color = new Color(255, 230, 132);
+    protected static Color red_plate_color = new Color(217, 0, 69);
 
 
 
-    private void Update()
+    public virtual void Update()
     {
         if (move)
         {
@@ -43,13 +43,14 @@ public class DecisionTreeHandler : MonoBehaviour
         }
     }
 
-    private void Dissable_Following()
+    public void Dissable_Following()
     {
         gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler>().enabled = false;
         place_button.SetActive(false);
+
     }
 
-    public void OnDataHandlerInit()
+    public virtual void OnDataHandlerInit()
     {
         GameObject root = Instantiate(frame_prefab, gameObject.transform);
         Layer layerZero = new Layer(0, DataHandler.data.Count, null, this);
@@ -71,7 +72,7 @@ public class DecisionTreeHandler : MonoBehaviour
 
     }
 
-    private void DeactivateTooltip()
+    public void DeactivateTooltip()
     {
         info_box.SetActive(false);
     }
@@ -95,9 +96,11 @@ public class DecisionTreeHandler : MonoBehaviour
         move = true;
     }
 
+    
+
     public static Color RandomColor()
     {
-        float threshold_similarity = 1f; //TODO calibrate level of similarity
+        float threshold_similarity = 1f; 
         if (prev_color == null) return prev_color = new Color(UnityEngine.Random.Range(0, 255) / 255f, UnityEngine.Random.Range(0, 255) / 255f, UnityEngine.Random.Range(0, 255) / 255f);
         Color new_color;
         int i = 0;

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Layer
 {
-    ArrayList nodes = new ArrayList(); //List of nodes in the layer to be placed 
+    protected ArrayList nodes = new ArrayList(); //List of nodes in the layer to be placed 
     public readonly int countDps; //number of datapoints in this layer to set frame size relative to this depending on the #dps in the node. Is already defined by the layer above
-    int countFinallyFiltered; // number of datapoints, that are perfectly seperated in this layer. In combination we now know the number of datapoints for the next layer
+    protected int countFinallyFiltered; // number of datapoints, that are perfectly seperated in this layer. In combination we now know the number of datapoints for the next layer
     public readonly int layerLevel;
-    private Layer prevLayer;
-    private DecisionTreeHandler decisionTree;
+    protected Layer prevLayer;
+    protected DecisionTreeHandler decisionTree;
 
 
-    public Layer(int level, int expectedDPs, Layer previousLayer, DecisionTreeHandler decisionTreeHandler)
+    public  Layer(int level, int expectedDPs, Layer previousLayer, DecisionTreeHandler decisionTreeHandler)
     {
         decisionTree = decisionTreeHandler;
         layerLevel = level;
@@ -20,36 +20,35 @@ public class Layer
         prevLayer = previousLayer;
     }
 
-    public void AddNode(GameObject frame)
+    public void AddNode(GameObject newframe)
     {
-        FrameHandler frameHandler = frame.GetComponent<FrameHandler>();
+        FrameHandler newFrameHandler = newframe.GetComponent<FrameHandler>();
 
-        countFinallyFiltered += frameHandler.Singular() ? frameHandler.NumberDatapoints() : 0;
+        countFinallyFiltered += newFrameHandler.Singular() ? newFrameHandler.NumberDatapoints() : 0;
 
-        int newNumberForSort = frameHandler.numberForSorting;
+        int newNumberForSort = newFrameHandler.numberForSorting;
         int i = 0;
-        //TODO for each instead of while 
+
         while (i < nodes.Count)
         {
             if (GetFrameHandler(i).numberForSorting > newNumberForSort)
             {
-                nodes.Insert(i, frame);
+                nodes.Insert(i, newframe);
                 return;
             }
             i++;
 
         }
-        nodes.Add(frame); //fallback if last object
+        nodes.Add(newframe); //fallback if last object
     }
 
-    public Layer NextLayer()
+    public virtual Layer NextLayer()
     {
         if (DecisionTreeHandler.s_layers.Count <= layerLevel + 1)
         {
             DecisionTreeHandler.s_layers.Add(new Layer(layerLevel + 1, countDps - countFinallyFiltered, this, decisionTree));
         }
-        Layer newLayer = (Layer)DecisionTreeHandler.s_layers[layerLevel + 1];
-        return newLayer;
+        return (Layer)DecisionTreeHandler.s_layers[layerLevel + 1];
     }
 
 
@@ -80,7 +79,7 @@ public class Layer
     }
 
 
-    private FrameHandler GetFrameHandler(int i)
+    protected FrameHandler GetFrameHandler(int i)
     {
         return ((GameObject)nodes[i]).GetComponent<FrameHandler>();
     }
@@ -99,7 +98,7 @@ public class Layer
     public bool IsEmpty()
     {
         return nodes.Count == 0;
-        //TODO make if no node containes any 
+        //TODO do something if no node containes any 
     }
 
 
@@ -114,7 +113,7 @@ public class Layer
 
     }
 
-    public void Activate()
+    public virtual void Activate()
     {
 
         decisionTree.MoveUpForNextLayer();
