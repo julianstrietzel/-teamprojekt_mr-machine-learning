@@ -1,9 +1,8 @@
+using Microsoft.MixedReality.Toolkit.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.Events;
-using Microsoft.MixedReality.Toolkit.UI;
 
 public class Rebuild_DecisionTree : DecisionTreeHandler
 {
@@ -45,24 +44,16 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
 
         rebuild_button = Instantiate(rebuild_prefab, gameObject.transform.parent.transform);
+        rebuild_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Rebuild Layer";
         rebuild_button.SetActive(false);
+
 
         UnityEvent button_pressed = EnableFollowing();
         button_pressed.AddListener(Dissable_Following);
         button_pressed.AddListener(roothandler.Activate);
         button_pressed.AddListener(DeactivateTooltip);
-        button_pressed.AddListener(InitRebuildButton);
-        
-
-
-
     }
-    //TODO add button to delete filter for every node and 
 
-    private void InitRebuildButton()
-    {
-        rebuild_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Rebuild Layer";
-    }
 
 
     public void MoveDowntoRebuild()
@@ -70,11 +61,12 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         movedown = true;
     }
 
-    
+
 
     public void ReplaceListenerToRebuildButton(UnityAction call)
     {
-        if (call == null) {
+        if (call == null)
+        {
             rebuild_button.SetActive(false);
             return;
         }
@@ -83,5 +75,5 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         rebuild_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed.AddListener(call);
     }
 
-    
+
 }
