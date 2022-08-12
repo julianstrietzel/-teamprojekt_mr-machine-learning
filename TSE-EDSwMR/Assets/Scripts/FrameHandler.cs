@@ -130,7 +130,8 @@ public class FrameHandler : MonoBehaviour
     /// Activates and shows the buttons for this frame so that the next discrimination can be chosen
     /// </summary>
     public void Activate()
-    {
+    { 
+        child_nodes = new List<GameObject>(); 
         activated = true;
         if (Singular()) return;
 
@@ -209,7 +210,7 @@ public class FrameHandler : MonoBehaviour
     {
         button_pressed = true;
         Layer next_layer = layer.NextLayer();
-        child_nodes = new List<GameObject>();
+        child_nodes.Clear();
 
         List<string> new_filtered_for = new List<string>(categories_filtered_for);
         new_filtered_for.Add(filtered);

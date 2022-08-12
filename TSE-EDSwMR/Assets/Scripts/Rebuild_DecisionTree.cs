@@ -61,7 +61,6 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
 
     private void InitRebuildButton()
     {
-        rebuild_button.SetActive(true);
         rebuild_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Rebuild Layer";
     }
 
@@ -81,7 +80,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         }
         rebuild_button.SetActive(true);
         rebuild_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed.RemoveAllListeners();
-        rebuild_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed.AddListener(call);
+        rebuild_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed.AddListener(call);
     }
 
     
