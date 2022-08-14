@@ -146,10 +146,7 @@ public class FrameHandler : MonoBehaviour
             source_path += "_";
             string choice = dataPoints[0].values[category];
             source_path += choice;
-            Debug.Log(source_path);
             Sprite pic = Resources.Load<Sprite>("2DIcons/" + source_path) as Sprite;
-            Debug.Log(pic);
-            Debug.Log(image);
             image.sprite = pic;
             
         } else
