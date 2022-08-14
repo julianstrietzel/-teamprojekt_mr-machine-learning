@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class DataHandlerPOV : MonoBehaviour
 {
-    //private static int AMOUNT_DECISIONS = 4;
 
-    //private bool[] decisions = new bool[AMOUNT_DECISIONS];
 
     private List<bool> decisionList = new List<bool>();
 
+    private bool[] finalDecisionOfDay = new bool[StateScriptPOV.AMOUNT_DAYS];
 
-    //private int decision_nr;
 
     // Start is called before the first frame update
     void Start()
     {
-        //decisions = new bool[AMOUNT_DECISIONS];
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SetFinalDecision(int day, bool decision)
+    {
+        finalDecisionOfDay[day - 1] = decision;
     }
 
     public void AddDecision(bool decision)
@@ -41,6 +44,16 @@ public class DataHandlerPOV : MonoBehaviour
     public List<bool> GetDecisions()
     {
         return decisionList;
+    }
+
+    public bool[] GetFinalDecisions()
+    {
+        Debug.Log("Getting final decisions");
+        foreach (bool decision in finalDecisionOfDay)
+        {
+            Debug.Log("Final decision is: " + decision);
+        }
+        return finalDecisionOfDay;
     }
 
 
