@@ -9,7 +9,7 @@ public class RetrobotDemo : MonoBehaviour
     public Transform retrobotAnchor;
 
     private RetrobotController retrobotController;
-    public GameObject retroBot; 
+    public GameObject retroBot;
 
     public Dropdown actions;
 
