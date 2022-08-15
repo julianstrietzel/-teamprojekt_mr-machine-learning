@@ -193,9 +193,15 @@ public class FrameHandler : MonoBehaviour
             wind_button.gameObject.SetActive(false);
         }
 
+        //update Entropy Buttons
+        EntropyHandler eHandler = gameObject.GetComponent<EntropyHandler>();
+        if (eHandler != null)
+        {
+            eHandler.updateButton(choose_button);
+        }
 
         //TODO place button in appropriete location relative to frame #14
-        
+
     }
     public void ButtonClick_Outlook()
     {

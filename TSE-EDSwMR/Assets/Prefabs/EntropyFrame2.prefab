@@ -138,7 +138,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Entropy: 0,97878987'
+  m_text: 'Entropy: 0,978'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: afc8299d5d5bbd440a0616c8ecbc7217, type: 2}
   m_sharedMaterial: {fileID: 21340371490990018, guid: afc8299d5d5bbd440a0616c8ecbc7217, type: 2}
@@ -165,8 +165,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 47
+  m_fontSizeBase: 47
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -681,7 +681,7 @@ Transform:
   m_GameObject: {fileID: 3495798948328543096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.89, y: 1.89, z: 1.89}
   m_Children:
   - {fileID: 8205062531933685091}
   - {fileID: 2055484217050247866}
@@ -896,7 +896,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4914211429708440975}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0030000135, y: -0.204, z: 0}
+  m_LocalPosition: {x: -0.32, y: 0.013000004, z: 0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6722525356989929895}
@@ -967,7 +967,7 @@ Transform:
   m_GameObject: {fileID: 5613260266333982829}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.001}
-  m_LocalScale: {x: 0.26217273, y: 0.04162796, z: 1}
+  m_LocalScale: {x: 0.31756967, y: 0.056260556, z: 1}
   m_Children: []
   m_Father: {fileID: 2687828742583373678}
   m_RootOrder: 1
@@ -1567,7 +1567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8903128940408931324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.04699999, y: 0.304, z: 0}
+  m_LocalPosition: {x: -0.43, y: 0.087, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6927309651049961016}
@@ -1597,11 +1597,11 @@ MonoBehaviour:
   pivot: {fileID: 386585390344663972}
   label: {fileID: 492954274639172550}
   contentParent: {fileID: 3495798948328543096}
-  toolTipText: 'Entropy: 0,97878987'
-  backgroundPadding: {x: 0.15, y: 0.025}
+  toolTipText: 'Entropy: 0,978'
+  backgroundPadding: {x: 0.17, y: 0.025}
   backgroundOffset: {x: 0, y: 0, z: 0}
-  contentScale: 2
-  fontSize: 25
+  contentScale: 1.89
+  fontSize: 47
   attachPointType: 9
   attachPointOffset: {x: 0, y: 0, z: 0}
   toolTipLine: {fileID: 6347283710797807556}
@@ -1617,7 +1617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60e108b635a73db40a8d3c02d87c249f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 2782996916342316544}
   toolTip: {fileID: 5860278971618136473}
   connectorFollowType: 1
   pivotMode: 0
@@ -1708,10 +1708,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   uniformDistortionStrength: 1
   startPoint:
-    position: {x: -0.003000021, y: -0.204, z: 0}
+    position: {x: -0.32, y: 0.013000004, z: 0.55}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   endPoint:
-    position: {x: 0, y: 0.20837203, z: 0}
+    position: {x: 0, y: 0.19683377, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &8735281931091945356
 MonoBehaviour:
@@ -1728,8 +1728,8 @@ MonoBehaviour:
   lineDataSource: {fileID: 6347283710797807556}
   lineColor:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 0.55}
-    key1: {r: 1, g: 1, b: 1, a: 0.55}
+    key0: {r: 1, g: 1, b: 1, a: 0.05032844}
+    key1: {r: 1, g: 1, b: 1, a: 0.05032844}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1860,8 +1860,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -0.55, y: 0.099999994, z: 0}
-  - {x: -0.547, y: 0.512372, z: 0}
+  - {x: -1.25, y: 0.1, z: 0.55}
+  - {x: -0.93, y: 0.28383377, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.01
@@ -1891,8 +1891,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.55}
-      key1: {r: 1, g: 1, b: 1, a: 0.55}
+      key0: {r: 1, g: 1, b: 1, a: 0.05032844}
+      key1: {r: 1, g: 1, b: 1, a: 0.05032844}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
