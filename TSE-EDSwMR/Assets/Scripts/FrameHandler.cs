@@ -28,7 +28,7 @@ public class FrameHandler : MonoBehaviour
     private bool activated = false;
     public float space_for_buttons_normed = 2;
     private Color color;
-     
+    private GameObject categorieIcon;
 
 
 
@@ -134,9 +134,6 @@ public class FrameHandler : MonoBehaviour
 
 
         //Changing Image in Frame
-        GameObject canvas = gameObject.transform.GetChild(2).gameObject;
-        GameObject imageObject = canvas.transform.GetChild(0).gameObject;
-        Image image = imageObject.GetComponent<Image>();
 
         if (layer.layerLevel != 0)
         {
@@ -146,15 +143,10 @@ public class FrameHandler : MonoBehaviour
             source_path += "_";
             string choice = dataPoints[0].values[category];
             source_path += choice;
-            Debug.Log(source_path);
-            Sprite pic = Resources.Load<Sprite>("2DIcons/" + source_path) as Sprite;
-            Debug.Log(pic);
-            Debug.Log(image);
-            image.sprite = pic;
-            
-        } else
-        {
-            image.sprite = null;
+            GameObject icon = Resources.Load<GameObject>("3DIcons/ReworkedPrefabs/" + source_path) as GameObject;
+            categorieIcon = Instantiate(icon);
+            categorieIcon.transform.SetParent(transform, false);
+            categorieIcon.transform.localPosition = new Vector3(0f, 0.4f, 0.5f);
         }
         
 
@@ -263,6 +255,10 @@ public class FrameHandler : MonoBehaviour
         foreach (string choice in categorie_filtered["choices"].Values<string>())
         {
             GameObject child = Instantiate(frame_prefab, transform.parent);
+            if (!(layer.layerLevel == 0)) //Set Icon from Parent inactive in child
+            {
+                child.transform.Find(categorieIcon.name).gameObject.SetActive(false);
+            }
             dps = dataPoints.FindAll(e => e.values[filtered] == choice);
             child.GetComponent<FrameHandler>()
                 .InitFrame(new_filtered_for, dps, next_layer, numberForSorting * 10 + ind_for_sorting++, number_datapoints_to_left + added_dp_to_Left, color);
