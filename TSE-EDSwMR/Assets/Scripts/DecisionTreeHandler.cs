@@ -91,6 +91,16 @@ public class DecisionTreeHandler : MonoBehaviour
         return place_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed;
     }
 
+    ///<summary>
+    ///Replace Function for the Handmenu that calls EnableFollowing
+    ///Necessary because EnableFollowing isnt recognized by unity as useable script for button presses
+    ///most likely because its not void but returns UnityEvent
+    ///</summary>
+    public void Replace()
+    {
+        EnableFollowing();
+    }
+
     public void MoveUpForNextLayer()
     {
         move = true;
