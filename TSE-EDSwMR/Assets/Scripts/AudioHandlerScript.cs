@@ -30,9 +30,6 @@ public class AudioHandlerScript : MonoBehaviour
     [SerializeField] AudioSource audioSourcePublic;
     [SerializeField] AudioClip[] audioClipArray;
 
-    //[SerializeField] AudioSource source2;
-
-
 
     // Start is called before the first frame update
     void Start()
