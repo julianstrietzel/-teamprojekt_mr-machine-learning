@@ -26,6 +26,8 @@ public class DecisionTreeHandler : MonoBehaviour
     protected static Color yellow_plate_color = new Color(255, 230, 132);
     protected static Color red_plate_color = new Color(217, 0, 69);
 
+    public GameObject hint_prefab;
+
 
 
     public virtual void Update()
@@ -131,5 +133,15 @@ public class DecisionTreeHandler : MonoBehaviour
             return Math.Pow(color_a.b - color_b.b, 2) + Math.Pow(color_a.r - color_b.r, 2) + Math.Pow(color_a.g - color_b.g, 2);
         }
 
+    }
+
+    
+    
+    public virtual void Hint()
+    {
+        string message = "In this module you are trying to build a decision tree from the given data.\n " +
+            "The Tennisballs on the table are used to represent the datapoints you collected. The frames are the nodes of the decision tree.They are color coded so you know the parent of each node. \n" +
+            "Use the buttons to choose a category to sort the datapoints. Your goal is to have only yes or no days (yellow or red tennisballs) in each node.";
+        Dialog.Open(hint_prefab, DialogButtonType.OK, "Hint", message, true);
     }
 }

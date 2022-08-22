@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -930,6 +930,7 @@ MonoBehaviour:
   info_box: {fileID: 3736739776393015688, guid: ce0b1782c067579419ec197f2084eb20, type: 3}
   frame_prefab: {fileID: 2782996915518340344, guid: b6c69d84d4f11824d8e20be8dbf5e772, type: 3}
   move: 0
+  hint_prefab: {fileID: 8451469530216736246, guid: 478732197b53dee4694480aac1a7c98c, type: 3}
   rebuild_prefab: {fileID: 2161814823950967579, guid: da123e9a88e1d794da6ab45f69b00199, type: 3}
 --- !u!1 &1033268226
 GameObject:
@@ -1138,6 +1139,18 @@ PrefabInstance:
     - target: {fileID: 4768722568762359836, guid: 68f4d65797d6a374ea0ea4213ba8db5a, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: DecisionTreeHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768722569192163448, guid: 68f4d65797d6a374ea0ea4213ba8db5a, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 972502513}
+    - target: {fileID: 4768722569192163448, guid: 68f4d65797d6a374ea0ea4213ba8db5a, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Hint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768722569192163448, guid: 68f4d65797d6a374ea0ea4213ba8db5a, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Rebuild_DecisionTree, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68f4d65797d6a374ea0ea4213ba8db5a, type: 3}

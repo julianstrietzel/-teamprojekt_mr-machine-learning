@@ -29,6 +29,7 @@ public class FrameHandler : MonoBehaviour
     public float space_for_buttons_normed = 2;
     private Color color;
     private GameObject categorieIcon;
+    public bool isEntropyFrame = false;
 
 
 
@@ -37,6 +38,7 @@ public class FrameHandler : MonoBehaviour
         return dataPoints.Count;
 
     }
+
 
     /// <summary>
     /// For layer activation: Next layer can be activated if every node in the previous layer is ready.
@@ -95,6 +97,7 @@ public class FrameHandler : MonoBehaviour
         this.numberForSorting = numberSort;
 
 
+
         //if node is empty deactivate it. It will also not be added to any Layer so nothing is referencing on this
         if (dataPoints.Count == 0 )
         {
@@ -112,10 +115,9 @@ public class FrameHandler : MonoBehaviour
 
         //Init Entropyhandler
         EntropyHandler eHandler = gameObject.GetComponent<EntropyHandler>();
-        if (eHandler != null)
-        {
-            eHandler.Initalise();
-        }
+        isEntropyFrame = eHandler != null;
+        if (isEntropyFrame) eHandler.Initalise();
+        
 
         //place according to number of dps to the left
         transform.localPosition = new Vector3((DecisionTreeHandler.s_max_width / layer.countDps) * number_datapoints_to_left, 0, layer.layerLevel * (-1.2f));

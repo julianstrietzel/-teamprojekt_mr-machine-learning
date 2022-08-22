@@ -10,6 +10,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     bool movedown = false;
     public GameObject rebuild_prefab;
     private GameObject rebuild_button;
+    bool isEntropyTree = false;
 
     public override void Update()
     {
@@ -35,10 +36,12 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         Rebuild_Layer layerZero = new Rebuild_Layer(0, DataHandler.data.Count, null, this);
         FrameHandler roothandler = root.GetComponent<FrameHandler>();
 
+
         s_layers = new ArrayList();
         s_layers.Add(layerZero);
         prev_color = Color.blue;
         roothandler.InitFrame(new List<string>(), DataHandler.data, layerZero, 1, 0, prev_color);
+        isEntropyTree = roothandler.isEntropyFrame;
 
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
         place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
@@ -75,6 +78,27 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         rebuild_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed.RemoveAllListeners();
         rebuild_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed.AddListener(call);
     }
+
+    public override void Hint()
+    {
+
+        string message = "Now you also have the possibility to rebuild parts of the tree by pressing the \"rebuild\" button.\n " +
+            "your goal is to build a tree as flat as possible, so your algorithm runs optimized. \n \n";
+        
+        if(isEntropyTree)
+        {
+            message = "In this Module we added Entropy and Information Gain as information. This helps you to build the perfect tree.\n";
+            message += "You still have the possibility to rebuild parts of the tree by pressing the \"rebuild\" button.\n " +
+                "your goal is to build a tree as flat as possible, so your algorithm runs optimized. \n \n";
+            message += "Previous Hint: \n In this module you are trying to build a decision tree from the given data.\n " +
+                 "The Tennisballs on the table are used to represent the datapoints you collected. The frames are the nodes of the decision tree.They are color coded so you know the parent of each node. \n" +
+                 "Use the buttons to choose a category to sort the datapoints. Your goal is to have only yes or no days (yellow or red tennisballs) in each node.";
+
+        }
+
+        Dialog.Open(hint_prefab, DialogButtonType.OK, "Hint", message, true);
+    }
+
 
 
 }

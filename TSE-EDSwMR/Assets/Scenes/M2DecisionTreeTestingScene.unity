@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1113,6 +1113,18 @@ PrefabInstance:
       value: Replace
       objectReference: {fileID: 0}
     - target: {fileID: 4768722568762359836, guid: 68f4d65797d6a374ea0ea4213ba8db5a, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DecisionTreeHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768722569192163448, guid: 68f4d65797d6a374ea0ea4213ba8db5a, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 758375418}
+    - target: {fileID: 4768722569192163448, guid: 68f4d65797d6a374ea0ea4213ba8db5a, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Hint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768722569192163448, guid: 68f4d65797d6a374ea0ea4213ba8db5a, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: DecisionTreeHandler, Assembly-CSharp
       objectReference: {fileID: 0}
