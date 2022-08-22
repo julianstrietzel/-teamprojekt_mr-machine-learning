@@ -90,7 +90,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
             message = "In this Module we added Entropy and Information Gain as information. This helps you to build the perfect tree.\n";
             message += "You still have the possibility to rebuild parts of the tree by pressing the \"rebuild\" button.\n " +
                 "your goal is to build a tree as flat as possible, so your algorithm runs optimized. \n \n";
-            message += "Previous Hint: \n In this module you are trying to build a decision tree from the given data.\n " +
+            message += "Previous Hint: \nIn this module you are trying to build a decision tree from the given data.\n " +
                  "The Tennisballs on the table are used to represent the datapoints you collected. The frames are the nodes of the decision tree.They are color coded so you know the parent of each node. \n" +
                  "Use the buttons to choose a category to sort the datapoints. Your goal is to have only yes or no days (yellow or red tennisballs) in each node.";
 
