@@ -47,5 +47,6 @@ MonoBehaviour:
   button_prefab: {fileID: 8451469530216736246, guid: 478732197b53dee4694480aac1a7c98c, type: 3}
   info_box: {fileID: 3736739776393015688, guid: ce0b1782c067579419ec197f2084eb20, type: 3}
   frame_prefab: {fileID: 2782996915518340344, guid: 1845797212c4596428823d8df671fe55, type: 3}
+  continue_button_prefab: {fileID: 264777408693762340, guid: 3f094d8ecd5063642b5ea0010fcb6de1, type: 3}
   move: 0
   hint_prefab: {fileID: 8451469530216736246, guid: 478732197b53dee4694480aac1a7c98c, type: 3}

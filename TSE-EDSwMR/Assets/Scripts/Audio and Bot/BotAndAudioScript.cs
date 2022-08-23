@@ -11,17 +11,6 @@ public class BotAndAudioScript : MonoBehaviour
     [SerializeField] AudioHandlerScript audioHandler;
     [SerializeField] RetrobotAnimations retrobotAnimations;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        retrobotAnimations.InitiateController();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     // has to be called over StartCoroutine()
     IEnumerator PlayClipCoroutine(int clip_nr)

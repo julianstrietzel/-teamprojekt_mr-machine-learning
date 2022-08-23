@@ -5,6 +5,7 @@ using UnityEngine;
 using Microsoft.MixedReality.Toolkit.UI;
 using System;
 
+[System.Obsolete("Not used anymore")]
 public class POVDecisionTree : MonoBehaviour
 {
 

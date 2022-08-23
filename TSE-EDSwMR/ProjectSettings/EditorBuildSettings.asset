@@ -6,14 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/POV.unity
-    guid: bef0342c53b40d74aa3e3d2b90db0842
+    path: Assets/Scenes/Onboarding.unity
+    guid: 5b5fed5534d4ec142bf960c305b43a49
+  - enabled: 1
+    path: Assets/Scenes/M3RebuildingTreeScene.unity
+    guid: 0e79cfae71d66164998fc4c9355a1efc
+  - enabled: 1
+    path: Assets/Scenes/M2DecisionTreeTestingScene.unity
+    guid: fdaaa7441f8d3594b8d017a077debb49
+  - enabled: 1
+    path: Assets/Scenes/M4EntropyScene.unity
+    guid: cf55d07e5bf6ce54f866329649b0786d
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 8e473be978a82334aa2b17f51139311f
   - enabled: 1
-    path: Assets/Scenes/Onboarding.unity
-    guid: 5b5fed5534d4ec142bf960c305b43a49
+    path: Assets/Scenes/POV.unity
+    guid: bef0342c53b40d74aa3e3d2b90db0842
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 07b71980238f30c4e904d1f0aee2455a, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: e477a2dedd853af4c8b3f60c8a6ca7a9, type: 2}

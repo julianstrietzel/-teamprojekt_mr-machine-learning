@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1238635965887903780}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: -0.36, z: 2.37}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 5494139599859803977}
   - {fileID: 7274190926431386832}
@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioHandler: {fileID: 5494139599859803976}
-  retrobot: {fileID: 8050411623275275882}
   retrobotAnimations: {fileID: 1238635966295637506}
 --- !u!1001 &1238635966295637511
 PrefabInstance:
@@ -210,7 +209,7 @@ PrefabInstance:
     - target: {fileID: 6705752102595264693, guid: 898d4740d8bf266408d0b869de858272, type: 3}
       propertyPath: audioClipArray.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 3002668a71ba9894bbf429efd88be252, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6705752102595264693, guid: 898d4740d8bf266408d0b869de858272, type: 3}
       propertyPath: audioClipArray.Array.data[1]
       value: 

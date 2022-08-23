@@ -26,6 +26,8 @@ public class Layer
 
         countFinallyFiltered += newFrameHandler.Singular() ? newFrameHandler.NumberDatapoints() : 0;
 
+        if (newFrameHandler.Singular()) decisionTree.NodeIsSingular();
+
         int newNumberForSort = newFrameHandler.numberForSorting;
         int i = 0;
 
@@ -105,23 +107,21 @@ public class Layer
     public void ListenerNodeGeneratesChildren()
     {
         if (!LayerIsReady()) return;
-        if (NextLayer().IsEmpty())
-        {
-            //TODO do something if everything is empty or ready
-        }
         NextLayer().Activate();
-
     }
 
     public virtual void Activate()
     {
-
+        bool atleastonenodenotsingular = false;
         decisionTree.MoveUpForNextLayer();
 
         foreach (GameObject nodeGameObject in nodes)
         {
-            nodeGameObject.GetComponent<FrameHandler>().Activate();
+            FrameHandler hand = nodeGameObject.GetComponent<FrameHandler>();
+            hand.Activate();
+            atleastonenodenotsingular = !hand.Singular() || atleastonenodenotsingular;
         }
+        if (!atleastonenodenotsingular) decisionTree.Finished();
     }
 
 

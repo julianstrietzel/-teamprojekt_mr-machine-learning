@@ -12,8 +12,12 @@ public class DecisionTreeHandler : MonoBehaviour
     public GameObject button_prefab;
     public GameObject info_box;
     public GameObject frame_prefab;
-    
+    public GameObject continue_button_prefab;
+    public GameObject Explaning;
+
+
     protected GameObject place_button;
+   
     public static ArrayList s_layers = new ArrayList();
     public static float s_max_width = 4f;
 
@@ -25,6 +29,10 @@ public class DecisionTreeHandler : MonoBehaviour
     protected static Color prev_color;
     protected static Color yellow_plate_color = new Color(255, 230, 132);
     protected static Color red_plate_color = new Color(217, 0, 69);
+    protected UnityEvent place_button_pressed;
+    protected GameObject continue_button;
+
+
 
     public GameObject hint_prefab;
 
@@ -54,6 +62,7 @@ public class DecisionTreeHandler : MonoBehaviour
 
     public virtual void OnDataHandlerInit()
     {
+
         GameObject root = Instantiate(frame_prefab, gameObject.transform);
         Layer layerZero = new Layer(0, DataHandler.data.Count, null, this);
         FrameHandler roothandler = root.GetComponent<FrameHandler>();
@@ -66,10 +75,10 @@ public class DecisionTreeHandler : MonoBehaviour
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
         place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
 
-        UnityEvent button_pressed = EnableFollowing();
-        button_pressed.AddListener(Dissable_Following);
-        button_pressed.AddListener(roothandler.Activate);
-        button_pressed.AddListener(DeactivateTooltip);
+        place_button_pressed = EnableFollowing();
+        place_button_pressed.AddListener(Dissable_Following);
+        place_button_pressed.AddListener(roothandler.Activate);
+        place_button_pressed.AddListener(DeactivateTooltip);
 
 
     }
@@ -89,8 +98,9 @@ public class DecisionTreeHandler : MonoBehaviour
     {
         gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler>().enabled = true;
         place_button.SetActive(true);
+        info_box.SetActive(true);
 
-        return place_button.GetComponent<Microsoft.MixedReality.Toolkit.UI.PressableButtonHoloLens2>().ButtonPressed;
+        return place_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed;
     }
 
     ///<summary>
@@ -101,10 +111,15 @@ public class DecisionTreeHandler : MonoBehaviour
     public void Replace()
     {
         EnableFollowing();
+        place_button_pressed.RemoveAllListeners();
+        place_button_pressed.AddListener(Dissable_Following);
+        place_button_pressed.AddListener(DeactivateTooltip);
+
     }
 
-    public void MoveUpForNextLayer()
+    public virtual void MoveUpForNextLayer()
     {
+
         move = true;
     }
 
@@ -139,9 +154,31 @@ public class DecisionTreeHandler : MonoBehaviour
     
     public virtual void Hint()
     {
-        string message = "In this module you are trying to build a decision tree from the given data.\n " +
-            "The Tennisballs on the table are used to represent the datapoints you collected. The frames are the nodes of the decision tree.They are color coded so you know the parent of each node. \n" +
-            "Use the buttons to choose a category to sort the datapoints. Your goal is to have only yes or no days (yellow or red tennisballs) in each node.";
-        Dialog.Open(hint_prefab, DialogButtonType.OK, "Hint", message, true);
+        
+    }
+
+    /// <summary>
+    /// This Method is called evertime there is a new singular node somewhere. 
+    /// </summary>
+    public virtual void NodeIsSingular()
+    {
+
+    }
+
+    /// <summary>
+    /// This Method is called by the last layer if the next layer is empty.
+    /// </summary>
+    public virtual void Finished()
+    {
+        continue_button = Instantiate(continue_button_prefab, gameObject.transform.parent.transform);
+        UnityEvent conButPressed = continue_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed;
+        conButPressed.AddListener(ContinueButtonPressed);
+
+
+    }
+
+    public virtual void ContinueButtonPressed()
+    {
+        Destroy(continue_button);
     }
 }
