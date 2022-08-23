@@ -40,17 +40,17 @@ public class Rebuild_Layer:Layer
         {
             nodeGameObject.GetComponent<FrameHandler>().Activate();
         }
-        ReplaceButtonCalltoThis();
+        ReplaceRebuildButtonCalltoThis();
+        ((Rebuild_DecisionTree) decisionTree).Dissable_Continue_Button();
     }
 
     public override void Activate()
     {
+        ReplaceRebuildButtonCalltoThis();
         base.Activate();
-        Debug.Log(decisionTree.move + "move in Activate afte base activation called");
-        ReplaceButtonCalltoThis();
     }
 
-    public void ReplaceButtonCalltoThis()
+    public void ReplaceRebuildButtonCalltoThis()
     {
         UnityAction deact = Deactivate;
         if (layerLevel == 0) deact = null;

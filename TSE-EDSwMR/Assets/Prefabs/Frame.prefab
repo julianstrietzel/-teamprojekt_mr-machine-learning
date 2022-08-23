@@ -428,6 +428,7 @@ MonoBehaviour:
   child_nodes: []
   numberForSorting: 0
   space_for_buttons_normed: 4
+  isEntropyFrame: 0
 --- !u!1 &2782996916342316544
 GameObject:
   m_ObjectHideFlags: 0

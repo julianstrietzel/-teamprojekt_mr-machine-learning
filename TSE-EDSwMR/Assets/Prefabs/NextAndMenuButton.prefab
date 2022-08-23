@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3463425964466820142, guid: 9c52639faf9f52a4cad6931d3aa2b4a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3783730151257798917, guid: 9c52639faf9f52a4cad6931d3aa2b4a7, type: 3}
       propertyPath: m_text
       value: Next
@@ -125,6 +129,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5092501276723108496}
     m_Modifications:
+    - target: {fileID: 1268334470977408690, guid: 2371efdfff985324c8374aac79e85552, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1515472738175054441, guid: 2371efdfff985324c8374aac79e85552, type: 3}
       propertyPath: m_Name
       value: Menu_PressableButtonHoloLens2_32x96
