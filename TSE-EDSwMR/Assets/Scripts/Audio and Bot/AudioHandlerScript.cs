@@ -57,6 +57,10 @@ public class AudioHandlerScript : MonoBehaviour
             audioSourcePublic.clip = clip;
             audioSourcePublic.Play();
         }
+        else
+        {
+            throw new System.IndexOutOfRangeException("AudioHandler clip index does not exist.");
+        }
 
     }
 
@@ -100,7 +104,6 @@ public class AudioHandlerScript : MonoBehaviour
 
             clipLenght = audioSourcePublic.clip.samples / audioSourcePublic.clip.frequency;
         }
-        Debug.Log("AudioHandler; Duration audio: " + clipLenght + "; clip nr: "+clipNumber);
 
         return clipLenght;
     }

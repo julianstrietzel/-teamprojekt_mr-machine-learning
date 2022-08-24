@@ -6,7 +6,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 using System;
 
 [System.Obsolete("Not used anymore")]
-public class POVDecisionTree : MonoBehaviour
+public class old_POVDecisionTree : MonoBehaviour
 {
 
     public ToolTip rootPublicToolTip;

@@ -1,0 +1,19 @@
+Thank you very much for your help. Now I know when to go play tennis. And I can also use this to decide in the future. I created this decision tree by writing down your choices. 
+
+Look: if I have the forecast for a day, I can use the decision tree to guide me. The new data point goes a long a so called path. 
+
+Its called decision tree because it looks a little like an upside down tree. 
+
+This is the root node.
+
+...and these are called inner nodes. 
+
+And where the tree ends are the leaves. 
+
+In each question you decided on an attribute. For example Temperature or Outlook. 
+
+That’s enough theory for now! You already learned the basic structure and terminology of a decision tree.  
+
+A decision tree can also be built with machine learning. You can do that to automize complex, but systematic decisions, so a machine can help you or decide for you. 
+
+Do you want to know how a machine can learn from data to built a decision tree? Then continue in the next module! 

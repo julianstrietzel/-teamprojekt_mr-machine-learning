@@ -69,8 +69,6 @@ public class StateScriptPOV : MonoBehaviour
      
         kaiAnimations.InitiateController(); // otherwise NullPointer because Start is called after the first animation is needed 
 
-        Debug.Log("in State Script, play intro");
-
         StartCoroutine(PlayAndTalkNextClipCoroutine()); // Intro
      
     }
@@ -81,18 +79,241 @@ public class StateScriptPOV : MonoBehaviour
 
         if(intro == true && !audioHandler.isPlaying())
         {
-
-            Debug.Log("intro false");
+            // start the choosing phase
             intro = false;
-
-
-            StartCoroutine(ClickOnlyDaysCoroutine());
+            StartCoroutine(TalkAndShowNext());
         }
 
 
     }
 
-    void UpdateCurrentState()
+    /// <summary>
+    /// inform data handler about Yes decision on current day and show next day
+    /// </summary>
+    public void Yes_Clicked()
+    {
+        dataHandler.SetFinalDecision(day, true);
+
+        StartCoroutine(TalkAndShowNext());
+
+    }
+    /// <summary>
+    /// inform data handler about No decision on current day and show next day
+    /// </summary>
+    public void No_Clicked()
+    {
+
+        dataHandler.SetFinalDecision(day, false);
+        StartCoroutine(TalkAndShowNext());
+    }
+
+
+
+
+
+
+    /// <summary>
+    /// In the choosing phase of the module shows the next icon and plays the audio
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator TalkAndShowNext()
+    {
+        int iconNrWaitForInput = 1;
+        while(iconNrWaitForInput <= AMOUNT_ICONS && !finishedGame)
+        {
+            float clip_length = audioHandler.DurationAudio(audio_nr);
+            ShowNext();
+            StartCoroutine(PlayAndTalkNextClipCoroutine());
+            yield return new WaitForSeconds(clip_length);
+            iconNrWaitForInput++;
+        }
+
+        //if (finishedGame)
+        //{
+        //    StartCoroutine(PlayExplanationDecisionTree()); //TODO seems to repeat
+
+        //}
+        //Debug.Log("TalkAndShowNext Explantions decsion tree ");
+
+
+
+    }
+    //private IEnumerator TalkAndShowNext()
+    //{
+
+    //    float clip_length = audioHandler.DurationAudio(audio_nr);
+    //    ShowNext();
+    //    StartCoroutine(PlayAndTalkNextClipCoroutine());
+    //    yield return new WaitForSeconds(clip_length);
+
+    //    clip_length = audioHandler.DurationAudio(audio_nr);
+
+    //    ShowNext();
+    //    StartCoroutine(PlayAndTalkNextClipCoroutine());
+    //    yield return new WaitForSeconds(clip_length);
+
+    //    clip_length = audioHandler.DurationAudio(audio_nr);
+
+    //    ShowNext();
+    //    StartCoroutine(PlayAndTalkNextClipCoroutine());
+    //    yield return new WaitForSeconds(clip_length);
+
+    //}
+
+
+
+
+
+
+
+
+
+
+
+    private IEnumerator PlayExplanationDecisionTree()
+    {
+        //TODO pauses between explanations
+
+        Debug.Log("Intro");
+        POV_DecisionTree dt = decisionTree.GetComponent<POV_DecisionTree>();
+        //intro
+        StartCoroutine(PlayAndTalkCoroutine(13)); 
+        yield return new WaitForSeconds(audioHandler.DurationAudio(13) + 1);
+
+        Debug.Log("Exmaple");
+
+        // example datapoint, show icons of datapoint, explain the example
+        dt.InstantiateExampleDatapoint();
+        StartCoroutine(PlayAndTalkCoroutine(14));
+        yield return new WaitForSeconds(3);
+
+        //highlight the nodes in tree
+        StartCoroutine(HighlightTreeNodesForExampleDatapoint(dt));     
+        yield return new WaitForSeconds(audioHandler.DurationAudio(14) - 2);
+        // TODO remove example object
+        dt.DestroyExample();
+        Debug.Log("upside down tree");
+
+        // decision tree explanation name
+        StartCoroutine(PlayAndTalkCoroutine(15));
+        yield return new WaitForSeconds(audioHandler.DurationAudio(15));
+
+        Debug.Log("Root");
+
+        // explain root
+        StartCoroutine(PlayAndTalkCoroutine(16));
+        dt.HighlightRoot();
+        yield return new WaitForSeconds(audioHandler.DurationAudio(16));
+        dt.RemoveHighlightRoot();
+
+        Debug.Log("inner node");
+
+        // show inner node
+        StartCoroutine(PlayAndTalkCoroutine(17));
+        dt.HighlightInnerNode();
+        yield return new WaitForSeconds(audioHandler.DurationAudio(17));
+        dt.RemoveHighlightInnerNode();
+
+        Debug.Log("leaves");
+
+        // leaves
+       
+
+        for (int nr = 18; nr < 21; nr++)
+        {
+            StartCoroutine(PlayAndTalkCoroutine(nr));
+            yield return new WaitForSeconds(audioHandler.DurationAudio(nr) + 0.5f);
+        }
+   
+
+        //TODO add buttons for next menu
+        // TODO add hint to go to the next menu?
+        // use update for all the different phases?
+
+
+
+    }
+
+    /// <summary>
+    /// with given decision tree script highlight the tree nodes for the example data point
+    /// </summary>
+    /// <param name="dt"></param>
+    /// <returns></returns>
+    private IEnumerator HighlightTreeNodesForExampleDatapoint(POV_DecisionTree dt)
+    {
+        foreach (GameObject node in dt.nodesExample)
+        {
+            Debug.Log("State script highlight for example node: " + node);
+            dt.HighlightNode(node);
+            yield return new WaitForSeconds(2);
+            dt.RemoveHighlightNode(node);
+        }
+
+    }
+
+    /// <summary>
+    /// plays next audio with animation, for the last icon retrobot presents left
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator PlayAndTalkNextClipCoroutine()
+    {
+        Debug.Log("Next clip Corutine; clip: " + audio_nr);
+
+        audioHandler.PlayAudioClipNr(audio_nr);
+        float clip_length = audioHandler.DurationAudio(audio_nr);
+        audio_nr++;
+        if (icon_nr == AMOUNT_ICONS)
+        {
+            yield return kaiAnimations.TalkAndPresentLeftCoroutine(clip_length);
+        }
+        else
+        {
+            yield return kaiAnimations.TalkForCoroutine(clip_length);
+        }
+
+    }
+
+    IEnumerator PlayAndTalkCoroutine(int clip_nr)
+    {
+        Debug.Log("State; Play and Talk Corutine");
+        audioHandler.PlayAudioClipNr(clip_nr);
+        yield return kaiAnimations.TalkForCoroutine((float)audioHandler.DurationAudio(clip_nr));
+    }
+
+    /// <summary>
+    /// show next icon or show decision tree if the game finished
+    /// </summary>
+    private void ShowNext()
+    {
+        UpdateCurrentState();
+
+        if (finishedGame && iconsHandler != null)
+        {
+            iconsHandler.DestroyParentAfterGameFinish();
+            ShowDecisionTree();
+            StartCoroutine(PlayExplanationDecisionTree()); //TODO wrong place 
+
+        }
+        else
+        {
+            iconsHandler.DisplayNextIcon(day, icon_nr);
+        }
+    }
+
+    private void ShowDecisionTree()
+    {
+        Debug.Log("Show decision tree");
+
+        decisionTree.GetComponent<POV_DecisionTree>().InitiateTree(dataHandler);
+        decisionTree.SetActive(true);
+
+
+    }
+
+    /// <summary>
+    /// update the state which day and icon it is 
+    /// </summary>
+    private void UpdateCurrentState()
     {
         if (icon_nr >= AMOUNT_ICONS)
         {
@@ -112,132 +333,6 @@ public class StateScriptPOV : MonoBehaviour
             icon_nr++;
         }
 
-    }
-   
-    private void Clicked()
-    {
-        UpdateCurrentState();
-
-        if (finishedGame && iconsHandler != null)
-        {
-            Debug.Log("Clicked if finished game");
-            iconsHandler.DestroyParentAfterGameFinish();
-            ShowDecisionTree();
-        }
-        else
-        {
-            iconsHandler.DisplayNextIcon(day, icon_nr);
-
-        }
-
-      
-      
-
-    }
-
-
-
-
-    IEnumerator ClickOnlyDaysCoroutine()
-    {
-
-        Debug.Log("ClickOnlyDaysCoroutine");
-
-        float clip_length = audioHandler.DurationAudio(audio_nr);
-        Clicked();
-        StartCoroutine(PlayAndTalkNextClipCoroutine());
-        //Debug.Log("Start delay " + Time.time+ " clip length: "+ clip_length);
-        yield return new WaitForSeconds(clip_length);
-
-        clip_length = audioHandler.DurationAudio(audio_nr);
-
-        //Debug.Log("second clicked at " + Time.time + "; new clip length: " +clip_length);
-        Clicked();
-        StartCoroutine(PlayAndTalkNextClipCoroutine());
-        yield return new WaitForSeconds(clip_length);
-
-        clip_length = audioHandler.DurationAudio(audio_nr);
-
-        Clicked();
-        StartCoroutine(PlayAndTalkNextClipCoroutine());
-        yield return new WaitForSeconds(clip_length);
-
-    }
-
-
-
-
-    IEnumerator PlayAndTalkCoroutine(int clip_nr)
-    {
-
-        Debug.Log("Play and Talk Corutine");
-
-        audioHandler.PlayAudioClipNr(clip_nr);
-
-        //StartCoroutine(kaiAnimations.TalkForCoroutine((float)audioHandler.DurationAudio(0)));
-        yield return kaiAnimations.TalkForCoroutine((float)audioHandler.DurationAudio(clip_nr));
-
-
-    } 
-    
-    IEnumerator PlayAndTalkNextClipCoroutine()
-    {
-        Debug.Log("Next clip Corutine; clip: "+audio_nr);
-
-        audioHandler.PlayAudioClipNr(audio_nr);
-        float clip_length = audioHandler.DurationAudio(audio_nr);
-        audio_nr++;
-        if (icon_nr == AMOUNT_ICONS)
-        {
-
-            yield return kaiAnimations.TalkAndPresentLeftCoroutine(clip_length);
-
-        }
-        else
-        {
-            yield return kaiAnimations.TalkForCoroutine(clip_length);
-        }
-       
-    }
-
-
-    private void ShowDecisionTree()
-    {
-        Debug.Log("Show decision tree");
-
-        decisionTree.GetComponent<POV_DecisionTree>().InitiateTree(dataHandler);
-        decisionTree.SetActive(true);
-        StartCoroutine(PlayExplanationDecisionTree());
-
-
-    }
-
-    IEnumerator PlayExplanationDecisionTree()
-    {
-        while (audio_nr < audioHandler.GetAudioClipArrayLength())
-        {
-            float clip_length = audioHandler.DurationAudio(audio_nr);
-            StartCoroutine(PlayAndTalkNextClipCoroutine());
-            yield return new WaitForSeconds(clip_length);
-        }
-
-
-        
-    }
-
-    public void Yes_Clicked()
-    {
-        dataHandler.SetFinalDecision(day, true);
-
-        StartCoroutine(ClickOnlyDaysCoroutine());
-
-    }
-
-    public void No_Clicked()
-    {
-
-        dataHandler.SetFinalDecision(day, false);
-        StartCoroutine(ClickOnlyDaysCoroutine());
     }
 
     public bool GetFinishedGame()
