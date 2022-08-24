@@ -1,0 +1,12 @@
+Hello, my name is Kai. I will guide you on your learning journey to become a Decision Tree Champ. Let’s start our journey.
+Have you had any experience with decision trees? 
+Please confirm your level of knowledge by pressing the corresponding button.  
+To be able to start, we first need all the tools. To start, please take the box labeled “MR: Decision Tree” from the shelf and place it on the table. Tell me if you are ready for the next step.
+Great, then let's start with the basics. Do you see the rectangle in the box? Please, place it centrally at the back edge of the table.
+Finished?
+Now you should see a frame. Move your head to position the frame on the rectangle. Press the button to lock the position.
+Open the hand menu by looking at the inside of your wrist. 
+Press the “Reset”-button in the hand menu to  reset the frame.  
+Congratulations, you have successfully completed onboarding. Now you're ready for the full learning experience. Press “overview” to get started. 
+
+

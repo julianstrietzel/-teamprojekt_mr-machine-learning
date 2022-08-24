@@ -1,0 +1,14 @@
+Hello Friend! I love to play tennis. But sometimes the weather is just not well suited for the court. Can you help me decide ? 
+!!Let's look at this temperature forecast for tomorrow. If you believe it's fitting for a tennis day choose yes otherwise choose no. // update
+!!We also know the weather is supposed to be overcast. What do you think now? !!
+There is one more thing we know about this day. It's not gonna be windy[humidity normal] at all. Now that you know all that information about tomorrow, should I go ?
+Now this is the forecast for the day after tomorrow.
+It's going to be hot. 
+And also very sunny.
+And oh wow, the humidity will be extremely high, that's probably a sweaty day. In your opinion should I go ?
+The oncoming days it'll cool down significantly.
+But it's still a nice and sunny day.
+And uuuh with normal humidity, it won't feel like a sauna outside.
+This is the last day I have time this week the temperature will be mild. 
+But it's heavily raining.
+And looks like the wind will be a super strong.

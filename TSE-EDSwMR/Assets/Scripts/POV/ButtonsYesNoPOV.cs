@@ -12,12 +12,11 @@ public class ButtonsYesNoPOV : MonoBehaviour
 
     public StateScriptPOV stateScript;
 
-    private GameObject buttonsPrivate;
     // Start is called before the first frame update
     void Start()
     {
         buttons.SetActive(false);
-        //TestButtons();
+        //StartCoroutine(TestButtons());
     }
 
     // Update is called once per frame
@@ -61,12 +60,13 @@ public class ButtonsYesNoPOV : MonoBehaviour
     }
 
 
-    private void TestButtons()
-    {
-        for(int i = 0; i < 14; i++)
-        {
-            stateScript.Yes_Clicked();
-            System.Threading.Thread.Sleep(2000);
-        }
-    }
+    //IEnumerator TestButtons()
+    //{
+    //    int i = 0;
+    //    while(i<4)
+    //    {
+    //        stateScript.Yes_Clicked();
+    //        yield return new WaitForSeconds(2);
+    //    }
+    //}
 }

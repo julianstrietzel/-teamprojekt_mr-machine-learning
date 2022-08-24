@@ -7,25 +7,28 @@ public class POV_DecisionTree : MonoBehaviour
 {
     [SerializeField] ToolTip nodeYes;
     [SerializeField] ToolTip nodeNo;
+    [SerializeField] GameObject root;
+    [SerializeField] GameObject innerNode;
+
+
+
 
     [SerializeField] GameObject[] parentNodes;
+    [SerializeField] Material highlightingMaterial;
+    [SerializeField] Material normalMaterial;
+
+
+    [SerializeField] GameObject exampleDatapoint;
+    public GameObject[] nodesExample;
+
+
 
     private DataHandlerPOV dataHandler;
+    private GameObject example;
 
     private bool[] decisions;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void InitiateTree(DataHandlerPOV data)
     {
@@ -43,7 +46,7 @@ public class POV_DecisionTree : MonoBehaviour
         for (int i = 0; i < parentNodes.Length; i++)
         {
             GameObject parentNode = parentNodes[i];
-            ToolTip leave = InstatitiateNode(decisions[i], parentNode);
+            ToolTip leave = InstantiateNode(decisions[i], parentNode);
     
             // Positioning and line 
             leave.transform.localPosition = new Vector3(0, (float)-0.2, 0);
@@ -56,7 +59,8 @@ public class POV_DecisionTree : MonoBehaviour
 
 
 
-    private ToolTip InstatitiateNode(bool decision, GameObject parent)
+
+    private ToolTip InstantiateNode(bool decision, GameObject parent)
     {
         ToolTip leave;
 
@@ -72,6 +76,59 @@ public class POV_DecisionTree : MonoBehaviour
 
         return leave;
     }
+
+    public void InstantiateExampleDatapoint()
+    {
+        example = GameObject.Instantiate(exampleDatapoint, gameObject.transform);
+        example.transform.localPosition = new Vector3(-0.03f, 0.6f, 0);
+
+    }
+
+    public void DestroyExample()
+    {
+        GameObject.Destroy(example);
+    }
+
+
+    private void ChangeMaterial(GameObject node, Material mat)
+    {
+     
+        GameObject tipBackground =  node.transform.Find("Pivot/ContentParent/TipBackground").gameObject;
+
+        tipBackground.GetComponent<MeshRenderer>().material = mat;
+
+    }
+
+    public void HighlightNode(GameObject node)
+    {
+        ChangeMaterial(node, highlightingMaterial);
+    } 
+    public void RemoveHighlightNode(GameObject node)
+    {
+        ChangeMaterial(node, normalMaterial);
+    }
+
+    public void HighlightInnerNode()
+    {
+        ChangeMaterial(innerNode, highlightingMaterial);
+    }
+
+    public void HighlightRoot()
+    {
+        ChangeMaterial(root, highlightingMaterial);
+    }
+
+
+    public void RemoveHighlightInnerNode()
+    {
+        ChangeMaterial(innerNode, normalMaterial);
+    }
+    public void RemoveHighlightRoot()
+    {
+        ChangeMaterial(root, normalMaterial);
+    }
+
+
 
 
 

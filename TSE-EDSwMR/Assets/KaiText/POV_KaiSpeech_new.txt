@@ -1,0 +1,20 @@
+Hello Friend! I love to play tennis. But sometimes the weather is just not well suited for the court. Can you help me decide ? 
+Let's look at this temperature forecast for tomorrow. It's expected to be mild
+and overcast 
+We also know the humidity will be normal. What do you think is it fitting for a tennis day ? Then choose yes otherwise choose no.
+Now this is the forecast for the day after tomorrow.
+It's going to be hot. 
+And also very sunny.
+And oh wow, the humidity will be extremely high, that's probably a sweaty day. In your opinion should I go ?
+The oncoming days it'll cool down significantly.
+But it's still a nice and sunny day.
+And not windy at all.     
+This is the last day I have time this week. The temperature is expected to be pleasant,
+But sadly it will be heavily raining.
+And it looks like the tennis ball will be blown a way.
+
+
+
+HINT:
+
+If you think the weather will be good for a tennis day, click the "Yes" button otherwise click "No".
