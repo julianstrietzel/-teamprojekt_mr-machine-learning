@@ -1,0 +1,33 @@
+Intro:
+Hi, I am Alice. Kai and I do play tennis on a regular basis. But sometimes he just doesn’t show up. I don’t know when he is letting me down, but I suspect a correlation with the weather. So for the last weeks, I tracked the weather and if he joined me or not.  
+Could you help me built a decision tree from that Data ? 
+In order to do that please position the Frame on the top left corner of the table in front of you. You can use the replace button on your hand menu to reposition the decision tree on the table. 
+You are going to need the tennis balls from the box too. Please position them inside
+
+Root:
+Each of those tennis balls represents one day and on it, you see the weather data I collected. 
+We know about the outlook, wind, humidity and temperature. The yellow balls represent days Kai appeared and the red balls represent the days he didn’t. 
+Each frame you see represents a node in the decision tree.  
+When building a decision tree the goal is, to get pure leave nodes, meaning there is only red or only yellow balls in one leave.  
+To reach that goal you need to separate the data by the attributes. For example the temperature. Please click on the button with the attribute you want to sort after. 
+
+First layer:
+The icon shows the value of the balls, that you want to place in that frame. You also see the number of red and yellow tennis balls, that belong to this node. 
+The top of the frame is color coded to match the parent node. This way you know where the tennis balls belong. 
+After you finished sorting the data points after the chosen attribute, you can select the next attribute for each node. The next layer will move up after you chose for each frame.  
+Please built the tree until all the nodes are singular, meaning there is only one color.
+
+Singular Node:
+Perfect! Your created a Node which has only data in it, that is categorized as the same. We call these nodes "leaves".
+Using the decision tree, every data point falling into this leaf, will be categorized the same, and we know whether to play tennis. 
+Please put the tennis balls from the leaf node to the side, so you don’t get confused.  
+
+After Tree Finished:
+Great job! You only have leaves left in your tree. Now, I always know whether we are playing Tennis together. If not I’m just gonna stay at home and binge watch Netflix.
+Over the last minutes, you learnt the decision structure of Kai. An algorithm would do pretty much the same, if you tell him to build a decision tree:
+First it has a lot of data. Those are the tennis balls you had in the beginning. 
+afterwards, you tried to learn from the data, which attributes resulted in "Yes" or "No". You did this by splitting the pool of data by the different categories. 
+Finally, your built structure, can now be used to decide on new "unseen" data. Just follow its way through the tree, and the leaves decide, in which category it belongs. 
+The next step is, to improve your decision tree.
+Imagine you have a data set, with a lot more information, and you need a hundred decisions to come to a conclusion, but you could use only ten, if you had a better tree. Making these decisions for thousands of data points, it really makes a difference in the performance of your algorithm.
+To learn more about improving, please continue with module 3.
