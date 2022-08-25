@@ -1242,6 +1242,18 @@ PrefabInstance:
       propertyPath: Explaning
       value: 
       objectReference: {fileID: 1654310956}
+    - target: {fileID: 4152371608331266225, guid: 4ab3280188ab3204f8094d47bae4e24a, type: 3}
+      propertyPath: IG_Dialog_Prefab
+      value: 
+      objectReference: {fileID: 6924438454614434094, guid: cc20b87f4d3a2b64da6e458c80d42913, type: 3}
+    - target: {fileID: 4152371608331266225, guid: 4ab3280188ab3204f8094d47bae4e24a, type: 3}
+      propertyPath: large_dialog_prefab
+      value: 
+      objectReference: {fileID: 8451469530216736246, guid: 478732197b53dee4694480aac1a7c98c, type: 3}
+    - target: {fileID: 4152371608331266225, guid: 4ab3280188ab3204f8094d47bae4e24a, type: 3}
+      propertyPath: Entropy_Dialog_Prefab
+      value: 
+      objectReference: {fileID: 961970370025019045, guid: 6537df58fd958354d9e383da4ab21000, type: 3}
     - target: {fileID: 6328734262257269915, guid: 4ab3280188ab3204f8094d47bae4e24a, type: 3}
       propertyPath: m_Name
       value: DecisionTree

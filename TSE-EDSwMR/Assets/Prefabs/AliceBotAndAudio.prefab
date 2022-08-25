@@ -66,6 +66,10 @@ PrefabInstance:
       propertyPath: headIconsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8235152697805542031, guid: 55864f4f47038d94485ac4cac9ef1add, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8485796281973539543, guid: 55864f4f47038d94485ac4cac9ef1add, type: 3}
       propertyPath: m_RootOrder
       value: 1
