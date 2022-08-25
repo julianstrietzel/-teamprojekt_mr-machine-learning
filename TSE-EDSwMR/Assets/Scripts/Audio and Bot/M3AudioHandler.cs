@@ -5,18 +5,27 @@ using UnityEngine;
 /// </summary>
 public class M3AudioHandler : MonoBehaviour
 {
+    private BotAndAudioScript botAndAudioScript;
 
+    public void Start()
+    {
+
+        botAndAudioScript = GetComponent<BotAndAudioScript>();
+    }
 
 
     public void PlayIntro()
     {
-        print("M3PlayIntroduction");
+        if (botAndAudioScript != null) StartCoroutine(botAndAudioScript.PlayClipCoroutine(0));
+
+        Debug.Log("M3PlayIntroduction", this);
     }
 
     public void PlaySumUp()
     {
+        if (botAndAudioScript != null) StartCoroutine(botAndAudioScript.PlayClipCoroutine(1));
 
-        print("M3PlaySUmUp");
+        Debug.Log("M3PlaySUmUp", this);
     }
 
     /// <summary>
@@ -24,7 +33,9 @@ public class M3AudioHandler : MonoBehaviour
     /// </summary>
     public void PlayAdditionalNotes()
     {
-        print("M3PlayAdditionalNotes");
+        if (botAndAudioScript != null) StartCoroutine(botAndAudioScript.PlayClipCoroutine(2));
+
+        Debug.Log("M3PlayAdditionalNotes", this);
 
     }
 

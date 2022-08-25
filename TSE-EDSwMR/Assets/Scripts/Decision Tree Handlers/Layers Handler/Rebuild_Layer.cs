@@ -1,3 +1,4 @@
+using Microsoft.MixedReality.Toolkit.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,6 +43,12 @@ public class Rebuild_Layer:Layer
         }
         ReplaceRebuildButtonCalltoThis();
         ((Rebuild_DecisionTree) decisionTree).Dissable_Continue_Button();
+    }
+
+
+    public void InitialActivation(DialogResult res)
+    {
+        Reactivate();
     }
 
     public override void Activate()

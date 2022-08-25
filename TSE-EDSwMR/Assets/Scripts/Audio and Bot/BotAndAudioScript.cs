@@ -13,7 +13,7 @@ public class BotAndAudioScript : MonoBehaviour
 
 
     // has to be called over StartCoroutine()
-    IEnumerator PlayClipCoroutine(int clip_nr)
+    public IEnumerator PlayClipCoroutine(int clip_nr)
     {
         audioHandler.PlayAudioClipNr(clip_nr);
         yield return retrobotAnimations.TalkForCoroutine(audioHandler.DurationAudio(clip_nr));

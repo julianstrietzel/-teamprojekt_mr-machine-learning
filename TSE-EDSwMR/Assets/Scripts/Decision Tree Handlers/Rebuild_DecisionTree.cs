@@ -11,11 +11,15 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     bool movedown = false;
     public GameObject rebuild_prefab;
     public GameObject small_dialog_prefab;
+    public GameObject large_dialog_prefab;
+    public GameObject IG_Dialog_Prefab;
+    public GameObject Entropy_Dialog_Prefab;
     private GameObject rebuild_button;
     bool isEntropyTree = false;
     private M3AudioHandler m3AudioHandler;
     private M4AudioHandler m4AudioHandler;
     private bool firstlayer = true;
+
 
 
 
@@ -59,7 +63,6 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         } else
         {
             m4AudioHandler = Explaning.GetComponent<M4AudioHandler>();
-            //TODO explain information gain, entropy and the idea of ID3
         }
 
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
@@ -73,9 +76,11 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
 
         place_button_pressed = EnableFollowing();
         place_button_pressed.AddListener(Dissable_Following);
-        place_button_pressed.AddListener(roothandler.Activate);
+        if (!isEntropyTree) place_button_pressed.AddListener(roothandler.Activate);
+        else place_button_pressed.AddListener(ExplainEntropy);
         place_button_pressed.AddListener(DeactivateTooltip);
     }
+
 
 
 
@@ -129,17 +134,17 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         Dialog.Open(hint_prefab, DialogButtonType.OK, "Hint", message, true);
     }
 
+    private void LoadMenu(DialogResult res)
+    {
+        SceneManager.LoadScene("Menu");
+    } 
+
     public override void ContinueButtonPressed()
     {
         if(isEntropyTree)
         {
-            Dialog.Open(small_dialog_prefab, DialogButtonType.OK, "Finished", "Thank you for taking this course. We hope you liked it.\n Use the hand menu to get back to the main menu.", true);
-        } else
-        {
-            SceneManager.LoadScene("M4EntropyScene");
-        }
-
-
+            Dialog.Open(small_dialog_prefab, DialogButtonType.OK, "Finished", "Thank you for taking this course. We hope you liked it.\n Press okay to get back to the main menu.", true).OnClosed += LoadMenu;
+        } else SceneManager.LoadScene("M4EntropyScene");
         base.ContinueButtonPressed();
     }
 
@@ -151,9 +156,53 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
 
     public override void Finished()
     {
-        if(!isEntropyTree && continue_button == null) m3AudioHandler.PlaySumUp();
+        if (!isEntropyTree && continue_button == null)
+        {
+            m3AudioHandler.PlaySumUp();
+        } else
+        {
+            if(s_layers.Count <= 3 || ((Layer)s_layers[3]).IsEmpty()) ExplainID3();
+            else Dialog.Open(small_dialog_prefab, DialogButtonType.OK, "Not the perfect DT", "Hey, that is not the perfect tree. \nDid you always click the category with the highest information gain?\nPlease try again, by rebuilding some layers.", true );
+            return;
+        }
+
         base.Finished();
     }
+
+    private void ExplainEntropy()
+    {
+        string message = "Entropy measures the randomness of a dataset. The higher the entropy, the more uncertainty is in it. \nLet S be the Dataset and P_yes is the proportion of Yes-Datapoints in it.\nIn our context this is the proportion of Days we go play tennis.";
+        m4AudioHandler.ExplainEntropy();
+        Dialog dialog = Dialog.Open(Entropy_Dialog_Prefab, DialogButtonType.OK, "Entropy", message, true);
+        dialog.OnClosed += ExplainIG;
+        
+    }
+
+    public void ExplainIG(DialogResult result)
+    {
+        string message = "Information Gain measures how much the average Entropy over the next subsets or nodes improves, by each category.\n" +
+            "In the follwing always choose the category with the highest Information Gain.";
+        m4AudioHandler.ExplainIG();
+        Dialog dialog = Dialog.Open(IG_Dialog_Prefab, DialogButtonType.OK, "Information Gain", message, true);
+        dialog.OnClosed += ((Rebuild_Layer) s_layers[0]).InitialActivation;
+    }
+
+    private void ExplainID3()
+    {
+        m4AudioHandler.ExplainID3();
+        string message = "1. You calculate the Entropy and Information Gain for each category." +
+            "\n2. Choose the category for the separation by the greatest Information Gain." +
+            "\nRepeat step 1 and 2 till every node has entropy zero.";
+        Dialog.Open(large_dialog_prefab, DialogButtonType.OK, "Algorithm ID3", message, true).OnClosed += Finished;
+        
+    }
+
+    public void Finished(DialogResult res)
+    {
+        base.Finished();
+    }
+
+
 
 
 
