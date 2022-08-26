@@ -53,7 +53,7 @@ public class DecisionTreeHandler : MonoBehaviour
         }
     }
 
-    public void Dissable_Following()
+    public virtual void Dissable_Following()
     {
         gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler>().enabled = false;
         place_button.SetActive(false);

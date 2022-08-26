@@ -376,6 +376,11 @@ MonoBehaviour:
   additionalOffset: {x: 0, y: 0, z: 0}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
+--- !u!1 &241191522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3736739776393015688, guid: ce0b1782c067579419ec197f2084eb20, type: 3}
+  m_PrefabInstance: {fileID: 1094253641}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &376194765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -873,6 +878,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Info_Placing
       objectReference: {fileID: 0}
+    - target: {fileID: 3736739776393015688, guid: ce0b1782c067579419ec197f2084eb20, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3736739776393015691, guid: ce0b1782c067579419ec197f2084eb20, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1094,6 +1103,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 977fe4570fd167946a2893c48489a9e7, type: 3}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d052b9b88eac894e9607e6a517c5aa4, type: 3}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d6f2f6342fc26743848c064e530a89c, type: 3}
     - target: {fileID: 7167944340593863819, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
       propertyPath: thrusterActivated
       value: 0
@@ -1203,6 +1228,10 @@ PrefabInstance:
       propertyPath: data
       value: 
       objectReference: {fileID: 1285746966}
+    - target: {fileID: 972502513, guid: bf389fddd6a9b5a4182c8354bfd088f8, type: 3}
+      propertyPath: info_box
+      value: 
+      objectReference: {fileID: 241191522}
     - target: {fileID: 972502513, guid: bf389fddd6a9b5a4182c8354bfd088f8, type: 3}
       propertyPath: Explaning
       value: 

@@ -13,9 +13,15 @@ public class M2AudioExplTreeHandler : DecisionTreeHandler
     public override void OnDataHandlerInit()
     {
         m2AudioHandler = Explaning.GetComponent<M2AudioHandler>();
-        m2AudioHandler.PlayIntroduction();
+        
         base.OnDataHandlerInit();
         place_button_pressed.AddListener(m2AudioHandler.PlayRootExplanation);
+    }
+
+    public override void Dissable_Following()
+    {
+        m2AudioHandler.PlayIntroduction();
+        base.Dissable_Following();
     }
 
     public override void MoveUpForNextLayer()

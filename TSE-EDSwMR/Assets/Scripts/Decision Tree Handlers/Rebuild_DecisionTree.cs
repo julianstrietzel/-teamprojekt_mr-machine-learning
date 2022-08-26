@@ -19,7 +19,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     private M3AudioHandler m3AudioHandler;
     private M4AudioHandler m4AudioHandler;
     private bool firstlayer = true;
-
+    private bool m3SumUpPlayed = false;
 
 
 
@@ -56,14 +56,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         isEntropyTree = roothandler.isEntropyFrame;
 
 
-        if (!isEntropyTree)
-        {
-            m3AudioHandler = Explaning.GetComponent<M3AudioHandler>();
-            m3AudioHandler.PlayIntro();
-        } else
-        {
-            m4AudioHandler = Explaning.GetComponent<M4AudioHandler>();
-        }
+        
 
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
         place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
@@ -79,6 +72,16 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         if (!isEntropyTree) place_button_pressed.AddListener(roothandler.Activate);
         else place_button_pressed.AddListener(ExplainEntropy);
         place_button_pressed.AddListener(DeactivateTooltip);
+
+        if (!isEntropyTree)
+        {
+            m3AudioHandler = Explaning.GetComponent<M3AudioHandler>();
+            place_button_pressed.AddListener(PlayIntroM3);            
+        }
+        else
+        {
+            m4AudioHandler = Explaning.GetComponent<M4AudioHandler>();
+        }
     }
 
 
@@ -158,7 +161,11 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     {
         if (!isEntropyTree && continue_button == null)
         {
-            m3AudioHandler.PlaySumUp();
+            if(!m3SumUpPlayed)
+            {
+                m3AudioHandler.PlaySumUp();
+                m3SumUpPlayed = true;
+            }        
         } else
         {
             if(s_layers.Count <= 3 || ((Layer)s_layers[3]).IsEmpty()) ExplainID3();
@@ -200,6 +207,11 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     public void Finished(DialogResult res)
     {
         base.Finished();
+    }
+
+    public void PlayIntroM3()
+    {
+        m3AudioHandler.PlayIntro();
     }
 
 

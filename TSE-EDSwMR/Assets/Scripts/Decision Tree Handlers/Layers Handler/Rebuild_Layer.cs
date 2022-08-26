@@ -32,7 +32,6 @@ public class Rebuild_Layer:Layer
             if (layer.layerLevel > this.layerLevel) DecisionTreeHandler.s_layers.Remove(layer);
             Debug.Assert((i == DecisionTreeHandler.s_layers.Count + 1 && layer.layerLevel > this.layerLevel) || !(layer.layerLevel > this.layerLevel) , "Next layer has not been removed from List" );
         }
-        Debug.Log("deactivated");
     }
 
     public void Reactivate()

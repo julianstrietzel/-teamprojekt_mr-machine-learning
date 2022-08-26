@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1017,6 +1017,22 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7549223054b906d4790ad1975238798d, type: 3}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 97d07928ea9d90a4181f293c01e83c94, type: 3}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 46efda9dfa4b52748bf3f368272d4220, type: 3}
     - target: {fileID: 7167944340593863819, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
       propertyPath: thrusterActivated
       value: 0

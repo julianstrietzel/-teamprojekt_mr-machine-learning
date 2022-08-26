@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1019,6 +1019,30 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6a743e680d047754c9beef4eace2cdc1, type: 3}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: bb5b017a89b55d545aaf21e655d03577, type: 3}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: d7cca8844f2ca0744a6cf2052b7e4433, type: 3}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 427127a36a343b748a815b484a16a340, type: 3}
+    - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
+      propertyPath: audioClipArray.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 253c939e4f78af84ca7d6d8f2bfa0858, type: 3}
     - target: {fileID: 7167944340593863819, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
       propertyPath: thrusterActivated
       value: 0
