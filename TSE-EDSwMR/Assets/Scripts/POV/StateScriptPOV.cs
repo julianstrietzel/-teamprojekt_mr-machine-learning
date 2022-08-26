@@ -1,10 +1,11 @@
+using Microsoft.MixedReality.Toolkit.UI;
+using Microsoft.MixedReality.Toolkit.Utilities.Solvers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StateScriptPOV : MonoBehaviour
 {
-    //TODO add hand menu to POV Scene
 
     public static readonly int AMOUNT_ICONS = 3;
     public static readonly int AMOUNT_DAYS = 4;
@@ -17,19 +18,21 @@ public class StateScriptPOV : MonoBehaviour
     public GameObject kai;
     public GameObject decisionTree;
 
+    public GameObject textAndHints;
+
+    [SerializeField] GameObject continueButton;
 
     [SerializeField] Vector3[] positionIcons = new Vector3[AMOUNT_ICONS];
 
     [SerializeField] Vector3[] scaleIcons = new Vector3[AMOUNT_ICONS];
 
-
+    
 
     [SerializeField] GameObject[] iconsDay1Prefab = new GameObject[AMOUNT_ICONS];
     [SerializeField] GameObject[] iconsDay2Prefab = new GameObject[AMOUNT_ICONS];
     [SerializeField] GameObject[] iconsDay3Prefab = new GameObject[AMOUNT_ICONS];
     [SerializeField] GameObject[] iconsDay4Prefab = new GameObject[AMOUNT_ICONS];
 
-    //private RetrobotAnimations kai;
 
     private RetrobotAnimations kaiAnimations;
     private GameObject decisionTreeFinished;
@@ -45,12 +48,9 @@ public class StateScriptPOV : MonoBehaviour
     // Parameter in Kai's animator. checking the parameter through the animator is power consuming
     private bool kai_animator_Is_Talking;
 
+
     private List<GameObject[]> iconsList = new List<GameObject[]>();
 
-    //private static int AMOUNT_ICONS = 3;
-
-    //// IDEA: putting the icons in a list would be more flexible. But harder to see the order, additional its also harder to say which position it should go to
-    //// what if the position is also set in unity?
 
 
     // Start is called before the first frame update
@@ -107,10 +107,47 @@ public class StateScriptPOV : MonoBehaviour
         StartCoroutine(TalkAndShowNext());
     }
 
+    /// <summary>
+    /// Start the previous audio again and kai's animation
+    /// </summary>
+    public void RestartAudio()
+    {
+        StartCoroutine(PlayAndTalkCoroutine(audio_nr - 1));
+    }
 
+    /// <summary>
+    /// Call this to open the Hint
+    /// </summary>
+    public void Hint()
+    {
+        // TODO pause audiosource
 
+        if (!finishedGame)
+        {
+            textAndHints.GetComponent<TextAndHintsPOV>().HintChoosingPhase();
+        }
+        else
+        {
+            textAndHints.GetComponent<TextAndHintsPOV>().HintExplanationPhase();
+        }
+    }
 
+    private void PauseAudioAndKai()
+    {
+        // TODO audio handler stop
+        kaiAnimations.StopTalking();
+    }
 
+    private void OpenInformationPanel()
+    {
+        string message = "- Root" + "\n\n" + "- Inner Node" + "\n\n" + "- Leave" + "\n\n" + "- Attribute" + "\n\n";
+        message += "\n" + "Use: automization of complex, but systematic decisions.";
+        message += "\n\n" + "Open the Hint to read the explanantion.";
+        textAndHints.GetComponent<TextAndHintsPOV>().informationPanelPrefab.GetComponent<SolverHandler>().AdditionalOffset = new Vector3(-1, 0, 0.3f);
+
+        Dialog.Open(textAndHints.GetComponent<TextAndHintsPOV>().informationPanelPrefab, DialogButtonType.None, "Terminology     ", message, false); ;
+
+    }
 
     /// <summary>
     /// In the choosing phase of the module shows the next icon and plays the audio
@@ -127,60 +164,21 @@ public class StateScriptPOV : MonoBehaviour
             yield return new WaitForSeconds(clip_length);
             iconNrWaitForInput++;
         }
-
-        //if (finishedGame)
-        //{
-        //    StartCoroutine(PlayExplanationDecisionTree()); //TODO seems to repeat
-
-        //}
-        //Debug.Log("TalkAndShowNext Explantions decsion tree ");
-
-
-
     }
-    //private IEnumerator TalkAndShowNext()
-    //{
-
-    //    float clip_length = audioHandler.DurationAudio(audio_nr);
-    //    ShowNext();
-    //    StartCoroutine(PlayAndTalkNextClipCoroutine());
-    //    yield return new WaitForSeconds(clip_length);
-
-    //    clip_length = audioHandler.DurationAudio(audio_nr);
-
-    //    ShowNext();
-    //    StartCoroutine(PlayAndTalkNextClipCoroutine());
-    //    yield return new WaitForSeconds(clip_length);
-
-    //    clip_length = audioHandler.DurationAudio(audio_nr);
-
-    //    ShowNext();
-    //    StartCoroutine(PlayAndTalkNextClipCoroutine());
-    //    yield return new WaitForSeconds(clip_length);
-
-    //}
 
 
-
-
-
-
-
-
-
-
-
+    /// <summary>
+    /// Whole explanation of decision tree
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator PlayExplanationDecisionTree()
     {
-        //TODO pauses between explanations
 
-        Debug.Log("Intro");
+
         POV_DecisionTree dt = decisionTree.GetComponent<POV_DecisionTree>();
         //intro
         StartCoroutine(PlayAndTalkCoroutine(13)); 
         yield return new WaitForSeconds(audioHandler.DurationAudio(13) + 1);
-
-        Debug.Log("Exmaple");
 
         // example datapoint, show icons of datapoint, explain the example
         dt.InstantiateExampleDatapoint();
@@ -190,49 +188,66 @@ public class StateScriptPOV : MonoBehaviour
         //highlight the nodes in tree
         StartCoroutine(HighlightTreeNodesForExampleDatapoint(dt));     
         yield return new WaitForSeconds(audioHandler.DurationAudio(14) - 2);
-        // TODO remove example object
+        //  remove example object
         dt.DestroyExample();
-        Debug.Log("upside down tree");
 
         // decision tree explanation name
         StartCoroutine(PlayAndTalkCoroutine(15));
         yield return new WaitForSeconds(audioHandler.DurationAudio(15));
 
-        Debug.Log("Root");
-
+       
         // explain root
         StartCoroutine(PlayAndTalkCoroutine(16));
         dt.HighlightRoot();
         yield return new WaitForSeconds(audioHandler.DurationAudio(16));
         dt.RemoveHighlightRoot();
 
-        Debug.Log("inner node");
 
         // show inner node
         StartCoroutine(PlayAndTalkCoroutine(17));
         dt.HighlightInnerNode();
-        yield return new WaitForSeconds(audioHandler.DurationAudio(17));
+        yield return new WaitForSeconds(audioHandler.DurationAudio(17) + 0.5f);
         dt.RemoveHighlightInnerNode();
 
-        Debug.Log("leaves");
 
         // leaves
-       
+        StartCoroutine(PlayAndTalkCoroutine(18));
 
-        for (int nr = 18; nr < 21; nr++)
-        {
-            StartCoroutine(PlayAndTalkCoroutine(nr));
-            yield return new WaitForSeconds(audioHandler.DurationAudio(nr) + 0.5f);
-        }
-   
+        dt.HighlightLeave(0);
+        yield return new WaitForSeconds(audioHandler.DurationAudio(18));
+        dt.RemoveHighlightLeave(0);
 
-        //TODO add buttons for next menu
-        // TODO add hint to go to the next menu?
-        // use update for all the different phases?
+        // attribute 
+
+        StartCoroutine(PlayAndTalkCoroutine(19));
+        yield return new WaitForSeconds(audioHandler.DurationAudio(19) + 0.5f);
 
 
+        // open information panel
+        OpenInformationPanel();
 
+        // enough theory
+        StartCoroutine(PlayAndTalkCoroutine(20));
+        yield return new WaitForSeconds(audioHandler.DurationAudio(20) + 0.5f);
+
+        // use 
+
+        StartCoroutine(PlayAndTalkCoroutine(21));
+        yield return new WaitForSeconds(audioHandler.DurationAudio(21) + 0.5f);
+
+
+        // next module
+
+        StartCoroutine(PlayAndTalkCoroutine(22));
+        yield return new WaitForSeconds(audioHandler.DurationAudio(22) + 0.5f);
+
+
+        continueButton.SetActive(true);
+
+    
     }
+
+
 
     /// <summary>
     /// with given decision tree script highlight the tree nodes for the example data point
@@ -241,14 +256,19 @@ public class StateScriptPOV : MonoBehaviour
     /// <returns></returns>
     private IEnumerator HighlightTreeNodesForExampleDatapoint(POV_DecisionTree dt)
     {
+        // highlight nodes in tree
         foreach (GameObject node in dt.nodesExample)
         {
-            Debug.Log("State script highlight for example node: " + node);
             dt.HighlightNode(node);
             yield return new WaitForSeconds(2);
             dt.RemoveHighlightNode(node);
         }
 
+        // highlight leave 
+
+        dt.HighlightLeave(dt.indexInTreeExampleLeave);
+        yield return new WaitForSeconds(2);
+        dt.RemoveHighlightLeave(dt.indexInTreeExampleLeave);
     }
 
     /// <summary>
@@ -257,8 +277,6 @@ public class StateScriptPOV : MonoBehaviour
     /// <returns></returns>
     private IEnumerator PlayAndTalkNextClipCoroutine()
     {
-        Debug.Log("Next clip Corutine; clip: " + audio_nr);
-
         audioHandler.PlayAudioClipNr(audio_nr);
         float clip_length = audioHandler.DurationAudio(audio_nr);
         audio_nr++;
@@ -273,9 +291,8 @@ public class StateScriptPOV : MonoBehaviour
 
     }
 
-    IEnumerator PlayAndTalkCoroutine(int clip_nr)
+    private IEnumerator PlayAndTalkCoroutine(int clip_nr)
     {
-        Debug.Log("State; Play and Talk Corutine");
         audioHandler.PlayAudioClipNr(clip_nr);
         yield return kaiAnimations.TalkForCoroutine((float)audioHandler.DurationAudio(clip_nr));
     }
@@ -291,7 +308,7 @@ public class StateScriptPOV : MonoBehaviour
         {
             iconsHandler.DestroyParentAfterGameFinish();
             ShowDecisionTree();
-            StartCoroutine(PlayExplanationDecisionTree()); //TODO wrong place 
+            StartCoroutine(PlayExplanationDecisionTree());
 
         }
         else
@@ -302,11 +319,8 @@ public class StateScriptPOV : MonoBehaviour
 
     private void ShowDecisionTree()
     {
-        Debug.Log("Show decision tree");
-
         decisionTree.GetComponent<POV_DecisionTree>().InitiateTree(dataHandler);
         decisionTree.SetActive(true);
-
 
     }
 
@@ -324,8 +338,6 @@ public class StateScriptPOV : MonoBehaviour
         if (day > AMOUNT_DAYS)
         {
             finishedGame = true;
-            Debug.Log(" set finishedGame ==: " + finishedGame);
-
         }
 
         else
