@@ -37,16 +37,10 @@ public class IconsPOV : MonoBehaviour
     {
         if (day <= StateScriptPOV.AMOUNT_DAYS && icon_nr <= StateScriptPOV.AMOUNT_ICONS)
         {
-
-            Debug.Log("display NEXT ICON");
-            Debug.Log("day: " + day + " icon nr: " + icon_nr);
-
             if (icon_nr == 1 && !(currentIcons[0] is null))
             {
                 foreach (GameObject icons in currentIcons)
                 {
-                    Debug.Log("Destroy icons");
-
                     Destroy(icons); // or DestroyComponent?
                 }
             }

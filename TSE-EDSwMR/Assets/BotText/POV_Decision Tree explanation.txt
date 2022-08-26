@@ -17,3 +17,9 @@ That’s enough theory for now! You already learned the basic structure and term
 A decision tree can also be built with machine learning. You can do that to automize complex, but systematic decisions, so a machine can help you or decide for you. 
 
 Do you want to know how a machine can learn from data to built a decision tree? Then continue in the next module! 
+
+
+The Nodes on the top are called 'Root', the ones in the middle 'Inner node' and on the bottom are the 'leaves'.
+In a question you decide on the value of an attribute.
+A decision tree can be built with machine learning. To automize complex, but systematic decisions, so a machine can help you or decide for you.
+It's recommended to continue in the next module and find out how to learn from data and how a computer builts a decision tree.
