@@ -30,8 +30,12 @@ public class FrameHandler : MonoBehaviour
     private Color color;
     private GameObject categorieIcon;
     public bool isEntropyFrame = false;
+    private bool highlighted = false;
+    private bool scaleup = true;
 
 
+
+    
 
     public int NumberDatapoints()
     {
@@ -75,6 +79,7 @@ public class FrameHandler : MonoBehaviour
         }
         singular_known = true;
         singular = true;
+
         return true;
     }
 
@@ -108,10 +113,12 @@ public class FrameHandler : MonoBehaviour
         //colorcoding:
         Transform frame = transform.GetChild(0);
         frame.GetChild(1).GetComponent<Renderer>().material.color = prev_color;
-        color = DecisionTreeHandler.RandomColor();
+        color = Singular() ? Color.white : DecisionTreeHandler.RandomColor(); //Highlighting singular nodes
         frame.GetChild(0).GetComponent<Renderer>().material.color = color;
         frame.GetChild(2).GetComponent<Renderer>().material.color = color;
         frame.GetChild(3).GetComponent<Renderer>().material.color = color;
+       
+        
 
         //Init Entropyhandler
         EntropyHandler eHandler = gameObject.GetComponent<EntropyHandler>();
@@ -288,4 +295,6 @@ public class FrameHandler : MonoBehaviour
         FrameHandler frame_handler = (FrameHandler) o;
         return frame_handler.numberForSorting == this.numberForSorting;
     }
+
+    
 }

@@ -26,7 +26,7 @@ public class Layer
 
         countFinallyFiltered += newFrameHandler.Singular() ? newFrameHandler.NumberDatapoints() : 0;
 
-        if (newFrameHandler.Singular()) decisionTree.NodeIsSingular();
+        if (newFrameHandler.Singular()) decisionTree.NodeIsSingular(newFrameHandler);
 
         int newNumberForSort = newFrameHandler.numberForSorting;
         int i = 0;

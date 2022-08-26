@@ -13,15 +13,11 @@ public class M2AudioExplTreeHandler : DecisionTreeHandler
     public override void OnDataHandlerInit()
     {
         m2AudioHandler = Explaning.GetComponent<M2AudioHandler>();
-        
+
         base.OnDataHandlerInit();
         place_button_pressed.AddListener(m2AudioHandler.PlayRootExplanation);
-    }
-
-    public override void Dissable_Following()
-    {
         m2AudioHandler.PlayIntroduction();
-        base.Dissable_Following();
+
     }
 
     public override void MoveUpForNextLayer()
@@ -34,16 +30,17 @@ public class M2AudioExplTreeHandler : DecisionTreeHandler
         }
     }
 
-    public override void NodeIsSingular()
+    public override void NodeIsSingular(FrameHandler frame)
     {
-        if(firstSingularNode) StartCoroutine(PlaySingularCoroutine());
+        if(firstSingularNode) StartCoroutine(PlaySingularCoroutine(frame));
         firstSingularNode = false;
-        base.NodeIsSingular();
+        base.NodeIsSingular(frame);
+
     }
 
-    private IEnumerator PlaySingularCoroutine()
+    private IEnumerator PlaySingularCoroutine(FrameHandler frame)
     {
-        yield return new WaitForSeconds(10);
+        if (s_layers.Count < 3) yield return new WaitForSeconds(40);
         m2AudioHandler.PlaySingularNodeExplanation();
     }
 
@@ -66,6 +63,8 @@ public class M2AudioExplTreeHandler : DecisionTreeHandler
             "Use the buttons to choose a category to sort the datapoints. Your goal is to have only yes or no days (yellow or red tennisballs) in each node.";
         Dialog.Open(hint_prefab, DialogButtonType.OK, "Hint", message, true);
     }
+
+    
 
 
 }

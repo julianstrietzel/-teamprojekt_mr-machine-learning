@@ -69,18 +69,19 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
 
         place_button_pressed = EnableFollowing();
         place_button_pressed.AddListener(Dissable_Following);
-        if (!isEntropyTree) place_button_pressed.AddListener(roothandler.Activate);
-        else place_button_pressed.AddListener(ExplainEntropy);
         place_button_pressed.AddListener(DeactivateTooltip);
 
         if (!isEntropyTree)
         {
             m3AudioHandler = Explaning.GetComponent<M3AudioHandler>();
-            place_button_pressed.AddListener(PlayIntroM3);            
+            place_button_pressed.AddListener(PlayIntroM3);
+            place_button_pressed.AddListener(roothandler.Activate);
         }
         else
         {
             m4AudioHandler = Explaning.GetComponent<M4AudioHandler>();
+            place_button_pressed.AddListener(ExplainEntropy);
+
         }
     }
 
@@ -196,6 +197,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
 
     private void ExplainID3()
     {
+        rebuild_button.SetActive(false);
         m4AudioHandler.ExplainID3();
         string message = "1. You calculate the Entropy and Information Gain for each category." +
             "\n2. Choose the category for the separation by the greatest Information Gain." +

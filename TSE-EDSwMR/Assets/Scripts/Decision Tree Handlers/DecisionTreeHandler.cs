@@ -139,6 +139,7 @@ public class DecisionTreeHandler : MonoBehaviour
         && unsimilarity(prev_color, new_color) < threshold_similarity
         && unsimilarity(new_color, yellow_plate_color) < threshold_similarity
         && unsimilarity(new_color, red_plate_color) < threshold_similarity
+        && unsimilarity(new_color, Color.white) < threshold_similarity
         );
         if (i == 10) Debug.Log("No new random color found. Exit with similar color");
         return prev_color = new_color;
@@ -160,7 +161,7 @@ public class DecisionTreeHandler : MonoBehaviour
     /// <summary>
     /// This Method is called evertime there is a new singular node somewhere. 
     /// </summary>
-    public virtual void NodeIsSingular()
+    public virtual void NodeIsSingular(FrameHandler frame)
     {
 
     }
