@@ -58,8 +58,6 @@ public class RetrobotAnimations : MonoBehaviour
 
     }
 
-  
-
 
     public void TalkingAnimation()
     {
@@ -72,6 +70,12 @@ public class RetrobotAnimations : MonoBehaviour
 
         controllerRetrobot.DoAction("Do_Present_Left");
     }
+
+    public void WaveHand()
+    {
+        controllerRetrobot.DoAction("Do_Wave_Simple");
+    }
+
     public void SetIsTalking(bool stillTalking)
     {
         controllerRetrobot.animator.SetBool("Is_Talking", stillTalking);

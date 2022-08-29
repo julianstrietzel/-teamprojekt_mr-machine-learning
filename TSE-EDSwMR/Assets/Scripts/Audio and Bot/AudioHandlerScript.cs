@@ -31,19 +31,7 @@ public class AudioHandlerScript : MonoBehaviour
     [SerializeField] AudioClip[] audioClipArray;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
+  
     /// <summary>
     /// Play the clip with the index=arrayIndex from the array of AudioClips which is provided in the AudioHandler Component in Unity.
     /// </summary>
@@ -111,6 +99,14 @@ public class AudioHandlerScript : MonoBehaviour
     public int GetAudioClipArrayLength()
     {
         return audioClipArray.Length;
+    }
+
+    /// <summary>
+    /// This method stops audios while playing.
+    /// </summary>
+    public void StopAudio()
+    {
+        audioSourcePublic.Stop();
     }
 
 }
