@@ -25,7 +25,7 @@ public class OnboardingIntro : MonoBehaviour
     private Dialog requestDialog;
 
     private const string REQUEST_TITLE = "Collect the box";
-    private const string REQUEST_TEXT = "To be able to start, we first need all the tools. To start, please take the box labeled 'MR: Decision Tree' from the shelf and place it on the table. Are you ready?";
+    private const string REQUEST_TEXT = "To be able to start, we first need all the tools. \nTo start, please take the box labeled 'MR: Decision Tree' from the shelf and place it on the table. \n\nAre you ready?";
     private bool destroyed = false;
 
     //TO-DO public in Ser.Field.
@@ -74,7 +74,7 @@ public class OnboardingIntro : MonoBehaviour
         /// Starts Assessment segment
         else if (assessmentDone)
         {
-            Destroy(startButton, 0);
+            Destroy(startButton);
             if (!destroyed)
             {
                 yesButton.SetActive(true);
@@ -240,8 +240,8 @@ public class OnboardingIntro : MonoBehaviour
 
         float clip_length = audioHandler.DurationAudio(audio_nr);
 
-        Destroy(yesButton, 0);
-        Destroy(noButton, 0);
+        Destroy(yesButton);
+        Destroy(noButton);
 
         //destroys the questionText GameObject after 2sec
         Destroy(questionText, clip_length);
@@ -249,10 +249,8 @@ public class OnboardingIntro : MonoBehaviour
 
 
         ReadDialog();
-
-        yield return new WaitForSeconds(clip_length);
-
-        //@LUCA: Wenn du Kai nicht im Bild haben willst 
+        yield return new WaitForSeconds(clip_length); 
+        Destroy(kai);
         ShowRequestDialog();
     }
 
@@ -270,11 +268,9 @@ public class OnboardingIntro : MonoBehaviour
 
     public void OnClose(DialogResult res)
     {
-        Destroy(kai); //TODO place where necessary LUCA
+        //Destroy(kai); //TODO place where necessary LUCA  Destroy(kai, 10)
         outro.GestureControlIntroduction();
     }
-
-    
 
    /** public int GetModulRecommondation()
     {

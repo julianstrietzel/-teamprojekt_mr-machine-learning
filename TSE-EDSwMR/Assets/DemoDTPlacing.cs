@@ -26,7 +26,6 @@ public class DemoDTPlacing : MonoBehaviour
     {
         gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler>().enabled = false;
         place_button.SetActive(false);
-
     }
 
     public void InitPlacementDemo(DialogResult res)
@@ -46,7 +45,6 @@ public class DemoDTPlacing : MonoBehaviour
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
         place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
 
-
         place_button_pressed = EnableFollowing();
         place_button_pressed.AddListener(Dissable_Following);
         place_button_pressed.AddListener(SumUpDemo);
@@ -65,9 +63,9 @@ public class DemoDTPlacing : MonoBehaviour
     /// </summary>
     public void SumUpDemo()
     {
-        // TODO: Luca put in the right clip number
         // plays the audio file of the gestrue control section
-        audioScript.PlayAudioClipNr(0); // "Excellent, you locked the frame. In the upcoming modules you have the possibility to use the 'reposition' button to unlock the frame and try again. Now you have learned all interaction possibilities and are ready to go." 
+        outro.ReadDialog(); // "Excellent, you locked the frame. In the upcoming modules you have the possibility to use the 'reposition' button to unlock the frame and try again. Now you have learned all interaction possibilities and are ready to go." 
+
 
         // opens the summary dialog for positioning and locking-in the virtual frame
         Dialog dialog = Dialog.Open(dialog_prefab, DialogButtonType.OK, DIALOG_TITLE, DIALOG_TEXT, true);
