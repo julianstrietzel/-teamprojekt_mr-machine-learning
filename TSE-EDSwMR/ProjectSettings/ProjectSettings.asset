@@ -141,9 +141,11 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 8064912344759695959, guid: e477a2dedd853af4c8b3f60c8a6ca7a9, type: 2}
   - {fileID: 8574187210214581907, guid: 07b71980238f30c4e904d1f0aee2455a, type: 2}
-  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -621,11 +623,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Template3D
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: 
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: kit
+  metroCertificateIssuer: kit
+  metroCertificateNotAfter: 004119610f9bd901
   metroApplicationDescription: Template_3D
   wsaImages: {}
   metroTileShortName: TSE-EDSwMR
