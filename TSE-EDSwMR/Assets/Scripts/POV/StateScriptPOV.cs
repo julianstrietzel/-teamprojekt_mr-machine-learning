@@ -143,7 +143,7 @@ public class StateScriptPOV : MonoBehaviour
         string message = "- Root" + "\n\n" + "- Inner Node" + "\n\n" + "- Leave" + "\n\n" + "- Attribute" + "\n\n";
         message += "\n" + "Use: automization of complex, but systematic decisions.";
         message += "\n\n" + "Open the Hint to read the explanantion.";
-        textAndHints.GetComponent<TextAndHintsPOV>().informationPanelPrefab.GetComponent<SolverHandler>().AdditionalOffset = new Vector3(-1, 0, 0.3f);
+        textAndHints.GetComponent<TextAndHintsPOV>().informationPanelPrefab.GetComponent<SolverHandler>().AdditionalOffset = new Vector3(-0.3f, -0.3f, 0.3f);
 
         Dialog.Open(textAndHints.GetComponent<TextAndHintsPOV>().informationPanelPrefab, DialogButtonType.None, "Terminology     ", message, false); ;
 

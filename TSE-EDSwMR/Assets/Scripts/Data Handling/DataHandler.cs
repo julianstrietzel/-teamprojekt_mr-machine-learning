@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 
 
 
+
 public class DataHandler : MonoBehaviour 
 {
     public static List<DataPointNew> data = new List<DataPointNew>();
@@ -17,8 +18,10 @@ public class DataHandler : MonoBehaviour
     void Start()
     {
         data.Clear();
+        TextAsset ass = Resources.Load<TextAsset>("Data/tse_tennis");
 
-        string json = File.ReadAllText(Application.dataPath + "/Data/tse_tennis.json");
+
+        string json = ass.ToString();
         JObject jobject = JObject.Parse(json);
         categories = (JArray)jobject["categories"];
         foreach (JObject dp in jobject["datapoints"])

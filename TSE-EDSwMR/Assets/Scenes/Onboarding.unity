@@ -747,9 +747,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1641231739}
     m_Modifications:
+    - target: {fileID: 1199327428180733398, guid: 93660862ad308424bb99a4956186936f, type: 3}
+      propertyPath: frontIconActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1199327428180733398, guid: 93660862ad308424bb99a4956186936f, type: 3}
+      propertyPath: headIconsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1199327428180733400, guid: 93660862ad308424bb99a4956186936f, type: 3}
       propertyPath: testing
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1199327428180733400, guid: 93660862ad308424bb99a4956186936f, type: 3}
       propertyPath: thruster
