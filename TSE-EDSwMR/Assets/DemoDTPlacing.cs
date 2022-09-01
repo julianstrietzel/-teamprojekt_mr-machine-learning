@@ -53,6 +53,7 @@ public class DemoDTPlacing : MonoBehaviour
     private UnityEvent EnableFollowing()
     {
         gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler>().enabled = true;
+        gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SurfaceMagnetism>().enabled = true;
         place_button.SetActive(true);
 
         return place_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed;

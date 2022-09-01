@@ -78,7 +78,7 @@ public class RetrobotAnimations : MonoBehaviour
 
     public void SetIsTalking(bool stillTalking)
     {
-        controllerRetrobot.animator.SetBool("Is_Talking", stillTalking);
+        if(controllerRetrobot.animator != null) controllerRetrobot.animator.SetBool("Is_Talking", stillTalking);
     }
     public bool GetIsTalking()
     {
