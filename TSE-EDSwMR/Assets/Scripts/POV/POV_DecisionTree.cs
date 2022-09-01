@@ -85,7 +85,7 @@ public class POV_DecisionTree : MonoBehaviour
     public void InstantiateExampleDatapoint()
     {
         example = GameObject.Instantiate(exampleDatapoint, gameObject.transform);
-        example.transform.localPosition = new Vector3(0, 0.7f, 0);
+        example.transform.localPosition = new Vector3(0, 0.6f, 0);
 
     }
 

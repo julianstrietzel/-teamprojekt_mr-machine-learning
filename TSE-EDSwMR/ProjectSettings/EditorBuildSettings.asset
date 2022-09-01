@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OldOnboarding.unity
     guid: 5b5fed5534d4ec142bf960c305b43a49
+  - enabled: 0
+    path: Assets/Scenes/TestDT.unity
+    guid: 3bde6cf8376bb574b8618f234c4bf5a6
+  - enabled: 1
+    path: Assets/Scenes/Onboarding.unity
+    guid: 9818417c37710ec4d873574fa4ea4d53
   - enabled: 1
     path: Assets/Scenes/M3RebuildingTreeScene.unity
     guid: 0e79cfae71d66164998fc4c9355a1efc

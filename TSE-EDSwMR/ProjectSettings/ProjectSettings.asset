@@ -601,7 +601,9 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    4: ARFOUNDATION_PRESENT
+    7: ARFOUNDATION_PRESENT
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

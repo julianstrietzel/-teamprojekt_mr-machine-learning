@@ -85,7 +85,7 @@ public class DecisionTreeHandler : MonoBehaviour
 
     public void DeactivateTooltip()
     {
-        info_box.SetActive(false);
+        if(info_box != null) info_box.SetActive(false);
     }
 
     /// <summary>
@@ -98,7 +98,7 @@ public class DecisionTreeHandler : MonoBehaviour
     {
         gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler>().enabled = true;
         place_button.SetActive(true);
-        info_box.SetActive(true);
+        if (info_box != null) info_box.SetActive(true);
 
         return place_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed;
     }
