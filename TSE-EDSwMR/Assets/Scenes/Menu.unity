@@ -228,7 +228,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6045440612190828494, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_text
-      value: Module 5
+      value: 'Module 5
+
+        -Pruning-'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
@@ -439,7 +441,9 @@ PrefabInstance:
       objectReference: {fileID: 2029796273261201946, guid: 0042cce860e187a41987b9f62af6e5da, type: 2}
     - target: {fileID: 6045440612190828494, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_text
-      value: Module 4
+      value: 'Module 4
+
+        -ID3 Algorithm-'
       objectReference: {fileID: 0}
     - target: {fileID: 6045440612190828494, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_fontAsset
@@ -833,7 +837,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6045440612190828494, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_text
-      value: Module 3
+      value: 'Module 3
+
+        -Optimizations-'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
@@ -1099,7 +1105,9 @@ PrefabInstance:
       objectReference: {fileID: 2029796273261201946, guid: 0042cce860e187a41987b9f62af6e5da, type: 2}
     - target: {fileID: 6045440612190828494, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_text
-      value: Module 2
+      value: 'Module 2
+
+        -Building a Tree-'
       objectReference: {fileID: 0}
     - target: {fileID: 6045440612190828494, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_fontAsset
@@ -1320,6 +1328,8 @@ PrefabInstance:
     - target: {fileID: 6045440612190828494, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_text
       value: 'Module 1
+
+        -The Basics-
 
 '
       objectReference: {fileID: 0}
