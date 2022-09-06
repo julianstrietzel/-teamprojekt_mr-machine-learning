@@ -166,6 +166,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 799907405}
     m_Modifications:
+    - target: {fileID: 3109381192887392136, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d125858383e80c41ab7fcc7cc6b57ea, type: 2}
     - target: {fileID: 5933346763589230733, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_Name
       value: Highlight Plate 5
@@ -348,7 +352,11 @@ PrefabInstance:
     - target: {fileID: 3109381192887392136, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d621fa99144ed404db8e0b8f4ac3851c, type: 2}
+      objectReference: {fileID: 2100000, guid: aa6848112e84f594683f16b4985254f2, type: 2}
+    - target: {fileID: 3793914047043111069, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
+      propertyPath: profiles.Array.data[3].Themes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0643f47b8c66f474d94d0e05ee9da0b1, type: 2}
     - target: {fileID: 3793914047043111069, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -747,6 +755,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 799907405}
     m_Modifications:
+    - target: {fileID: 3109381192887392136, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 22fbcd1834f7953449f0d4412f495b7a, type: 2}
+    - target: {fileID: 3793914047043111069, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
+      propertyPath: profiles.Array.data[3].Themes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e28c4b300d45b8468bd9c55a1860792, type: 2}
     - target: {fileID: 3793914047043111069, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -996,7 +1012,11 @@ PrefabInstance:
     - target: {fileID: 3109381192887392136, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d621fa99144ed404db8e0b8f4ac3851c, type: 2}
+      objectReference: {fileID: 2100000, guid: 35a4a10548259464895018983c7e53cc, type: 2}
+    - target: {fileID: 3793914047043111069, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
+      propertyPath: profiles.Array.data[3].Themes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: dcb0f6a32956c0946b26bbef8cccfd81, type: 2}
     - target: {fileID: 3793914047043111069, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1220,7 +1240,7 @@ PrefabInstance:
     - target: {fileID: 3109381192887392136, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d621fa99144ed404db8e0b8f4ac3851c, type: 2}
+      objectReference: {fileID: 2100000, guid: 93ffaf60adf4dfe49944c94875338fba, type: 2}
     - target: {fileID: 3793914047043111069, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1297,6 +1317,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2029796273261201946, guid: 0042cce860e187a41987b9f62af6e5da, type: 2}
+    - target: {fileID: 6045440612190828494, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
+      propertyPath: m_text
+      value: 'Module 1
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 6045440612190828494, guid: eb1a2657d138c0c49aa03eb409789fdf, type: 3}
       propertyPath: m_fontAsset
       value: 

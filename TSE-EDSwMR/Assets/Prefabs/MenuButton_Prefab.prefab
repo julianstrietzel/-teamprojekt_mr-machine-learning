@@ -1167,9 +1167,6 @@ MonoBehaviour:
   - Target: {fileID: 6045440611216689810}
     Themes:
     - {fileID: 11400000, guid: 087b16002c2b0b445baa3ed3beae44a9, type: 2}
-  - Target: {fileID: 1312408306360066320}
-    Themes:
-    - {fileID: 11400000, guid: 4eac9835747496c418d84d54a76ee55e, type: 2}
   OnClick:
     m_PersistentCalls:
       m_Calls:
