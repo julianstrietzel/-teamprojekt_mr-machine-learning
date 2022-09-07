@@ -502,7 +502,7 @@ MonoBehaviour:
   maxDistance: 0.6
   defaultDistance: 0.5
   maxViewHorizontalDegrees: 45
-  maxViewVerticalDegrees: 45
+  maxViewVerticalDegrees: 30
   reorientWhenOutsideParameters: 1
   orientToControllerDeadzoneDegrees: 60
   ignoreAngleClamp: 0
@@ -529,7 +529,7 @@ MonoBehaviour:
   trackedHandness: 3
   trackedHandJoint: 2
   transformOverride: {fileID: 0}
-  additionalOffset: {x: 0, y: 0, z: 0}
+  additionalOffset: {x: 0, y: -0.1, z: 0}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
 --- !u!1001 &3534832075498712512

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 213527223}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 181cd563a8349c34ea8978b0bc8d9c7e, type: 3}
   m_Name: 
@@ -874,6 +874,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 202117126}
     m_Modifications:
+    - target: {fileID: 2482452966614442182, guid: ce0b1782c067579419ec197f2084eb20, type: 3}
+      propertyPath: additionalOffset.x
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3736739776393015688, guid: ce0b1782c067579419ec197f2084eb20, type: 3}
       propertyPath: m_Name
       value: Info_Placing
@@ -1077,7 +1081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1238635965887903781, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.6
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1238635965887903781, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1122,7 +1126,7 @@ PrefabInstance:
     - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
       propertyPath: audioClipArray.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 977fe4570fd167946a2893c48489a9e7, type: 3}
+      objectReference: {fileID: 8300000, guid: e288a168eb55e0d4b87fba17c9d1752a, type: 3}
     - target: {fileID: 5494139599859803976, guid: 83c6e23fc9459c04a92e93faec550ad9, type: 3}
       propertyPath: audioClipArray.Array.data[1]
       value: 

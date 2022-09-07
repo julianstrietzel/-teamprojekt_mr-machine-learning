@@ -46,9 +46,16 @@ public class M2AudioExplTreeHandler : DecisionTreeHandler
 
     public override void Finished()
     {
+        StartCoroutine(EndCoroutine());
+        
+    }
+
+    private IEnumerator EndCoroutine()
+    {
+        yield return new WaitForSeconds(10);
         m2AudioHandler.PlaySumUp();
         base.Finished();
-    }
+    } 
 
     public override void ContinueButtonPressed()
     {

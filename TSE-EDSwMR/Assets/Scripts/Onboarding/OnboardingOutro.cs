@@ -19,7 +19,7 @@ public class OnboardingOutro : MonoBehaviour
     private const string DIALOG_GESTURE_RECTANGLE_TITLE = "Gesture Control Introduction";
     private const string DIALOG_GESTURE_RECTANGLE_TEXT = "Great, than let's start with the basics. Do you see the rectangle in the box? \nPlease, place it centrally at the back edge on the table. \n\nAre you finished?";
     private const string DIALOG_GESTURE_FRAME_TITLE = "Gesture Control Introduction";
-    private const string DIALOG_GESTURE_FRAME_TEXT = "Following this explanation, you should see a frame. Move your head to position the frame on the rectangle. Press the button to lock the position.";
+    private const string DIALOG_GESTURE_FRAME_TEXT = "Following this explanation, you should see a frame. Move your head to position the frame on the rectangle. Press the button to lock the position. \n\nClose this dialog first!";
     private const string DIALOG_HANDMENU_TITLE = "Handmenu Introduction";
     private const string DIALOG_HANDMENU_TEXT = "Perfect, now let's continue with the last part of the onboarding module. \nPlease open your hand menu. To do this, look at the palm of your right hand and press the button that appears on your wrist. \nTo complete the onboarding module click the 'Back to menu' button in the hand menu.";
     private const string DIALOG_HINT_TITLE = "Hint Explanation";

@@ -15,7 +15,7 @@ public class DemoDTPlacing : MonoBehaviour
     // Declaration of GameObject used for dialog (gestrure control) and all needed string constants
     public GameObject dialog_prefab;
     private const string DIALOG_TITLE = "Gesture Control Introduction";
-    private const string DIALOG_TEXT = "Ecellent, you locked the frame. \nIn the upcoming modules you have the possibility to use the 'reposition' button to unlock the frame and try again. \nNow you have learned all interaction possibilities and are ready to go.";
+    private const string DIALOG_TEXT = "Excellent, you locked the frame. \nIn the upcoming modules you have the possibility to use the 'reposition' button in the hand menu to unlock the frame and try again. \nNow you have learned all interaction possibilities and are ready to go.\nYou can now put the paper frame back in the box and take out the tennis ball, afterwards you can put the box away.";
 
     protected GameObject place_button;
     protected UnityEvent place_button_pressed;

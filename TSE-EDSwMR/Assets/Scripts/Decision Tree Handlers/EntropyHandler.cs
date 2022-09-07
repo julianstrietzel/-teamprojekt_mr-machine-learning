@@ -61,7 +61,7 @@ public class EntropyHandler : MonoBehaviour
             TextMeshPro text = textObject.GetComponent<TextMeshPro>();
             if (gains[text.name] == 2)
             {
-                text.text = "already Chosen";
+                text.text = "already chosen";
             }
             else
             {

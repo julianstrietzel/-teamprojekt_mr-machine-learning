@@ -164,17 +164,31 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         {
             if(!m3SumUpPlayed)
             {
-                m3AudioHandler.PlaySumUp();
-                m3SumUpPlayed = true;
+                StartCoroutine(M3EndCoroutine());
             }        
         } else
         {
-            if(s_layers.Count <= 3 || ((Layer)s_layers[3]).IsEmpty()) ExplainID3();
+            if(s_layers.Count <= 3 || ((Layer)s_layers[3]).IsEmpty()) StartCoroutine(M4EndCoroutine());
             else Dialog.Open(small_dialog_prefab, DialogButtonType.OK, "Not the perfect DT", "Hey, that is not the perfect tree. \nDid you always click the category with the highest information gain?\nPlease try again, by rebuilding some layers.", true );
             return;
         }
 
+        
+    }
+
+
+    private IEnumerator M3EndCoroutine()
+    {
+        yield return new WaitForSeconds(10);
+        m3AudioHandler.PlaySumUp();
+        m3SumUpPlayed = true;
         base.Finished();
+    }
+    private IEnumerator M4EndCoroutine()
+    {
+        rebuild_button.SetActive(false);
+        yield return new WaitForSeconds(10);
+        ExplainID3();
     }
 
     private void ExplainEntropy()
@@ -183,7 +197,6 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         m4AudioHandler.ExplainEntropy();
         Dialog dialog = Dialog.Open(Entropy_Dialog_Prefab, DialogButtonType.OK, "Entropy", message, true);
         dialog.OnClosed += ExplainIG;
-        
     }
 
     public void ExplainIG(DialogResult result)
@@ -197,7 +210,6 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
 
     private void ExplainID3()
     {
-        rebuild_button.SetActive(false);
         m4AudioHandler.ExplainID3();
         string message = "1. You calculate the Entropy and Information Gain for each category." +
             "\n2. Choose the category for the separation by the greatest Information Gain." +
