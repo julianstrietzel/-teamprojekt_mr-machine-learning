@@ -716,7 +716,7 @@ MonoBehaviour:
   minDistance: 0.4
   maxDistance: 0.8
   defaultDistance: 0.6
-  maxViewHorizontalDegrees: 30
+  maxViewHorizontalDegrees: 50
   maxViewVerticalDegrees: 45
   reorientWhenOutsideParameters: 1
   orientToControllerDeadzoneDegrees: 60
