@@ -6,6 +6,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
+/// <summary>
+/// Handles Entropy information on frames
+/// Calculates from num of yes and no dps in this frame
+/// </summary>
 public class EntropyHandler : MonoBehaviour
 {
     FrameHandler parentFrameHandler;

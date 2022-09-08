@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// DecisionTrees are built from layers, which contain all the nodes
+/// They sum up important information for data capsuling and how many nodes are singular/empty 
+/// </summary>
 public class Layer
 {
     protected ArrayList nodes = new ArrayList(); //List of nodes in the layer to be placed 
@@ -11,8 +15,14 @@ public class Layer
     protected Layer prevLayer;
     protected DecisionTreeHandler decisionTree;
 
-
-    public  Layer(int level, int expectedDPs, Layer previousLayer, DecisionTreeHandler decisionTreeHandler)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="level">layer of the node starting from zero</param> 
+    /// <param name="expectedDPs">all dps in prev layer minus singular node's dps</param>
+    /// <param name="previousLayer">null on first layer</param>
+    /// <param name="decisionTreeHandler">respective DT Handler</param>
+    public Layer(int level, int expectedDPs, Layer previousLayer, DecisionTreeHandler decisionTreeHandler)
     {
         decisionTree = decisionTreeHandler;
         layerLevel = level;
@@ -20,6 +30,12 @@ public class Layer
         prevLayer = previousLayer;
     }
 
+    /// <summary>
+    /// Adds a node to this layer.
+    /// Updates statistics with this node
+    /// Adds this node to datastructured
+    /// </summary>
+    /// <param name="newframe">new Frame Gameobject, needs to contain FrameHandler Component</param>
     public void AddNode(GameObject newframe)
     {
         FrameHandler newFrameHandler = newframe.GetComponent<FrameHandler>();
@@ -44,6 +60,11 @@ public class Layer
         nodes.Add(newframe); //fallback if last object
     }
 
+    /// <summary>
+    /// Returns new Layer.
+    /// Creates new Layer if none is there
+    /// </summary>
+    /// <returns></returns>
     public virtual Layer NextLayer()
     {
         if (DecisionTreeHandler.s_layers.Count <= layerLevel + 1)
@@ -53,19 +74,18 @@ public class Layer
         return (Layer)DecisionTreeHandler.s_layers[layerLevel + 1];
     }
 
-
-    //Returns the number of dps to the left of the given frame to place ´his childs accordingly
-    //returns -1 if node is not in layer
-    //Wird aufgerufen von einem Knoten in dieser Layer, welcher einen neuen Knoten darunter platzieren will
+    /// <summary>
+    /// Returns the number of dps to the left without singularsof the given frame to place his childs accordingly
+    /// Called from Node in this layer which wants to position a new node in next layer
+    /// </summary>
+    /// <param name="frame"></param>
+    /// <returns>number of dps to left, returns -1 if node is not in layer</returns>
     public int GetCountDPsToTheLeftForNextLayer(FrameHandler frame)
     {
-
         int result = 0;
         int i = 0;
-        if (!(nodes.Count > 0))
-        {
-            return -1;
-        }
+        if (!(nodes.Count > 0)) return -1;
+        
         FrameHandler it_frame = ((GameObject)nodes[i]).GetComponent<FrameHandler>();
         while (!it_frame.Equals(frame))
         {
@@ -80,14 +100,17 @@ public class Layer
         return result;
     }
 
-
+    
     protected FrameHandler GetFrameHandler(int i)
     {
         return ((GameObject)nodes[i]).GetComponent<FrameHandler>();
     }
 
 
-
+    /// <summary>
+    /// Checks for all nodes being ready
+    /// </summary>
+    /// <returns>All nodes ready??</returns>
     public bool LayerIsReady()
     {
         foreach (GameObject node in nodes)
@@ -97,19 +120,29 @@ public class Layer
         return true;
     }
 
+    /// <summary>
+    /// No nodes in this class
+    /// </summary>
+    /// <returns></returns>
     public bool IsEmpty()
     {
         return nodes.Count == 0;
-        //TODO do something if no node containes any 
     }
 
-
+    /// <summary>
+    /// ACtivates next layer if this is ready.
+    /// Called in Node if the it generates children, to check if this is the last node to do so
+    /// </summary>
     public void ListenerNodeGeneratesChildren()
     {
         if (!LayerIsReady()) return;
         NextLayer().Activate();
     }
 
+    /// <summary>
+    /// Activates all nodes in this layer.
+    /// If they are all singular calls Finished()
+    /// </summary>
     public virtual void Activate()
     {
         bool atleastonenodenotsingular = false;

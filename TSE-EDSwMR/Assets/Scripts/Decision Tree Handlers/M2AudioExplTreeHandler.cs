@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Child of DecisionTreeHandler 
+/// Adding functionality to play sounds and explenations in M2 at the correct positions
+/// </summary>
 public class M2AudioExplTreeHandler : DecisionTreeHandler
 {
     private M2AudioHandler m2AudioHandler;
@@ -63,6 +67,9 @@ public class M2AudioExplTreeHandler : DecisionTreeHandler
         SceneManager.LoadScene("M3RebuildingTreeScene");
     }
 
+    /// <summary>
+    /// Hint specific for the M2
+    /// </summary>
     public override void Hint()
     {
         string message = "In this module you are trying to build a decision tree from the given data.\n" +

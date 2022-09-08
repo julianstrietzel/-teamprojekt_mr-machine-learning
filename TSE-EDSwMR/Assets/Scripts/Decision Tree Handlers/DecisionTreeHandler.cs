@@ -5,15 +5,22 @@ using System;
 using UnityEngine.Events;
 using Microsoft.MixedReality.Toolkit.UI;
 
+/// <summary>
+/// The DecisionTreeHandler is a key class for managing the behaviour of the Decision Tree.
+/// It contains layers s_layers and the DataHandler data.
+/// It is base Class to Rebuild_DecisionTree and M2_AudioTree, which specify the behaviour in M2,3, and 4
+/// </summary>
 public class DecisionTreeHandler : MonoBehaviour
 {
-
+    //Data 
     public DataHandler data;
-    public GameObject button_prefab;
-    public GameObject info_box;
-    public GameObject frame_prefab;
+    //GameObjects from the Scene relevant for the Tree
+    public GameObject info_box; // Info Box to deactivate and activate on placement
+    public GameObject Explaning; // Audio and Bot
+    //Prefabs to init buttons, the DataPOint Frame and the continue button
+    public GameObject button_prefab; //"placed correctly" button
+    public GameObject frame_prefab; //Node represented as frame
     public GameObject continue_button_prefab;
-    public GameObject Explaning;
 
 
     protected GameObject place_button;
@@ -21,14 +28,15 @@ public class DecisionTreeHandler : MonoBehaviour
     public static ArrayList s_layers = new ArrayList();
     public static float s_max_width = 4f;
 
-    public bool move;
+    [HideInInspector] public bool move;
     protected float moved = 0;
     protected float speed = 0.5f;
 
     protected float buffer = .1f; //Buffer between the layers
-    protected static Color prev_color;
+    protected static Color prev_color; //To ensure two random colors are not to similar
     protected static Color yellow_plate_color = new Color(255, 230, 132);
     protected static Color red_plate_color = new Color(217, 0, 69);
+
     protected UnityEvent place_button_pressed;
     protected GameObject continue_button;
 
@@ -37,7 +45,9 @@ public class DecisionTreeHandler : MonoBehaviour
     public GameObject hint_prefab;
 
 
-
+    /// <summary>
+    /// On Update DT moves if move == true
+    /// </summary>
     public virtual void Update()
     {
         if (move)
@@ -45,7 +55,7 @@ public class DecisionTreeHandler : MonoBehaviour
             moved += Vector3.Distance(Vector3.forward * Time.deltaTime * speed, Vector3.zero);
 
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
-            if (moved > .3f * (1f + buffer))
+            if (moved > .3f * (1f + buffer)) // local scale * width of frame + a bit of space between the frames
             {
                 move = false;
                 moved = 0f;
@@ -53,6 +63,10 @@ public class DecisionTreeHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Dissable the Following solver in the parent to fix position. 
+    /// Called by placement button
+    /// </summary>
     public virtual void Dissable_Following()
     {
         gameObject.transform.GetComponentInParent<Microsoft.MixedReality.Toolkit.Utilities.Solvers.SolverHandler>().enabled = false;
@@ -60,6 +74,12 @@ public class DecisionTreeHandler : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Initializes the DecisionTree, by 
+    /// 1. Init root node
+    /// 2. Init layerZero
+    /// 3. Activate and define placed correctly button
+    /// </summary>
     public virtual void OnDataHandlerInit()
     {
 
@@ -75,14 +95,16 @@ public class DecisionTreeHandler : MonoBehaviour
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
         place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
 
-        place_button_pressed = EnableFollowing();
+        place_button_pressed = EnableFollowing(); 
+        //all the stuff that should happen when the tree is placed correctly
         place_button_pressed.AddListener(Dissable_Following);
-        place_button_pressed.AddListener(roothandler.Activate);
+        place_button_pressed.AddListener(roothandler.Activate); // On placement the root node gets activated and the fun beginns
         place_button_pressed.AddListener(DeactivateTooltip);
-
-
     }
 
+    /// <summary>
+    /// Deactivates the information box on how to place the decision tree
+    /// </summary>
     public void DeactivateTooltip()
     {
         if(info_box != null) info_box.SetActive(false);
@@ -117,14 +139,19 @@ public class DecisionTreeHandler : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Sets move bool to true so next update will move dt up
+    /// </summary>
     public virtual void MoveUpForNextLayer()
     {
-
         move = true;
     }
 
     
-
+    /// <summary>
+    /// Gives a random color which is not to similar to a previous and other important used colors.
+    /// </summary>
+    /// <returns>new random color </returns>
     public static Color RandomColor()
     {
         float threshold_similarity = 1f; 
@@ -160,6 +187,7 @@ public class DecisionTreeHandler : MonoBehaviour
 
     /// <summary>
     /// This Method is called evertime there is a new singular node somewhere. 
+    /// Relevant in M2 to explain what is a singular node
     /// </summary>
     public virtual void NodeIsSingular(FrameHandler frame)
     {
@@ -170,6 +198,7 @@ public class DecisionTreeHandler : MonoBehaviour
 
     /// <summary>
     /// This Method is called by the last layer if the next layer is empty.
+    /// Initializes Continue Button with call to Continue Button pressed.
     /// </summary>
     public virtual void Finished()
     {

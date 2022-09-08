@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
+/// <summary>
+/// Visualizes the number of Tennisballs on the Frame
+/// </summary>
 public class IndicatorHandler : MonoBehaviour
 {
+    //prefabs for the yes and no plates
     public GameObject prefabYes;
     public GameObject prefabNo; 
 
 
     public void Visualize(int yes, int no)
     {
-
         DestroyChildrenIndicators();
         transform.localScale = Vector3.one * .25f;
         transform.localPosition = new Vector3(0, .17f, 0);
@@ -32,6 +36,9 @@ public class IndicatorHandler : MonoBehaviour
         if (no == 0) transform.GetChild(1).GetComponent<TextMeshPro>().text = "";
     }
 
+    /// <summary>
+    /// Destroys any possible leftovers on the frame
+    /// </summary>
     private void DestroyChildrenIndicators()
     {
         foreach (Transform child in transform)

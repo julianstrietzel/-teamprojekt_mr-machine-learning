@@ -8,21 +8,27 @@ using Newtonsoft.Json.Linq;
 
 
 
+/// <summary>
+/// Class for handling the Data from a given Json File in the correct format.
+/// Needs a DecisionTree with Handler as Reference Tree to init and a correct specified path to json file.
+/// 
+/// </summary>
 
 public class DataHandler : MonoBehaviour 
 {
-    public static List<DataPointNew> data = new List<DataPointNew>();
-    public GameObject decisionTree;
-    public static JArray categories;
+    [SerializeField] private string jsonPath = "Data/tse_tennis";
+    [HideInInspector] public static List<DataPointNew> data = new List<DataPointNew>();
+    [HideInInspector] public static JArray categories;
+    [SerializeField] private GameObject decisionTree;
 
+
+    /// <summary>
+    /// Inits the Data from json and calls OnDatahandlerInit in the referenced DecisionTree.
+    /// </summary>
     void Start()
     {
         data.Clear();
-        TextAsset ass = Resources.Load<TextAsset>("Data/tse_tennis");
-
-
-        string json = ass.ToString();
-        JObject jobject = JObject.Parse(json);
+        JObject jobject = JObject.Parse(Resources.Load<TextAsset>(jsonPath).ToString());
         categories = (JArray)jobject["categories"];
         foreach (JObject dp in jobject["datapoints"])
         {
@@ -34,7 +40,6 @@ public class DataHandler : MonoBehaviour
             }
             data.Add(new DataPointNew(values, dp.Value<bool>("result"), dp.Value<int>("index")));
         }
-
         decisionTree.GetComponent<DecisionTreeHandler>().OnDataHandlerInit(); 
     }
 

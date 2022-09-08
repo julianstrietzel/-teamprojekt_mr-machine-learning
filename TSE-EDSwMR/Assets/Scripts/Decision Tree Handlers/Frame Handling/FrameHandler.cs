@@ -7,40 +7,47 @@ using Newtonsoft.Json.Linq;
 using Microsoft.MixedReality.Toolkit.UI;
 
 
+/// <summary>
+/// This class Handles everything there is to handle for a normal Frame. It is base class for the Rebuild Frame used in M3 and M4.
+/// </summary>
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 public class FrameHandler : MonoBehaviour
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 {
+    //prefabs
     public GameObject choose_button_prefab;
     public GameObject frame_prefab;
-    //public GameObject tooltip_prefab;
 
     public List<DataPointNew> dataPoints;
     public List<string> categories_filtered_for;
     private GameObject choose_button;
-    public List<GameObject> child_nodes;
-    public Layer layer;
+    protected List<GameObject> child_nodes;
+    protected Layer layer;
     public int numberForSorting; //indices for nodes beginns at 1 making root node 1 and its childnodes 11, 12 and evtl. 13
 
-    private bool singular_known = false;
+    //status
+    private bool singular_known = false; //optimizing calls on singular
     private bool singular;
     private bool button_pressed = false;
     private bool activated = false;
+
     public float space_for_buttons_normed = 2;
     private Color color;
     private GameObject categorieIcon;
+
     public bool isEntropyFrame = false;
-    private bool highlighted = false;
-    private bool scaleup = true;
+
 
 
 
     
-
+    /// <summary>
+    /// Returns the Number of DPs in this Frame
+    /// </summary>
+    /// <returns></returns>
     public int NumberDatapoints()
     {
         return dataPoints.Count;
-
     }
 
 
@@ -54,9 +61,7 @@ public class FrameHandler : MonoBehaviour
     /// <returns></returns>
     public bool IsReady()
     {
-
-        return activated && (Singular() || button_pressed);
-        
+        return activated && (Singular() || button_pressed);   
     }
 
     /// <summary>
@@ -119,7 +124,6 @@ public class FrameHandler : MonoBehaviour
         frame.GetChild(3).GetComponent<Renderer>().material.color = color;
        
         
-
         //Init Entropyhandler
         EntropyHandler eHandler = gameObject.GetComponent<EntropyHandler>();
         isEntropyFrame = eHandler != null;
@@ -138,12 +142,12 @@ public class FrameHandler : MonoBehaviour
 
         layer.AddNode(gameObject);
 
-        //Placing plate for tennisballs in the frame
+        //Placing plate for each tennisball on the frame, by calling indicator handler on the indicator component of frame prefab
         transform.GetChild(1).GetComponent<IndicatorHandler>().Visualize(relevant_datapoints.FindAll(e => e.result).Count, relevant_datapoints.FindAll(e => !e.result).Count);
 
 
-        //Changing Image in Frame
-
+        //Changing Image in Frame to current filtered for category value
+        //assumes that there are matching images in 3dicons folder
         if (layer.layerLevel != 0)
         {
             string source_path = "";
@@ -163,7 +167,8 @@ public class FrameHandler : MonoBehaviour
 
 
     /// <summary>
-    /// Activates and shows the buttons for this frame so that the next discrimination can be chosen by the user
+    /// Activates means: Show the buttons for this frame so that the next discrimination can be chosen by the user
+    /// This is called by a layer on all its frames
     /// </summary>
     public void Activate()
     { 
@@ -202,16 +207,13 @@ public class FrameHandler : MonoBehaviour
             wind_button.gameObject.SetActive(false);
         }
 
+        //TODO generalize by iterating over 0-4 not temp_button etc.
+
         //update Entropy Buttons
-        EntropyHandler eHandler = gameObject.GetComponent<EntropyHandler>();
-        if (eHandler != null)
-        {
-            eHandler.updateButton(choose_button);
-        }
-
-        //TODO place button in appropriete location relative to frame #14
-
+        if (isEntropyFrame) gameObject.GetComponent<EntropyHandler>().updateButton(choose_button);
     }
+
+
     public void ButtonClick_Outlook()
     {
         if (this.choose_button is null) return;
@@ -251,6 +253,7 @@ public class FrameHandler : MonoBehaviour
     void Create_child_nodes(string filtered)
     {
         button_pressed = true;
+
         Layer next_layer = layer.NextLayer();
         child_nodes.Clear();
 
@@ -285,8 +288,12 @@ public class FrameHandler : MonoBehaviour
 
     }
 
-    override
-    public bool Equals(System.Object o)
+    /// <summary>
+    /// Equals if numberfor sorting is equal
+    /// </summary>
+    /// <param name="o"></param>
+    /// <returns></returns>
+    public override bool Equals(System.Object o)
     {
 #pragma warning disable CS0253 // Possible unintended reference comparison; right hand side needs cast
         if (this == o) return true;

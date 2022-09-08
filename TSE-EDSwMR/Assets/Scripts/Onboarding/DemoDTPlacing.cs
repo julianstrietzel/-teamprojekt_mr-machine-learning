@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Class for demo DT Placing in the Onboarding
+/// On InitPlacementDemo() this activates and the surfacemagnetism follower to explain the placement in the beginning of M2,3,4
+/// On CloseDemo() this calls the next part of Introduction: HandmenuIntro
+/// </summary>
 public class DemoDTPlacing : MonoBehaviour
 {
     public GameObject frame_prefab;

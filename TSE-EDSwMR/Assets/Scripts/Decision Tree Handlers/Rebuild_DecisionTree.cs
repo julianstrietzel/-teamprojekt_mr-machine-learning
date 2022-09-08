@@ -5,10 +5,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+
+/// <summary>
+/// specific DecisionTreeHandler that enables the rebuilding of layers.
+/// used in M3 and 4 depending on this audio is played
+/// TODO extract parts that are only relevant for M4 or M3 and not necessary for the rebuilding part
+/// </summary>
 public class Rebuild_DecisionTree : DecisionTreeHandler
 {
 
-    bool movedown = false;
+    [HideInInspector] bool movedown = false;
     public GameObject rebuild_prefab;
     public GameObject small_dialog_prefab;
     public GameObject large_dialog_prefab;
@@ -16,13 +22,16 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     public GameObject Entropy_Dialog_Prefab;
     private GameObject rebuild_button;
     bool isEntropyTree = false;
+
     private M3AudioHandler m3AudioHandler;
     private M4AudioHandler m4AudioHandler;
     private bool firstlayer = true;
     private bool m3SumUpPlayed = false;
 
 
-
+    /// <summary>
+    /// Adds movedown to update functionality
+    /// </summary>
     public override void Update()
     {
         base.Update();
@@ -40,7 +49,10 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
 
     }
 
-
+    /// <summary>
+    /// Init changed only that correct types are used.
+    /// Also adds rebuild button
+    /// </summary>
     public override void OnDataHandlerInit()
     {
         GameObject root = Instantiate(frame_prefab, gameObject.transform);
@@ -55,9 +67,6 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         roothandler.InitFrame(new List<string>(), DataHandler.data, layerZero, 1, 0, prev_color);
         isEntropyTree = roothandler.isEntropyFrame;
 
-
-        
-
         place_button = Instantiate(button_prefab, gameObject.transform.parent.parent);
         place_button.transform.GetChild(2).transform.GetChild(0).transform.GetComponent<TMPro.TextMeshPro>().text = "Placed correctly?";
 
@@ -71,6 +80,7 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         place_button_pressed.AddListener(Dissable_Following);
         place_button_pressed.AddListener(DeactivateTooltip);
 
+        //This could be extracted to child classes M3 and M4
         if (!isEntropyTree)
         {
             m3AudioHandler = Explaning.GetComponent<M3AudioHandler>();
@@ -81,18 +91,22 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         {
             m4AudioHandler = Explaning.GetComponent<M4AudioHandler>();
             place_button_pressed.AddListener(ExplainEntropy);
-
         }
     }
 
 
 
-
+    /// <summary>
+    /// Sets movedown to true so update will move tree back again
+    /// </summary>
     public void MoveDowntoRebuild()
     {
         movedown = true;
     }
 
+    /// Only adds audio from M3 to base func, which is called if this is the first movement
+    /// <summary>
+    /// </summary>
     public override void MoveUpForNextLayer()
     {
         base.MoveUpForNextLayer();
@@ -104,7 +118,12 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
     }
 
 
-
+    /// <summary>
+    /// Sets function to call on Rebuild Button pressed
+    /// If there is no function to call, this will deactivate the buttonn
+    /// If the button is deactivated this will activate the button
+    /// </summary>
+    /// <param name="call"></param>
     public void ReplaceListenerToRebuildButton(UnityAction call)
     {
         if (call == null)
@@ -117,6 +136,9 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         rebuild_button.GetComponent<PressableButtonHoloLens2>().ButtonPressed.AddListener(call);
     }
 
+    /// <summary>
+    /// Creates a hint dialog on Handmenu hint button pressed
+    /// </summary>
     public override void Hint()
     {
 
@@ -138,11 +160,20 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         Dialog.Open(hint_prefab, DialogButtonType.OK, "Hint", message, true);
     }
 
+    /// <summary>
+    /// Goes to Menu
+    /// Function to add to dialog.OnClose()
+    /// Specific for M4
+    /// </summary>
+    /// <param name="res"></param>
     private void LoadMenu(DialogResult res)
     {
         SceneManager.LoadScene("Menu");
     } 
 
+    /// <summary>
+    /// Loads next scene or finished dialog with back to menu on close when continue button is pressed
+    /// </summary>
     public override void ContinueButtonPressed()
     {
         if(isEntropyTree)
@@ -152,12 +183,19 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         base.ContinueButtonPressed();
     }
 
+    /// <summary>
+    /// Dissables the continue Button.
+    /// Called if a layer is reactivated.
+    /// </summary>
     public void Dissable_Continue_Button()
     {
-        if (continue_button == null) return;
-        Destroy(continue_button);
+        if (continue_button != null) Destroy(continue_button);        
     }
 
+    /// <summary>
+    /// Called if in the current layer all nodes are singular.
+    /// Starts end coroutine for M3 and M4
+    /// </summary>
     public override void Finished()
     {
         if (!isEntropyTree && continue_button == null)
@@ -214,11 +252,11 @@ public class Rebuild_DecisionTree : DecisionTreeHandler
         string message = "1. You calculate the Entropy and Information Gain for each category." +
             "\n2. Choose the category for the separation by the greatest Information Gain." +
             "\nRepeat step 1 and 2 till every node has entropy zero.";
-        Dialog.Open(large_dialog_prefab, DialogButtonType.OK, "Algorithm ID3", message, true).OnClosed += Finished;
+        Dialog.Open(large_dialog_prefab, DialogButtonType.OK, "Algorithm ID3", message, true).OnClosed += M4ReallyFinished;
         
     }
 
-    public void Finished(DialogResult res)
+    public void M4ReallyFinished(DialogResult res)
     {
         base.Finished();
     }
