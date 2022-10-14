@@ -2,57 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class handels the information which button was clicked (yes or no) <see cref="ButtonsYesNoPOV"/>
+/// it gets the information from <see cref="StateScriptPOV"/> and provides it to <see cref="POV_DecisionTree"/> to display the correct leave node.
+/// </summary>
 public class DataHandlerPOV : MonoBehaviour
 {
 
-
+    [System.Obsolete("was used to save each decision the user made")]
     private List<bool> decisionList = new List<bool>();
 
+    // only saves the final decision used for the leave nodes in the tree
     private bool[] finalDecisionOfDay = new bool[StateScriptPOV.AMOUNT_DAYS];
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+	/// Set final decision for the tree
+	/// </summary>
+	/// <param name="day">the example number</param>
+	/// <param name="decision">yes or no</param>
     public void SetFinalDecision(int day, bool decision)
     {
         finalDecisionOfDay[day - 1] = decision;
     }
 
+    [System.Obsolete("for saving every decision")]
     public void AddDecision(bool decision)
     {
         decisionList.Add(decision);
     }
 
-
-    //public void UpdateDecisions(bool decision_YN)
-    //{
-    //    decisions[decision_nr] = decision_YN;
-
-    //    decision_nr++;
-    //}
-
+    [System.Obsolete("for returning every decision")]
     public List<bool> GetDecisions()
     {
         return decisionList;
     }
 
+    /// <summary>
+	/// provides the information for the leaves of the decision tree.
+	/// <returns>the array with the decision the user made for the example days
+	/// </summary></returns>  
     public bool[] GetFinalDecisions()
     {
-        Debug.Log("Getting final decisions");
-        foreach (bool decision in finalDecisionOfDay)
-        {
-            Debug.Log("Final decision is: " + decision);
-        }
+
         return finalDecisionOfDay;
     }
 

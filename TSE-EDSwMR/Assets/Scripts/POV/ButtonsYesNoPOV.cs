@@ -16,13 +16,13 @@ public class ButtonsYesNoPOV : MonoBehaviour
     void Start()
     {
         buttons.SetActive(false);
-        //StartCoroutine(TestButtons());
     }
 
     // Update is called once per frame
     void Update()
     {
         DestroyButtonsAfterGameFinished();
+        //activates buttons after the intro from the bot is over
         if (buttons.activeInHierarchy == false && !stateScript.GetIntroIsPlaying())
         {
             buttons.SetActive(true);
@@ -31,25 +31,30 @@ public class ButtonsYesNoPOV : MonoBehaviour
 
     }
 
-   
 
-
+    /// <summary>
+	/// informs the state script, that yes was clicked
+	/// </summary>
     public void Yes_Clicked()
     {
-        Debug.Log("Buttons: Yes clickd");
 
         stateScript.Yes_Clicked();
 
     }
 
+    /// <summary>
+	/// informs the state script, that no was clicked
+	/// </summary>
     public void No_Clicked()
     {
-        Debug.Log("Buttons: No clickd");
 
         stateScript.No_Clicked();
 
     }
 
+    /// <summary>
+    /// destroys the button game object in the scene, after the decision part of the Module 1 is finished
+    /// </summary>
     private void DestroyButtonsAfterGameFinished()
     {
         if (stateScript.GetFinishedGame())
@@ -59,14 +64,4 @@ public class ButtonsYesNoPOV : MonoBehaviour
         }
     }
 
-
-    //IEnumerator TestButtons()
-    //{
-    //    int i = 0;
-    //    while(i<4)
-    //    {
-    //        stateScript.Yes_Clicked();
-    //        yield return new WaitForSeconds(2);
-    //    }
-    //}
 }

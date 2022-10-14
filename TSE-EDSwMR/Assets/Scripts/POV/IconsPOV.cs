@@ -3,30 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-/* Script has to be added to Icons Parent and the parent has to be added to Components GameObject in Unity.
- * 
- */
+/// <summary>
+/// Initialized the icons. Handels the correct order, scale and position, information is handed over by <see cref="StateScriptPOV"/>
+/// Script has to be added to Icons Parent and the parent has to be added to Components GameObject in Unity.
+/// </summary>
 public class IconsPOV : MonoBehaviour
 {
-    private Vector3[] positionIcons;// = new Vector3[AMOUNT_ICONS];
-    private Vector3[] scaleIcons;// = new Vector3[AMOUNT_ICONS];
+    private Vector3[] positionIcons;
+    private Vector3[] scaleIcons;
 
 
     // updated after each "day" and set on the icons for the new day
     private GameObject[] currentIcons = new GameObject[StateScriptPOV.AMOUNT_ICONS];
-
+    // all icons in correct order
     private List<GameObject[]> iconsList = new List<GameObject[]>();
 
-    // Start is called before the first frame update
-    void Start()
+    // sets the given (GameObject) icons, position of the icons and the scale, gets the information from state script, where it is set in unity inspector.
+    public void SetIconPositionScale(List<GameObject[]> icons, Vector3[] positions, Vector3[] scale)
     {
+        iconsList = icons;
+        positionIcons = positions;
+        scaleIcons = scale;
 
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     /// <summary>
@@ -41,7 +40,7 @@ public class IconsPOV : MonoBehaviour
             {
                 foreach (GameObject icons in currentIcons)
                 {
-                    Destroy(icons); // or DestroyComponent?
+                    Destroy(icons);
                 }
             }
 
@@ -61,15 +60,6 @@ public class IconsPOV : MonoBehaviour
     public void DestroyParentAfterGameFinish()
     {
         Destroy(gameObject);
-    }
-
-    public void SetIconPositionScale(List<GameObject[]> icons, Vector3[] positions, Vector3[] scale)
-    {
-        iconsList = icons;
-        positionIcons = positions;
-        scaleIcons = scale;
-
-
     }
 
 }

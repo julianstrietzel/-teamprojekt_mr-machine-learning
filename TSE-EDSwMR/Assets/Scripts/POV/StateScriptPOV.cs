@@ -4,6 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class that handels the current state of the module 1.
+/// First the intro, then choosing/decision game phase and the the decision tree 
+/// </summary>
 public class StateScriptPOV : MonoBehaviour
 {
 
@@ -43,6 +47,10 @@ public class StateScriptPOV : MonoBehaviour
     private bool finishedGame = false;
     private bool intro = true;
     private int audio_nr = 0;
+
+    //Message for the information panel about decision tree terminology
+    private string message = "- Root" + "\n\n" + "- Inner Node" + "\n\n" + "- Leave" + "\n\n" + "- Attribute" + "\n\n" + "\n" + "Use: automization of complex, but systematic decisions." + "\n\n" + "Open the Hint to read the explanantion.";
+
 
 
     // Parameter in Kai's animator. checking the parameter through the animator is power consuming
@@ -120,7 +128,6 @@ public class StateScriptPOV : MonoBehaviour
     /// </summary>
     public void Hint()
     {
-        // TODO pause audiosource
 
         if (!finishedGame)
         {
@@ -134,15 +141,15 @@ public class StateScriptPOV : MonoBehaviour
 
     private void PauseAudioAndKai()
     {
-        // TODO audio handler stop
         kaiAnimations.StopTalking();
     }
 
+    /// <summary>
+	/// information panel about terminology of dt
+	/// </summary>
     private void OpenInformationPanel()
-    {
-        string message = "- Root" + "\n\n" + "- Inner Node" + "\n\n" + "- Leave" + "\n\n" + "- Attribute" + "\n\n";
-        message += "\n" + "Use: automization of complex, but systematic decisions.";
-        message += "\n\n" + "Open the Hint to read the explanantion.";
+    { 
+        
         textAndHints.GetComponent<TextAndHintsPOV>().informationPanelPrefab.GetComponent<SolverHandler>().AdditionalOffset = new Vector3(-0.4f, -0.3f, 0);
         Dialog.Open(textAndHints.GetComponent<TextAndHintsPOV>().informationPanelPrefab, DialogButtonType.None, "Terminology     ", message, false); ;
 
@@ -167,7 +174,7 @@ public class StateScriptPOV : MonoBehaviour
 
 
     /// <summary>
-    /// Whole explanation of decision tree
+    /// Whole explanation of decision tree with animation order 
     /// </summary>
     /// <returns></returns>
     private IEnumerator PlayExplanationDecisionTree()
@@ -292,6 +299,11 @@ public class StateScriptPOV : MonoBehaviour
 
     }
 
+    /// <summary>
+	/// Plays the audio clip and starts and stops the talking animation of the bot
+	/// </summary>
+	/// <param name="clip_nr"></param>
+	/// <returns></returns>
     private IEnumerator PlayAndTalkCoroutine(int clip_nr)
     {
         audioHandler.PlayAudioClipNr(clip_nr);
@@ -318,6 +330,9 @@ public class StateScriptPOV : MonoBehaviour
         }
     }
 
+    /// <summary>
+	/// initiates the display of the decision tree
+	/// </summary>
     private void ShowDecisionTree()
     {
         decisionTree.GetComponent<POV_DecisionTree>().InitiateTree(dataHandler);
@@ -348,11 +363,19 @@ public class StateScriptPOV : MonoBehaviour
 
     }
 
+    /// <summary>
+	/// if true then the choosing game phase is over 
+	/// </summary>
+	/// <returns></returns>
     public bool GetFinishedGame()
     {
         return finishedGame;
     }
 
+    /// <summary>
+	/// if true then the intro audio is currently playing 
+	/// </summary>
+	/// <returns></returns>
     public bool GetIntroIsPlaying()
     {
         return intro;

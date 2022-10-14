@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class for the Hint and texts of the hints in the hand menu.
+/// </summary>
 public class TextAndHintsPOV : MonoBehaviour
 {
 
